@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<properties resource="application.properties" />
+
+	<context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+
+		<property name="beginningDelimiter" value="`" />
+		<property name="endingDelimiter" value="`" />
+		<property name="javaFileEncoding" value="UTF-8" />
+
+		<plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+			<property name="mappers" value="com.investoday.cms.common.mapper.Mapper" />
+		</plugin>
+
+		<javaModelGenerator targetPackage="com.investoday.cms.common.model.app" targetProject="src/main/java">
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		
+		<sqlMapGenerator targetPackage="mapper/app" targetProject="src/main/resources" />
+		
+		<javaClientGenerator targetPackage="com.investoday.cms.common.mapper.app" targetProject="src/main/java" type="XMLMAPPER" />
+		
+		<table tableName="SCHEDULE_JOB_LOG" domainObjectName="scheduleJobLog">
+			<!--mysql 配置 -->
+			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
+		</table>
+	</context>
+</generatorConfiguration>
