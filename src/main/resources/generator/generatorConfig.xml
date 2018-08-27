@@ -13,16 +13,16 @@
 		<property name="javaFileEncoding" value="UTF-8" />
 
 		<plugin type="tk.mybatis.mapper.generator.MapperPlugin">
-			<property name="mappers" value="com.checkOut.mapper.Mapper" />
+			<property name="mappers" value="com.checkOut.businessFunction.mapper.Mapper" />
 		</plugin>
 
-		<javaModelGenerator targetPackage="com.checkOut.model" targetProject="src/main/java">
+		<javaModelGenerator targetPackage="com.checkOut.businessFunction.model" targetProject="src/main/java">
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 		
 		<sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources" />
 		
-		<javaClientGenerator targetPackage="com.checkOut.mapper" targetProject="src/main/java" type="XMLMAPPER" />
+		<javaClientGenerator targetPackage="com.checkOut.businessFunction.mapper" targetProject="src/main/java" type="XMLMAPPER" />
 		
 		<table tableName="SCHEDULE_JOB_LOG" domainObjectName="scheduleJobLog">
 			<!--mysql 配置 -->

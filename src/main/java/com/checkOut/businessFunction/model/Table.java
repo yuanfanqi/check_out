@@ -1,4 +1,4 @@
-package com.checkOut.model;
+package com.checkOut.businessFunction.model;
 
 import java.util.ArrayList;
 import java.util.List;

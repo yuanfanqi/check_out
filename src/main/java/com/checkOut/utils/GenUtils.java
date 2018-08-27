@@ -10,8 +10,8 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 
-import com.checkOut.model.Column;
-import com.checkOut.model.Table;
+import com.checkOut.businessFunction.model.Column;
+import com.checkOut.businessFunction.model.Table;
 
 import java.io.File;
 import java.io.IOException;
