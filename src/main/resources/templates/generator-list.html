@@ -8,32 +8,10 @@
 </head>
 <body>
 	<form action="" id="tableForm" class="form-horizontal" style="width: 100%">
-		<!-- <div class="form-group">
-			<label for="tableName" class="col-md-1 control-label">表名称：</label>
-			<div class="col-md-2">
-				<div class="input-group">
-					<input type="text" id="tableName" class="form-control"/>
-					<div class="input-group-addon">
-						<i class="fa fa-close fa-fw"></i>
-					</div>
-				</div>
-			</div>
-			<label for="tableSchema" class="col-md-1 control-label">Schema：</label>
-			<div class="col-md-2">
-				<select id="tableSchema" class="form-control">
-					<option value="jrtz_app">jrtz_app - 应用库</option>
-					<option value="jrtz_cust">jrtz_cust - 中间库</option>
-					<option value="jrtz_hg">jrtz_hg - 资讯库</option>
-				</select>
-			</div>
-			<div class="col-md-2 text-center">
-				<a href="javascript:void(0)" id="searchBtn" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;查询&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-			</div>
-		</div> -->
 		<table id="jqGrid"></table>
 		<div id="jqGridPager"></div>
 	</form>
 	<div th:include="common::header"></div>
-	<script src="/script/sys/generator-list.js"></script>
+	<script src="/statics/generator-list.js"></script>
 </body>
 </html>

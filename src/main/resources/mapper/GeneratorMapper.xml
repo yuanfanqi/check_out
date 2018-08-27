@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.investoday.cms.common.mapper.app.AppGeneratorMapper">
+<mapper namespace="com.checkOut.mapper.GeneratorMapper">
 
 	<sql id="sortParam">
 		<if test="sortField !=null and sortField != '' ">
@@ -11,7 +11,7 @@
 		</if>
 	</sql>
 
-	<select id="queryListMysql" parameterType="com.investoday.cms.common.model.Table" resultType="java.util.Map">
+	<select id="queryListMysql" parameterType="com.checkOut.model.Table" resultType="java.util.Map">
 		SELECT TABLE_NAME, TABLE_SCHEMA, TABLE_ROWS, ENGINE, TABLE_COMMENT, CREATE_TIME
 		FROM INFORMATION_SCHEMA.TABLES
 		<where>
@@ -30,7 +30,7 @@
 		<include refid="sortParam"/>
 	</select>
 
-	<select id="queryListOracle" parameterType="com.investoday.cms.common.model.Table" resultType="java.util.Map">
+	<select id="queryListOracle" parameterType="com.checkOut.model.Table" resultType="java.util.Map">
 		SELECT A.TABLE_NAME,
 		A.TABLESPACE_NAME,
 		'' AS TABLE_ROWS,
