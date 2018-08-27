@@ -20,7 +20,7 @@
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 		
-		<sqlMapGenerator targetPackage="mapper/app" targetProject="src/main/resources" />
+		<sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources" />
 		
 		<javaClientGenerator targetPackage="com.checkOut.mapper" targetProject="src/main/java" type="XMLMAPPER" />
 		

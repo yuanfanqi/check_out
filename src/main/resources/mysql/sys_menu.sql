@@ -32,4 +32,13 @@ CREATE TABLE `sys_menu` (
   `ICON` varchar(100) DEFAULT '' COMMENT 'font awsome所使用的图标代码',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 COMMENT='系统权限表';
+
+-- ----------------------------
+-- Records of sys_menu
+-- ----------------------------
+INSERT INTO `sys_menu` VALUES ('1', '商品管理', '1', '', '0', '', '', '2018-08-27 10:22:28', '2018-08-27 10:22:31', '');
+INSERT INTO `sys_menu` VALUES ('2', '库存管理', '1', '', '0', '', '', '2018-08-27 10:22:59', '2018-08-27 10:23:02', '');
+INSERT INTO `sys_menu` VALUES ('3', '进货名单', '1', '', '0', '', '', '2018-08-27 10:23:22', '2018-08-27 10:23:27', '');
+INSERT INTO `sys_menu` VALUES ('4', '昨日战绩', '1', '', '0', '', '', '2018-08-27 10:23:40', '2018-08-27 10:23:43', '');
+
 SET FOREIGN_KEY_CHECKS=1;
