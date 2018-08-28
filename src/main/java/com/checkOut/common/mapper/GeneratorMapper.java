@@ -1,9 +1,9 @@
-package com.checkOut.businessFunction.mapper;
+package com.checkOut.common.mapper;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import com.checkOut.businessFunction.model.Table;
+import com.checkOut.common.model.Table;
 
 import java.util.List;
 import java.util.Map;

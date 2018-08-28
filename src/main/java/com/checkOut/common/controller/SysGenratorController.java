@@ -1,7 +1,7 @@
-package com.checkOut.businessFunction.controller;
+package com.checkOut.common.controller;
 
-import com.checkOut.businessFunction.model.Table;
-import com.checkOut.businessFunction.service.SysGeneratorService;
+import com.checkOut.common.model.Table;
+import com.checkOut.common.service.SysGeneratorService;
 import com.checkOut.utils.H;
 
 import org.apache.commons.io.IOUtils;

@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
-@MapperScan(basePackages="com.checkOut.businessFunction.mapper")
+@MapperScan(basePackages="com.checkOut.common.mapper")
 public class CheckOutSysApplication {
 
 	public static void main(String[] args) {

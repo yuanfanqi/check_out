@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.checkOut.common.mapper.sys.SysUserMapper">
+  <resultMap id="BaseResultMap" type="com.checkOut.common.model.sys.SysUser">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="SALT" jdbcType="VARCHAR" property="salt" />
+    <result column="NICK_NAME" jdbcType="VARCHAR" property="nickName" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="LOCKED" jdbcType="BIT" property="locked" />
+    <result column="ONLINE" jdbcType="BIT" property="online" />
+    <result column="LOGIN_TIME" jdbcType="TIMESTAMP" property="loginTime" />
+    <result column="LOGIN_IP" jdbcType="VARCHAR" property="loginIp" />
+    <result column="VALID" jdbcType="BIT" property="valid" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+  </resultMap>
+  
+  <select id="findUserNamesByPermissionSign" parameterType="java.lang.String" resultType="java.lang.String">
+  	SELECT USER_NAME FROM SYS_USER WHERE ID IN(SELECT SYS_USER_ID FROM SYS_USER_ROLE WHERE SYS_ROLE_ID IN(SELECT SYS_ROLE_ID FROM sys_role_permission WHERE SYS_PERMISSION_ID = (SELECT ID FROM sys_permission WHERE PERMISSION_SIGN = #{permissionSign,jdbcType=VARCHAR} AND VALID = 1))) AND VALID = 1
+  </select>
+</mapper>

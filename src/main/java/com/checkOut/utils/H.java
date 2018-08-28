@@ -1,5 +1,17 @@
 package com.checkOut.utils;
 
+import java.util.Collection;
+import java.util.Map;
+import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+//import com.investoday.cms.common.enums.ClientIpHeaderEnum;
+//import com.investoday.cms.common.model.app.SysPermission;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.shiro.crypto.hash.SimpleHash;
 //import org.apache.shiro.crypto.hash.SimpleHash;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,15 +21,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 
-//import com.investoday.cms.common.enums.ClientIpHeaderEnum;
-//import com.investoday.cms.common.model.app.SysPermission;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Collection;
-import java.util.Map;
-import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.checkOut.common.model.sys.SysPermission;
 
 /**
  * Helper助手类
@@ -62,37 +66,37 @@ public class H {
      * @param bindingResult
      * @return
      */
-//    public static String checkValidation(BindingResult bindingResult, SysPermission sysPermission) {
-//        logger.info("===========================进入验证属性值方法");
-//        String str = null;
-//        if (bindingResult.hasErrors()) {
-//            StringBuffer sb = new StringBuffer();
-//            for (ObjectError objectError : bindingResult.getAllErrors()) {
-//                if (sysPermission.getType() == (short) 1) {
-//                    if (((FieldError) objectError).getField().equals("permissionName")) {
-//                        sb.append("菜单名称：").append(objectError.getDefaultMessage()).append("</br>");
-//                    } else if (((FieldError) objectError).getField().equals("url")) {
-//                        sb.append("菜单URL：").append(objectError.getDefaultMessage()).append("</br>");
-//                    } else if (((FieldError) objectError).getField().equals("sort")) {
-//                        sb.append("排序号：").append(objectError.getDefaultMessage()).append("</br>");
-//                    }
-//                }
-//                if (sysPermission.getType() == (short) 2) {
-//                    if (((FieldError) objectError).getField().equals("permissionName")) {
-//                        sb.append("菜单名称：").append(objectError.getDefaultMessage()).append("</br>");
-//                    } else if (((FieldError) objectError).getField().equals("permissionSign")) {
-//                        sb.append("授权标识：").append(objectError.getDefaultMessage()).append("</br>");
-//                    }
-//                }
-//            }
-//            str = sb.toString();
-//
-//            if (H.isBlank(str)) {
-//                return null;
-//            }
-//        }
-//        return str;
-//    }
+    public static String checkValidation(BindingResult bindingResult, SysPermission sysPermission) {
+        logger.info("===========================进入验证属性值方法");
+        String str = null;
+        if (bindingResult.hasErrors()) {
+            StringBuffer sb = new StringBuffer();
+            for (ObjectError objectError : bindingResult.getAllErrors()) {
+                if (sysPermission.getType() == (short) 1) {
+                    if (((FieldError) objectError).getField().equals("permissionName")) {
+                        sb.append("菜单名称：").append(objectError.getDefaultMessage()).append("</br>");
+                    } else if (((FieldError) objectError).getField().equals("url")) {
+                        sb.append("菜单URL：").append(objectError.getDefaultMessage()).append("</br>");
+                    } else if (((FieldError) objectError).getField().equals("sort")) {
+                        sb.append("排序号：").append(objectError.getDefaultMessage()).append("</br>");
+                    }
+                }
+                if (sysPermission.getType() == (short) 2) {
+                    if (((FieldError) objectError).getField().equals("permissionName")) {
+                        sb.append("菜单名称：").append(objectError.getDefaultMessage()).append("</br>");
+                    } else if (((FieldError) objectError).getField().equals("permissionSign")) {
+                        sb.append("授权标识：").append(objectError.getDefaultMessage()).append("</br>");
+                    }
+                }
+            }
+            str = sb.toString();
+
+            if (H.isBlank(str)) {
+                return null;
+            }
+        }
+        return str;
+    }
 
     /**
      * 驼峰法转下划线
@@ -203,10 +207,10 @@ public class H {
      * @param hashIterations
      * @return
      */
-//    public static String encSource(String source, String salt, int hashIterations) {
-//        SimpleHash simpleHash = new SimpleHash("md5", source, salt, hashIterations);
-//        return simpleHash.toString();
-//    }
+    public static String encSource(String source, String salt, int hashIterations) {
+        SimpleHash simpleHash = new SimpleHash("md5", source, salt, hashIterations);
+        return simpleHash.toString();
+    }
 
     /***
      * salt加密

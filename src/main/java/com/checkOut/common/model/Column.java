@@ -1,4 +1,4 @@
-package com.checkOut.businessFunction.model;
+package com.checkOut.common.model;
 
 /**
  * 列的属性

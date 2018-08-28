@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.checkOut.common.mapper.sys.SysRolePermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.checkOut.common.model.sys.SysRolePermission" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="SYS_ROLE_ID" property="sysRoleId" jdbcType="INTEGER" />
+    <result column="SYS_PERMISSION_ID" property="sysPermissionId" jdbcType="INTEGER" />
+  </resultMap>
+   <insert id="insertBatch">
+  	INSERT INTO SYS_ROLE_PERMISSION(SYS_ROLE_ID,SYS_PERMISSION_ID) VALUES
+  	<foreach collection="permissionIds" item="permissionId" index="index" separator=",">
+  		(#{roleId,jdbcType=INTEGER}, #{permissionId,jdbcType=INTEGER})
+  	</foreach>
+  </insert>
+</mapper>

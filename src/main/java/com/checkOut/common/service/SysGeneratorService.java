@@ -1,11 +1,11 @@
-package com.checkOut.businessFunction.service;
+package com.checkOut.common.service;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.checkOut.businessFunction.mapper.GeneratorMapper;
-import com.checkOut.businessFunction.model.Table;
+import com.checkOut.common.mapper.GeneratorMapper;
+import com.checkOut.common.model.Table;
 import com.checkOut.utils.GenUtils;
 import com.checkOut.utils.H;
 
