@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+<title>user-detail</title>
+</head>
+<body>
+	<div class="panel panel-default" id="rrapp">
+		<div class="panel-heading" th:text="${sysUser.id==null?'新增':'修改'}">新增</div>
+		<form id="userForm" class="form-horizontal">
+			<input type="hidden" id="userId" name="id" th:value="${sysUser.id}" />
+			<input type="hidden" id="isAdmin" th:value="${sysUser.userName=='admin'?1:0}" />
+			<div class="form-group">
+				<div class="col-sm-2 control-label">用户名</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="userName" name="userName" th:value="${sysUser.userName}" placeholder="登录账号" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">密码</div>
+				<div class="col-sm-10" id="pwdBox">
+					<input type="password" class="form-control" id="password" name="password" th:value="${sysUser.password}" placeholder="密码" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">昵称</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="nickName" name="nickName" th:value="${sysUser.nickName}" placeholder="昵称" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">手机号码</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="phone" name="phone" th:value="${sysUser.phone}" placeholder="手机号码" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">邮箱</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="email" name="email" th:value="${sysUser.email}" placeholder="邮箱" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">角色</div>
+				<div class="col-sm-10">
+					<label th:each="role,index:*{sysRoles}" class="checkbox-inline">
+						<input type="checkbox" name="roleIds" th:value="${role.id}" />
+						<span th:text="${role.roleName}"></span>
+					</label>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">状态</div>
+				<label class="radio-inline">
+					<input type="radio" name="valid" value="false" th:checked="${sysUser.valid==false}" />
+					禁用
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="valid" value="true" th:checked="${sysUser.valid==null?true:sysUser.valid==true}" />
+					正常
+				</label>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label"></div>
+				<div class="col-sm-10 text-center">
+					<button id="saveBtn" class="btn btn-primary" style="width: 100px;" type="submit">确定</button>
+					<!-- <a href="javascript:void(0);" id="saveBtn" class="btn btn-primary" style="width: 100px;" type="submit">确定</a> -->
+					<a href="javascript:;" id="changePasswordBtn" class="btn btn-success" style="width: 120px;" th:if="${session['org.apache.shiro.subject.support.DefaultSubjectContext_PRINCIPALS_SESSION_KEY'].getPrimaryPrincipal().userName}=='admin' and ${sysUser.id}!=null">修改用户密码</a>
+					<a href="javascript:;" id="backBtn" class="btn btn-warning" style="width: 100px;">返回</a>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div th:include="common::header"></div>
+	<script src="/script/sys/user-detail.js"></script>
+</body>
+</html>

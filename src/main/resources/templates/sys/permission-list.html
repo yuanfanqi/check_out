@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+<title>permission-list</title>
+</head>
+<body>
+	<form action="" id="permissionForm" class="form-horizontal" style="width: 100%">
+		<div class="form-group">
+				<div class="col-sm-1">
+					<a href="/sys/permission/fetch/0" id="addBtn" class="btn btn-default btn-block">新增</a>
+				</div>
+			<div class="col-sm-1">
+				<a href="javascript:void(0)" id="modifyBtn" class="btn btn-default btn-block">修改</a>
+			</div>
+			<div class="col-sm-1">
+				<a href="javascript:void(0)" id="removeBtn" class="btn btn-default btn-block">删除</a>
+			</div>
+			<div class="col-sm-9"></div>
+		</div>
+		<table id="jqGrid"></table>
+		<div id="jqGridPager"></div>
+	</form>
+	<div th:include="common::header"></div>
+	<script src="/script/sys/permission-list.js"></script>
+</body>
+</html>

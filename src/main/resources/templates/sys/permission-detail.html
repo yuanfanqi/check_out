@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+<title>permission-list</title>
+</head>
+<body>
+	<div class="panel panel-default" id="rrapp">
+		<div class="panel-heading" th:text="${sysPermission.id==null?'新增':'修改'}">新增</div>
+		<form id="permissionForm" class="form-horizontal">
+			<input type="hidden" id="permissionId" name="id" th:value="${sysPermission.id}" />
+			<div class="form-group">
+				<div class="col-sm-2 control-label">类型</div>
+				<label class="radio-inline">
+					<input type="radio" name="type" value="0" th:checked="${sysPermission.type==0||sysPermission.type==null?true:false}" />
+					目录
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="type" value="1" th:checked="${sysPermission.type==1||sysPermission.type==null?true:false}" />
+					菜单
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="type" value="2" th:checked="${sysPermission.type==2?true:false}" />
+					权限
+				</label>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">菜单名称</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="permissionName" name="permissionName" th:value="${sysPermission.permissionName}" placeholder="菜单名称或按钮名称" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">上级菜单</div>
+				<div class="col-sm-10">
+					<input type="text" id="parentPermission" class="form-control" style="cursor: pointer;" readonly="readonly" placeholder="一级菜单" th:value="${sysPermission.parentName}" />
+					<input type="hidden" id="parentId" name="parentId" th:value="${sysPermission.parentId==null?0:sysPermission.parentId}" />
+				</div>
+			</div>
+			<div id="urlBox" class="form-group">
+				<div class="col-sm-2 control-label">菜单URL</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="url" name="url" th:value="${sysPermission.url}" placeholder="菜单URL" />
+				</div>
+			</div>
+			<div id="signBox" class="form-group">
+				<div class="col-sm-2 control-label">授权标识</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="permissionSign" name="permissionSign" th:value="${sysPermission.permissionSign}" placeholder="多个用逗号分隔，如：user:list,user:create" />
+				</div>
+			</div>
+			<div id="sortBox" class="form-group">
+				<div class="col-sm-2 control-label">排序号</div>
+				<div class="col-sm-10">
+					<input type="number" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" class="form-control" id="sort" name="sort" th:value="${sysPermission.sort}" placeholder="排序号" />
+				</div>
+			</div>
+			<div id="iconBox" class="form-group">
+				<div class="col-sm-2 control-label">图标</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="icon" name="icon" th:value="${sysPermission.icon}" placeholder="菜单图标" />
+					<code style="margin-top: 4px; display: block;">
+						获取图标：
+						<a href="http://www.fontawesome.com.cn/faicons/" target="_blank">http://www.fontawesome.com.cn/faicons/</a>
+					</code>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">状态</div>
+				<label class="radio-inline">
+					<input type="radio" name="valid" value="false" th:checked="${sysPermission.valid==false}" />
+					禁用
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="valid" value="true" th:checked="${sysPermission.valid==null?true:sysPermission.valid==true}" />
+					正常
+				</label>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3">
+					<a href="javascript:;" id="saveBtn" class="btn btn-primary btn-block">确定</a>
+				</div>
+				<div class="col-sm-3">
+					<a href="javascript:;" id="backBtn" class="btn btn-warning btn-block">返回</a>
+				</div>
+				<div class="col-sm-3"></div>
+			</div>
+		</form>
+	</div>
+	<!-- 选择菜单 -->
+	<div id="menuLayer" style="display: none; padding: 10px;">
+		<ul id="menuTree" class="ztree"></ul>
+	</div>
+	<div th:include="common::header"></div>
+	<script src="/script/sys/permission-detail.js"></script>
+</body>
+</html>
