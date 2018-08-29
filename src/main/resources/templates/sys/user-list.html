@@ -24,6 +24,7 @@
 		<div id="jqGridPager"></div>
 	</form>
 	<div th:include="common::header"></div>
-	<script src="/script/sys/user-list.js"></script>
+	<!-- <script src="/script/sys/user-list.js"></script> -->
+	<script th:src="@{'/projectJS/sys/user-list.js?time='+${new java.util.Date().getTime()}}"></script>
 </body>
 </html>

@@ -38,4 +38,10 @@ CREATE TABLE `sys_user` (
   PRIMARY KEY (`ID`),
   UNIQUE KEY `USER_NAME_UNIQUE` (`USER_NAME`)
 ) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COMMENT='系统用户表';
+
+-- ----------------------------
+-- Records of sys_user
+-- ----------------------------
+INSERT INTO `sys_user` VALUES ('1', 'admin', 'a66abb5684c45962d887564f08346e8d', '123456', 'admin', '2018-08-29 14:57:57', '2018-08-29 14:58:18', '\0', '\0', null, '', '', '暂无备注', '', '');
+
 SET FOREIGN_KEY_CHECKS=1;

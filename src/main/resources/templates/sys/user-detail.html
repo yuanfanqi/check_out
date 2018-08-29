@@ -75,6 +75,7 @@
 		</form>
 	</div>
 	<div th:include="common::header"></div>
-	<script src="/script/sys/user-detail.js"></script>
+	<!-- <script src="/script/sys/user-detail.js"></script> -->
+	<script th:src="@{'/projectJS/sys/user-detail.js?time='+${new java.util.Date().getTime()}}"></script>
 </body>
 </html>

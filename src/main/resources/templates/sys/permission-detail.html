@@ -95,6 +95,7 @@
 		<ul id="menuTree" class="ztree"></ul>
 	</div>
 	<div th:include="common::header"></div>
-	<script src="/script/sys/permission-detail.js"></script>
+	<!-- <script src="/script/sys/permission-detail.js"></script> -->
+	<script th:src="@{'/projectJS/sys/permission-detail.js?time='+${new java.util.Date().getTime()}}"></script>
 </body>
 </html>

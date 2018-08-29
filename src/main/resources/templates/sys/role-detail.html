@@ -57,6 +57,7 @@
 		</div>
 	</div>
 	<div th:include="common::header"></div>
-	<script src="/script/sys/role-detail.js"></script>
+	<!-- <script src="/script/sys/role-detail.js"></script> -->
+	<script th:src="@{'/projectJS/sys/role-detail.js?time='+${new java.util.Date().getTime()}}"></script>
 </body>
 </html>

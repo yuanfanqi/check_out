@@ -32,6 +32,7 @@
 		</form>
 	</div>
 	<div th:include="common::header"></div>
-	<script type="text/javascript" src="/script/sys/user-pwd.js"></script>
+	<!-- <script type="text/javascript" src="/projectJS/sys/user-pwd.js"></script> -->
+	<script th:src="@{'/projectJS/sys/user-pwd.js?time='+${new java.util.Date().getTime()}}"></script>
 </body>
 </html>
