@@ -1,22 +1,28 @@
 package com.checkOut.common.controller;
 
-import com.checkOut.common.model.Table;
-import com.checkOut.common.service.SysGeneratorService;
-import com.checkOut.utils.H;
-
-import org.apache.commons.io.IOUtils;
-//import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.checkOut.common.model.Table;
+import com.checkOut.common.service.SysGeneratorService;
+import com.checkOut.utils.H;
 
 /**
  * 代码生成控制器
@@ -39,7 +45,7 @@ public class SysGenratorController {
 	 * @return String - 页面
 	 */
 	@RequestMapping(value = "/generator/show", method = RequestMethod.GET)
-//	@RequiresPermissions("generator:index")
+	@RequiresPermissions("generator:index")
 	public String show(){
         logger.info("\n\n★进入跳转到数据库表记录列表页方法======================================================\n");
 

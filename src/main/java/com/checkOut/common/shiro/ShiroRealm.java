@@ -13,6 +13,7 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
@@ -207,5 +208,13 @@ public class ShiroRealm extends AuthorizingRealm {
 		PrincipalCollection principals = SecurityUtils.getSubject().getPrincipals();
 		super.clearCache(principals);
 	}
-
+    
+    /*测试类
+     * public static void main(String[] args) {
+        String hashAlgorithmName = "MD5";
+        String credentials = "123456";
+        int hashIterations = 1;
+        Object obj = new SimpleHash(hashAlgorithmName, credentials, ADMIN, hashIterations);
+        System.out.println(obj);
+    }*/
 }
