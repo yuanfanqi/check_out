@@ -209,12 +209,4 @@ public class ShiroRealm extends AuthorizingRealm {
 		super.clearCache(principals);
 	}
     
-    /*测试类
-     * public static void main(String[] args) {
-        String hashAlgorithmName = "MD5";
-        String credentials = "123456";
-        int hashIterations = 1;
-        Object obj = new SimpleHash(hashAlgorithmName, credentials, ADMIN, hashIterations);
-        System.out.println(obj);
-    }*/
 }
