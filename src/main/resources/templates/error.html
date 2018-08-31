@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>exception info</title>
+</head>
+<body>
+<p>完整请求URL:<span th:text="${requestUrl}">1</span></p>
+<p>请求行的参数:<span th:text="${queryString}">1</span></p>
+<p>发出请求的客户端IP:<span th:text="${clientIp}">1</span></p>
+<p>发出请求的主机名:<span th:text="${clientName}">1</span></p>
+<p>WEB容器的IP地址:<span th:text="${webIp}">1</span></p>
+<p>WEB容器的主机名:<span th:text="${webName}">1</span></p>
+<p>异常名称:<span th:text="${exceptionName}">1</span></p>
+<p>堆栈信息:<span th:text="${exceptionMessage}">1</span></p>
+</body>
+</html>

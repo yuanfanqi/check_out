@@ -38,10 +38,12 @@ CREATE TABLE `sys_permission` (
 -- ----------------------------
 INSERT INTO `sys_permission` VALUES ('1', '系统模块', '0', '', '0', '', '', '2018-08-29 15:35:50', '2018-08-29 15:35:53', '');
 INSERT INTO `sys_permission` VALUES ('2', '业务模块', '0', '', '0', '', '', '2018-08-29 15:35:50', '2018-08-29 15:35:53', '');
-INSERT INTO `sys_permission` VALUES ('3', '用户管理', '1', '', '1', '', '', '2018-08-29 15:35:50', '2018-08-29 15:35:53', '');
-INSERT INTO `sys_permission` VALUES ('4', '商品管理', '1', '', '2', '', '', '2018-08-27 10:22:28', '2018-08-27 10:22:31', '');
-INSERT INTO `sys_permission` VALUES ('5', '库存管理', '1', '', '2', '', '', '2018-08-27 10:22:59', '2018-08-27 10:23:02', '');
-INSERT INTO `sys_permission` VALUES ('6', '进货名单', '1', '', '2', '', '', '2018-08-27 10:23:22', '2018-08-27 10:23:27', '');
-INSERT INTO `sys_permission` VALUES ('7', '昨日战绩', '1', '', '2', '', '', '2018-08-27 10:23:40', '2018-08-27 10:23:43', '');
+INSERT INTO `sys_permission` VALUES ('3','菜单管理','1','','1','/sys/permission/show','', '2018-08-29 15:35:50', '2018-08-29 15:35:53','fa fa-bars');
+INSERT INTO `sys_permission` VALUES ('4','用户管理','1','','1','/sys/user/show','', '2018-08-29 15:35:50', '2018-08-29 15:35:53','fa fa-bars');
+INSERT INTO `sys_permission` VALUES ('5','角色管理','1','','1','/sys/role/show','', '2018-08-29 15:35:50', '2018-08-29 15:35:53','fa fa-bars');
+INSERT INTO `sys_permission` VALUES ('6', '商品管理', '1', '', '2', '', '', '2018-08-27 10:22:28', '2018-08-27 10:22:31', '');
+INSERT INTO `sys_permission` VALUES ('7', '库存管理', '1', '', '2', '', '', '2018-08-27 10:22:59', '2018-08-27 10:23:02', '');
+INSERT INTO `sys_permission` VALUES ('8', '进货名单', '1', '', '2', '', '', '2018-08-27 10:23:22', '2018-08-27 10:23:27', '');
+INSERT INTO `sys_permission` VALUES ('9', '昨日战绩', '1', '', '2', '', '', '2018-08-27 10:23:40', '2018-08-27 10:23:43', '');
 
 SET FOREIGN_KEY_CHECKS=1;
