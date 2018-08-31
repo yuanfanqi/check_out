@@ -45,5 +45,6 @@ INSERT INTO `sys_permission` VALUES ('6', '商品管理', '1', '', '2', '', '',
 INSERT INTO `sys_permission` VALUES ('7', '库存管理', '1', '', '2', '', '', '2018-08-27 10:22:59', '2018-08-27 10:23:02', '');
 INSERT INTO `sys_permission` VALUES ('8', '进货名单', '1', '', '2', '', '', '2018-08-27 10:23:22', '2018-08-27 10:23:27', '');
 INSERT INTO `sys_permission` VALUES ('9', '昨日战绩', '1', '', '2', '', '', '2018-08-27 10:23:40', '2018-08-27 10:23:43', '');
+INSERT INTO `sys_permission` VALUES ('10', '代码生成', '1', '', '1', '/sys/generator/show', '', '2017-09-08 09:11:16', '2017-09-08 09:11:16', 'fa fa-file-code-o');
 
 SET FOREIGN_KEY_CHECKS=1;
