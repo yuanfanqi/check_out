@@ -11,11 +11,9 @@
     <result column="PERMISSION_SIGN" jdbcType="VARCHAR" property="permissionSign" />
     <result column="PARENT_ID" jdbcType="INTEGER" property="parentId" />
     <result column="URL" jdbcType="VARCHAR" property="url" />
-    <result column="SORT" jdbcType="INTEGER" property="sort" />
     <result column="VALID" jdbcType="BIT" property="valid" />
     <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
     <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
     <result column="ICON" jdbcType="VARCHAR" property="icon" />
     <result column="PARENT_NAME" jdbcType="VARCHAR" property="parentName" />
   </resultMap>
@@ -68,11 +66,9 @@
   		<if test="permissionSign!=null">AND A.PERMISSION_SIGN = #{permissionSign,jdbcType=VARCHAR}</if>
   		<if test="parentId!=null">AND A.PARENT_ID = #{parentId,jdbcType=INTEGER}</if>
   		<if test="url!=null">AND A.URL = #{url,jdbcType=VARCHAR}</if>
-  		<if test="sort!=null">AND A.SORT = #{sort,jdbcType=INTEGER}</if>
   		<if test="valid!=null">AND A.VALID = #{valid,jdbcType=BIT}</if>
   		<if test="createTime!=null">AND A.CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}</if>
   		<if test="updateTime!=null">AND A.UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}</if>
-  		<if test="remark!=null">AND A.REMARK = #{remark,jdbcType=VARCHAR}</if>
   		<if test="icon!=null">AND A.ICON = #{icon,jdbcType=VARCHAR}</if>
   	</where>
   </select>

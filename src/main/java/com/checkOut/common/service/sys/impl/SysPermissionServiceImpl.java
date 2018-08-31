@@ -76,7 +76,6 @@ public class SysPermissionServiceImpl implements SysPermissionService {
 				//如果是权限
 				record.setIcon(null);
 				record.setUrl(null);
-				record.setSort(null);
 			}
 			
 			record.setCreateTime(Calendar.getInstance().getTime());
@@ -111,7 +110,6 @@ public class SysPermissionServiceImpl implements SysPermissionService {
 			if (record.getType() == 2) {
 				record.setIcon(null);
 				record.setUrl(null);
-				record.setSort(null);
 			}
 			count = sysPermissionMapper.updateByPrimaryKeySelective(record);
 			shiroRealm.clearCached();

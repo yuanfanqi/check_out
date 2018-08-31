@@ -6,9 +6,6 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
-import org.hibernate.validator.constraints.Range;
-
-
 @Table(name = "sys_permission")
 public class SysPermission {
 	/**
@@ -58,13 +55,6 @@ public class SysPermission {
 	private String url;
 
 	/**
-	 * 排列序号
-	 */
-	@Range(min=0,max=99,message="排列序号值应在0-100之间！")
-	@Column(name = "SORT")
-	private Integer sort;
-
-	/**
 	 * 是否有效(0:否|1:是)
 	 */
 	@Column(name = "VALID")
@@ -81,12 +71,6 @@ public class SysPermission {
 	 */
 	@Column(name = "UPDATE_TIME")
 	private Date updateTime;
-
-	/**
-	 * 备注
-	 */
-	@Column(name = "REMARK")
-	private String remark;
 
 	/**
 	 * 子菜单
@@ -215,25 +199,6 @@ public class SysPermission {
 	}
 
 	/**
-	 * 获取排列序号
-	 *
-	 * @return SORT - 排列序号
-	 */
-	public Integer getSort() {
-		return sort;
-	}
-
-	/**
-	 * 设置排列序号
-	 *
-	 * @param sort
-	 *            排列序号
-	 */
-	public void setSort(Integer sort) {
-		this.sort = sort;
-	}
-
-	/**
 	 * 获取是否有效(0:否|1:是)
 	 *
 	 * @return VALID - 是否有效(0:否|1:是)
@@ -288,25 +253,6 @@ public class SysPermission {
 	 */
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
-	}
-
-	/**
-	 * 获取备注
-	 *
-	 * @return REMARK - 备注
-	 */
-	public String getRemark() {
-		return remark;
-	}
-
-	/**
-	 * 设置备注
-	 *
-	 * @param remark
-	 *            备注
-	 */
-	public void setRemark(String remark) {
-		this.remark = remark == null ? null : remark.trim();
 	}
 
 	/**
