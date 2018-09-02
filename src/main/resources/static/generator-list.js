@@ -6,15 +6,15 @@ $(function(){
 //	$('#searchBtn').bind('click',triggerGrid);
 });
 
-function triggerGrid(){
-	$("#jqGrid").setGridParam({
+//function triggerGrid(){
+//	$("#jqGrid").setGridParam({
 //		postData:{
 //			tableName:$('#tableName').val(),
 //			tableSchema:$('#tableSchema').val()
 //		},
-		page:1
-	}).trigger("reloadGrid");
-}
+//		page:1
+//	}).trigger("reloadGrid");
+//}
 
 var config = {
 		url: "/sys/generator/search",
@@ -26,28 +26,24 @@ var config = {
 		scrollOffset: 0,
 		colModel: [{
 			label: '表名称',
-			name: 'tableName',
+			name: 'TABLE_NAME',
 			key: true,
 			sortable: true
 		}, {
-			label: 'Schema',
-			name: 'tableSchema',
-			sortable: true
-		}, {
 			label: '记录数',
-			name: 'tableRows',
+			name: 'TABLE_ROWS',
 			sortable: true
 		}, {
 			label: '引擎类型',
-			name: 'engine',
+			name: 'ENGINE',
 			sortable: false
 		}, {
 			label: '注释',
-			name: 'tableComment',
+			name: 'TABLE_COMMENT',
 			sortable: false
 		}, {
 			label: '创建时间',
-			name: 'createTime',
+			name: 'CREATE_TIME',
 			formatter: function(value, options, row) {
 				var result = "";
 				result = new Date(value).pattern("yyyy/MM/dd HH:mm:ss");
@@ -56,9 +52,9 @@ var config = {
 			sortable: true
 		}, {
 			label: '操作',
-			name: 'operation',
+			name: 'OPERATION',
 			formatter: function(value, options, row) {
-					return  "<a href='/sys/generator/code/"+row.tableName+"/"+row.tableSchema+"' class='btn btn-success btn-xs' title='生成代码'>生成代码</a>";
+					return  "<a href='/sys/generator/code/"+row.TABLE_NAME +"' class='btn btn-success btn-xs' title='生成代码'>生成代码</a>";
 			}
 		}],
 		autowidth: true,

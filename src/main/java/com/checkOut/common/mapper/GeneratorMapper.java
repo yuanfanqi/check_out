@@ -18,18 +18,16 @@ public interface GeneratorMapper {
 	List<Map<String, Object>> queryListMysql(Table record);
 
 	/**
-	 * 根据schema与表名查询表信息
-	 * @param tableSchema
+	 * 根据表名查询表信息
 	 * @param tableName - 表名称
 	 * @return Map<String, String> - 表信息
 	 */
-	Map<String, String> queryTable(@Param("tableSchema") String tableSchema, @Param("tableName") String tableName);
+	Map<String, String> queryTable(@Param("tableName") String tableName);
 
 	/**
-	 * 根据schema与表名查询该表的字段信息
-	 * @param tableSchema
+	 * 根据表名查询该表的字段信息
 	 * @param tableName - 表名称
 	 * @return List<Map<String, String>> - 字段信息集合
 	 */
-	List<Map<String, String>> queryColumns(@Param("tableSchema") String tableSchema, @Param("tableName") String tableName);
+	List<Map<String, String>> queryColumns(@Param("tableName") String tableName);
 }

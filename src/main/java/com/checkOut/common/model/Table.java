@@ -34,10 +34,6 @@ public class Table {
      * 类名(第一个字母小写)，如：sys_user => sysUser
      */
 	private String classname;
-    /**
-     * 表前缀(例:jrtz_app)
-     */
-	private String tableSchema;
 
 	public String getTableName() {
 		return tableName;
@@ -85,14 +81,6 @@ public class Table {
 
 	public void setClassname(String classname) {
 		this.classname = classname;
-	}
-
-	public String getTableSchema() {
-		return tableSchema;
-	}
-
-	public void setTableSchema(String tableSchema) {
-		this.tableSchema = tableSchema;
 	}
 
 }

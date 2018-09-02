@@ -70,11 +70,10 @@ public class GenUtils {
 		
 		//表信息
 		Table info = new Table();
-		info.setTableName(table.get("tableName"));
-		info.setComments(table.get("tableComment"));
-		info.setTableSchema(table.get("tableSchema"));
+		info.setTableName(table.get("TABLE_NAME"));
+		info.setComments(table.get("TABLE_COMMENT"));
 		//表名转换成Java类名
-		String className = tableToJava(info.getTableName(), config.getString("tablePrefix"));
+		String className = tableToJava(info.getTableName(), config.getString("TABLE_PREFIX"));
 		info.setClassName(className);
 		info.setClassname(StringUtils.uncapitalize(className));
 		
@@ -83,10 +82,10 @@ public class GenUtils {
 		Set<String> imports = new HashSet<>();
 		for(Map<String, String> column : columns){
 			Column newColumn = new Column();
-			newColumn.setColumnName(column.get("columnName"));
-			newColumn.setDataType(convertDataType(column.get("dataType")));
-			newColumn.setComments(column.get("columnComment"));
-			newColumn.setExtra(column.get("extra"));
+			newColumn.setColumnName(column.get("COLUMN_NAME"));
+			newColumn.setDataType(convertDataType(column.get("DATA_TYPE")));
+			newColumn.setComments(column.get("COLUMN_COMMENT"));
+			newColumn.setExtra(column.get("EXTRA"));
 			
 			//列名转换成Java属性名
 			String attrName = columnToJava(newColumn.getColumnName());
@@ -94,7 +93,7 @@ public class GenUtils {
 			newColumn.setAttrname(StringUtils.uncapitalize(attrName));
 			
 			//列的数据类型，转换成Java类型
-			String absAttrType = config.getString(newColumn.getDataType(), "unknowType");
+			String absAttrType = config.getString(newColumn.getDataType(), "UNKNOW_TYPE");
 			String attrType = "";
 			if(absAttrType.lastIndexOf(".") != -1){
 				attrType = absAttrType.substring(absAttrType.lastIndexOf(".") + 1);
@@ -102,7 +101,7 @@ public class GenUtils {
 			
 			//如果字段类型为clob 或者 blob
             String clob = "clob", blob = "blob";
-            if (clob.equals(column.get("dataType")) || blob.equals(column.get("dataType"))) {
+            if (clob.equals(column.get("DATA_TYPE")) || blob.equals(column.get("DATA_TYPE"))) {
                 attrType = "Byte[]";
 			}
 			
@@ -113,7 +112,7 @@ public class GenUtils {
 			}
 			
 			//是否主键
-			if("PRI".equalsIgnoreCase(column.get("columnKey"))){
+			if("PRI".equalsIgnoreCase(column.get("COLUMN_KEY"))){
 				info.getPk().add(newColumn);
 			}
 			
@@ -135,7 +134,6 @@ public class GenUtils {
 		map.put("className", info.getClassName());
 		map.put("classname", info.getClassname());
 		map.put("pathName", info.getClassname().toLowerCase());
-		map.put("database", info.getTableSchema().replace("jrtz_", ""));
 		map.put("columns", info.getColumns());
 		map.put("package", config.getString("package"));
 		map.put("author", config.getString("author"));
@@ -154,7 +152,7 @@ public class GenUtils {
 			
 			try {
 				//添加到zip
-				zip.putNextEntry(new ZipEntry(getFileName(template, info.getTableSchema(), info.getClassName(), config.getString("package"))));  
+				zip.putNextEntry(new ZipEntry(getFileName(template, info.getClassName(), config.getString("package"))));  
 				IOUtils.write(sw.toString(), zip, "UTF-8");
 				IOUtils.closeQuietly(sw);
 				zip.closeEntry();
@@ -196,30 +194,30 @@ public class GenUtils {
 	/**
 	 * 获取文件名
 	 */
-	public static String getFileName(String template,String tableSchema, String className, String packageName){
+	public static String getFileName(String template, String className, String packageName){
 		String packagePath = "main" + File.separator + "java" + File.separator;
 		if(StringUtils.isNotBlank(packageName)){
 			packagePath += packageName.replace(".", File.separator) + File.separator;
 		}
 
         if (template.contains(VelocityTemplateSuffixNameType.MAPPER_JAVA.getValue())) {
-            return packagePath + "mapper" + File.separator + tableSchema.replace("jrtz_", "") + File.separator + className + "Mapper.java";
+            return packagePath + "mapper" + File.separator + File.separator + className + "Mapper.java";
 		}
 
         if (template.contains(VelocityTemplateSuffixNameType.ENTITY_JAVA.getValue())) {
-            return packagePath + "model" + File.separator + tableSchema.replace("jrtz_", "") + File.separator + className + ".java";
+            return packagePath + "model" + File.separator + File.separator + className + ".java";
 		}
 
         if (template.contains(VelocityTemplateSuffixNameType.SERVICE_JAVA.getValue())) {
-            return packagePath + "service" + File.separator + tableSchema.replace("jrtz_", "") + File.separator + className + "Service.java";
+            return packagePath + "service" + File.separator + File.separator + className + "Service.java";
 		}
 
         if (template.contains(VelocityTemplateSuffixNameType.SERVICE_IMPL_JAVA.getValue())) {
-            return packagePath + "service" + File.separator + tableSchema.replace("jrtz_", "") + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
+            return packagePath + "service" + File.separator + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
 		}
 
         if (template.contains(VelocityTemplateSuffixNameType.MAPPER_XML.getValue())) {
-            return "main" + File.separator + "resources" + File.separator + "mapper" + File.separator + tableSchema.replace("jrtz_", "") + File.separator + className + "Mapper.xml";
+            return "main" + File.separator + "resources" + File.separator + "mapper" + File.separator + File.separator + className + "Mapper.xml";
 		}
 		
 		/*

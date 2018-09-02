@@ -45,7 +45,7 @@ public class SysGenratorController {
 	 * @return String - 页面
 	 */
 	@RequestMapping(value = "/generator/show", method = RequestMethod.GET)
-	@RequiresPermissions("generator:index")
+//	@RequiresPermissions("generator:index")
 	public String show(){
         logger.info("\n\n★进入跳转到数据库表记录列表页方法======================================================\n");
 
@@ -84,21 +84,14 @@ public class SysGenratorController {
 	 * @param response
 	 * @throws IOException
 	 */
-	@RequestMapping("/generator/code/{tableName}/{tableSchema}")
+	@RequestMapping("/generator/code/{tableName}")
 	public void code(
-			@PathVariable(value = "tableSchema", required = true) String tableSchema,
 			@PathVariable(value = "tableName", required = true) String tableName,
 			HttpServletResponse response) throws IOException{
         logger.info("\n\n★进入根据表名生成代码方法======================================================\n");
 
 		try {
-			String dataSourceType = "";
-			if(H.isNotBlank(tableSchema)){
-				dataSourceType =tableSchema.replace("jrtz_", "");
-			}else{
-				dataSourceType = "app";
-			}
-			byte[] data = sysGeneratorService.generateCode(tableSchema, tableName);
+			byte[] data = sysGeneratorService.generateCode(tableName);
 
 			response.reset();
 			response.setHeader("Content-Disposition", "attachment; filename=\""+tableName+".zip\"");

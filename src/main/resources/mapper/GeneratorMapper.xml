@@ -12,63 +12,21 @@
 	</sql>
 
 	<select id="queryListMysql" parameterType="com.checkOut.common.model.Table" resultType="java.util.Map">
-		SELECT TABLE_NAME, TABLE_SCHEMA, TABLE_ROWS, ENGINE, TABLE_COMMENT, CREATE_TIME
+		SELECT TABLE_NAME, TABLE_ROWS, ENGINE, TABLE_COMMENT, CREATE_TIME
 		FROM INFORMATION_SCHEMA.TABLES
 		<where>
-			<choose>
-				<when test="tableSchema != null and tableSchema.trim() != ''">
-					AND TABLE_SCHEMA = #{tableSchema}
-				</when>
-				<otherwise>
-					AND TABLE_SCHEMA = (SELECT DATABASE())
-				</otherwise>
-			</choose>
+			table_schema='check_out'
 			<if test="tableName != null and tableName.trim() != ''">
 				AND INSTR(TABLE_NAME,#{tableName})>0
 			</if>
 		</where>
-		<include refid="sortParam"/>
-	</select>
-
-	<select id="queryListOracle" parameterType="com.checkOut.common.model.Table" resultType="java.util.Map">
-		SELECT A.TABLE_NAME,
-		A.TABLESPACE_NAME,
-		'' AS TABLE_ROWS,
-		'' AS ENGINE,
-		C.COMMENTS AS TABLE_COMMENT,
-		B.CREATED AS CREATE_TIME
-		FROM USER_TABLES A
-		INNER JOIN USER_OBJECTS B
-		ON A.TABLE_NAME = B.OBJECT_NAME
-		INNER JOIN USER_TAB_COMMENTS C
-		ON A.TABLE_NAME = C.TABLE_NAME
-		<where>
-			<choose>
-				<when test="tableSchema != null and tableSchema.trim() != ''">
-					AND A.TABLESPACE_NAME = LOWER(#{tableSchema}) OR A.TABLESPACE_NAME = UPPER(#{tableSchema})
-				</when>
-				<otherwise>
-					AND A.TABLESPACE_NAME = (SELECT DEFAULT_TABLESPACE FROM USER_USERS)
-				</otherwise>
-			</choose>
-			<if test="tableName != null and tableName.trim() != ''">
-				AND INSTR(A.TABLE_NAME,#{tableName})>0
-			</if>
-		</where>
-		<include refid="sortParam"/>
+		<!-- <include refid="sortParam"/> -->
 	</select>
 
 	<select id="queryTable" resultType="java.util.Map">
 		SELECT TABLE_NAME, TABLE_SCHEMA, ENGINE, TABLE_COMMENT, CREATE_TIME FROM INFORMATION_SCHEMA.TABLES
 		<where>
-			<choose>
-				<when test="tableSchema != null and tableSchema.trim() != ''">
-					AND TABLE_SCHEMA = #{tableSchema}
-				</when>
-				<otherwise>
-					AND TABLE_SCHEMA = (SELECT DATABASE())
-				</otherwise>
-			</choose>
+			table_schema='check_out'
 			<if test="tableName != null and tableName.trim() != ''">
 				AND TABLE_NAME = #{tableName}
 			</if>
@@ -78,14 +36,7 @@
 	<select id="queryColumns" resultType="java.util.Map">
 		SELECT COLUMN_NAME, DATA_TYPE, COLUMN_COMMENT, COLUMN_KEY, EXTRA FROM INFORMATION_SCHEMA.COLUMNS
 		<where>
-			<choose>
-				<when test="tableSchema != null and tableSchema.trim() != ''">
-					AND TABLE_SCHEMA = #{tableSchema}
-				</when>
-				<otherwise>
-					AND TABLE_SCHEMA = (SELECT DATABASE())
-				</otherwise>
-			</choose>
+			table_schema='check_out'
 			<if test="tableName != null and tableName.trim() != ''">
 				AND TABLE_NAME = #{tableName}
 			</if>
