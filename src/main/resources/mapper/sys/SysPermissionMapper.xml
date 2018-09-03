@@ -1,80 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.checkOut.common.mapper.sys.SysPermissionMapper">
-  <resultMap id="BaseResultMap" type="com.checkOut.common.model.sys.SysPermission">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="ID" jdbcType="INTEGER" property="id" />
-    <result column="PERMISSION_NAME" jdbcType="VARCHAR" property="permissionName" />
-    <result column="TYPE" jdbcType="SMALLINT" property="type" />
-    <result column="PERMISSION_SIGN" jdbcType="VARCHAR" property="permissionSign" />
-    <result column="PARENT_ID" jdbcType="INTEGER" property="parentId" />
-    <result column="URL" jdbcType="VARCHAR" property="url" />
-    <result column="VALID" jdbcType="BIT" property="valid" />
-    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="ICON" jdbcType="VARCHAR" property="icon" />
-    <result column="PARENT_NAME" jdbcType="VARCHAR" property="parentName" />
-  </resultMap>
-  
-  <select id="selectByUserIdAndType" parameterType="java.util.Map" resultMap="BaseResultMap">
-	SELECT 
-	    *
-	FROM
-	    SYS_PERMISSION
-	<where>
-		<if test="userId !=null and valid != null and types != null">
-			AND ID IN (SELECT 
-		            SYS_PERMISSION_ID
-		        FROM
-		            SYS_ROLE_PERMISSION
-		        WHERE
-		            SYS_ROLE_ID IN (SELECT 
-		                    ID
-		                FROM
-		                    SYS_ROLE T
-		                WHERE
-		                    T.ID IN (SELECT 
-		                            SYS_ROLE_ID
-		                        FROM
-		                            SYS_USER_ROLE
-		                        WHERE SYS_USER_ID = #{userId,jdbcType=INTEGER})
-		                        AND T.VALID = 1))
-		        AND VALID = #{valid,jdbcType=BIT}
-		        AND TYPE IN
-		        <foreach collection="types" item="type" open="(" separator="," close=")">
-		        	#{type,jdbcType=SMALLINT}
-		        </foreach>
-		</if>
-		<if test="userId == null and valid == null and types != null">
-			AND TYPE IN
-			<foreach collection="types" item="type" open="(" separator="," close=")">
-	        	#{type,jdbcType=SMALLINT}
-	        </foreach>
-		</if>
-	</where>
-	    
-  </select>
-  
-  <select id="findPage" parameterType="com.checkOut.common.model.sys.SysPermission" resultMap="BaseResultMap">
-  	SELECT A.*,B.PERMISSION_NAME PARENT_NAME FROM SYS_PERMISSION A LEFT JOIN SYS_PERMISSION B ON A.PARENT_ID = B.ID ORDER BY B.PERMISSION_NAME ASC
-  	<where>
-  		<if test="id!=null">AND A.ID = #{id,jdbcType=INTEGER}</if>
-  		<if test="permissionName!=null">AND A.PERMISSION_NAME = #{permissionName,jdbcType=VARCHAR}</if>
-  		<if test="type!=null">AND A.TYPE = #{type,jdbcType=SMALLINT}</if>
-  		<if test="permissionSign!=null">AND A.PERMISSION_SIGN = #{permissionSign,jdbcType=VARCHAR}</if>
-  		<if test="parentId!=null">AND A.PARENT_ID = #{parentId,jdbcType=INTEGER}</if>
-  		<if test="url!=null">AND A.URL = #{url,jdbcType=VARCHAR}</if>
-  		<if test="valid!=null">AND A.VALID = #{valid,jdbcType=BIT}</if>
-  		<if test="createTime!=null">AND A.CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}</if>
-  		<if test="updateTime!=null">AND A.UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}</if>
-  		<if test="icon!=null">AND A.ICON = #{icon,jdbcType=VARCHAR}</if>
-  	</where>
-  </select>
-  
-  <select id="findByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-  	SELECT A.*,B.PERMISSION_NAME PARENT_NAME FROM SYS_PERMISSION A LEFT JOIN SYS_PERMISSION B ON A.PARENT_ID = B.ID
-  	WHERE A.ID = #{primaryKey,jdbcType=INTEGER}
-  </select>
+	<resultMap id="BaseResultMap" type="com.checkOut.common.model.sys.SysPermission">
+		<!-- WARNING - @mbg.generated -->
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="PERMISSION_NAME" jdbcType="VARCHAR" property="permissionName" />
+		<result column="TYPE" jdbcType="SMALLINT" property="type" />
+		<result column="PERMISSION_SIGN" jdbcType="VARCHAR" property="permissionSign" />
+		<result column="PARENT_ID" jdbcType="INTEGER" property="parentId" />
+		<result column="URL" jdbcType="VARCHAR" property="url" />
+		<result column="VALID" jdbcType="BIT" property="valid" />
+		<result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+		<result column="ICON" jdbcType="VARCHAR" property="icon" />
+		<result column="PARENT_NAME" jdbcType="VARCHAR" property="parentName" />
+	</resultMap>
+
+	<select id="selectByUserIdAndType" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		SELECT
+		*
+		FROM
+		SYS_PERMISSION
+		<where>
+			<if test="userId !=null and valid != null and types != null">
+				AND ID IN (SELECT
+				SYS_PERMISSION_ID
+				FROM
+				SYS_ROLE_PERMISSION
+				WHERE
+				SYS_ROLE_ID IN (SELECT
+				ID
+				FROM
+				SYS_ROLE T
+				WHERE
+				T.ID IN (SELECT
+				SYS_ROLE_ID
+				FROM
+				SYS_USER_ROLE
+				WHERE SYS_USER_ID = #{userId,jdbcType=INTEGER})
+				AND T.VALID = 1))
+				AND VALID = #{valid,jdbcType=BIT}
+				AND TYPE IN
+				<foreach collection="types" item="type" open="(" separator=","
+					close=")">
+					#{type,jdbcType=SMALLINT}
+				</foreach>
+			</if>
+			<if test="userId == null and valid == null and types != null">
+				AND TYPE IN
+				<foreach collection="types" item="type" open="(" separator=","
+					close=")">
+					#{type,jdbcType=SMALLINT}
+				</foreach>
+			</if>
+		</where>
+
+	</select>
+
+	<select id="findPage" resultMap="BaseResultMap">
+		SELECT A.*,B.PERMISSION_NAME PARENT_NAME FROM SYS_PERMISSION A LEFT
+		JOIN SYS_PERMISSION B ON A.PARENT_ID = B.ID ORDER BY B.PERMISSION_NAME
+		ASC
+		<where>
+			<if test="null != record">
+				<if test="record.id!=null">AND A.ID = #{record.id,jdbcType=INTEGER}</if>
+				<if test="record.permissionName!=null">AND A.PERMISSION_NAME =
+					#{record.permissionName,jdbcType=VARCHAR}
+				</if>
+				<if test="record.type!=null">AND A.TYPE = #{record.type,jdbcType=SMALLINT}</if>
+				<if test="record.permissionSign!=null">AND A.PERMISSION_SIGN =
+					#{record.permissionSign,jdbcType=VARCHAR}
+				</if>
+				<if test="record.parentId!=null">AND A.PARENT_ID = #{record.parentId,jdbcType=INTEGER}
+				</if>
+				<if test="record.url!=null">AND A.URL = #{record.url,jdbcType=VARCHAR}</if>
+				<if test="record.valid!=null">AND A.VALID = #{record.valid,jdbcType=BIT}</if>
+				<if test="record.createTime!=null">AND A.CREATE_TIME =
+					#{record.createTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="record.updateTime!=null">AND A.UPDATE_TIME =
+					#{record.updateTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="record.icon!=null">AND A.ICON = #{record.icon,jdbcType=VARCHAR}</if>
+			</if>
+		</where>
+		limit #{start},#{end}
+	</select>
+
+	<select id="findByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		SELECT A.*,B.PERMISSION_NAME PARENT_NAME FROM SYS_PERMISSION A LEFT JOIN
+		SYS_PERMISSION B ON A.PARENT_ID = B.ID
+		WHERE A.ID = #{primaryKey,jdbcType=INTEGER}
+	</select>
 </mapper>

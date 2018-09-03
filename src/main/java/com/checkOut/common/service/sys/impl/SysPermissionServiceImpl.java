@@ -126,6 +126,13 @@ public class SysPermissionServiceImpl implements SysPermissionService {
 		return count;
 	}
 
+
+	@Override
+	public List<SysPermission> selectPage(SysPermission record) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/*@Override
 	public PageInfo<SysPermission> findPage(SysPermission record) throws Exception {
 		pageInfo = null;
@@ -138,17 +145,12 @@ public class SysPermissionServiceImpl implements SysPermissionService {
 		}
 		return pageInfo;
 	}*/
-
-	@Override
-	public List<SysPermission> selectPage(SysPermission record) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
 	public List<SysPermission> findPage(SysPermission record, Integer page, Integer limit) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Integer start = (page-1) * limit;
+		Integer end = page * limit;
+		List<SysPermission> findPage = sysPermissionMapper.findPage(sysPermission, start, end);
+		return findPage;
 	}
 	
 	@Override

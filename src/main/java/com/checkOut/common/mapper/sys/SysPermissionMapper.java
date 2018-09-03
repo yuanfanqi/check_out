@@ -27,7 +27,7 @@ public interface SysPermissionMapper extends Mapper<SysPermission> {
 	 * @return List<SysPermission>
 	 * @throws Exception
 	 */
-	List<SysPermission> findPage(SysPermission record) throws Exception;
+	List<SysPermission> findPage(@Param("record") SysPermission record, @Param("start") Integer start, @Param("end") Integer end) throws Exception;
 	/**
 	 * 根据主键查找
 	 * @param primaryKey - 主键

@@ -153,14 +153,7 @@ public class ShiroRealm extends AuthorizingRealm {
 			record.setType((short) 2);
 			record.setValid(true);
 			try {
-				//permissionList = sysPermissionService.selectByExample(record);
-				Example example = new Example(SysPermission.class);
-				Criteria criteria = example.createCriteria();
-				criteria.andEqualTo("type", 2);
-				criteria.andEqualTo("valid", true);
-				//TODO
-//				PageHelper.startPage(0, 0, false);
-				permissionList = sysPermissionMapper.selectByExample(example);
+				permissionList = sysPermissionService.selectByExample(record);
 			} catch (Exception e) {
 				logger.error(e.getMessage(), e);
 			}
