@@ -1,0 +1,15 @@
+package ${package}.common.service.${database};
+
+import ${package}.model.${database}.${className};
+import ${package}.service.BaseService;
+
+/**
+ * ${comments}-业务层接口
+ * @author ${author} E-mail:${email}
+ * @date 创建时间：${createTime}
+ * @version 1.0
+ * @since 
+ */
+public interface ${className}Service extends BaseService<${className}>{
+	
+}

@@ -1,0 +1,55 @@
+package ${package}.common.model.${database};
+
+import java.io.Serializable;
+#if(${hasDate})
+import java.util.Date;
+#end
+import javax.persistence.*;
+import com.investoday.cms.model.BaseEntity;
+
+#foreach ($import in $imports)
+import $import;
+#end
+
+/**
+ * ${comments}-实体
+ * @author ${author} E-mail:${email}
+ * @date 创建时间：${createTime}
+ * @version 1.0
+ * @since 
+ */
+@Table(name = "${tableName}")
+public class ${className} extends BaseEntity implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+#foreach ($column in $columns)
+	/**
+     * $column.comments
+     */
+    #if($pk.contains($column))
+@Id
+    #end
+@Column(name = "$column.columnName")
+	private $column.attrType $column.attrname;
+#end
+
+#foreach ($column in $columns)
+	/**
+	 * 设置：${column.comments}
+	 */
+	public void set${column.attrName}($column.attrType $column.attrname) {
+	#if($column.attrType == "String")
+	this.$column.attrname = $column.attrname == null ? null : ${column.attrname}.trim();
+#else  
+	this.$column.attrname = $column.attrname;
+#end
+	}
+	/**
+	 * 获取：${column.comments}
+	 * @return ${column.columnName} - ${column.comments}
+	 */
+	public $column.attrType get${column.attrName}() {
+		return $column.attrname;
+	}
+#end
+}
