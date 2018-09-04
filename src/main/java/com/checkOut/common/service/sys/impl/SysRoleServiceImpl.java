@@ -97,8 +97,9 @@ public class SysRoleServiceImpl implements SysRoleService {
 
 	@Override
 	public List<SysRole> findPage(SysRole record, Integer page, Integer limit) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO 未做分页（role目前没有做分页，后期补全）
+		List<SysRole> select = sysRoleMapper.select(record);
+		return select;
 	}
 	
 	@Override

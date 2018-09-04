@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 10.1.1.12
-Source Server Version : 50718
-Source Host           : 10.1.1.12:3306
-Source Database       : jrtz_app
+Source Server         : loc
+Source Server Version : 80012
+Source Host           : localhost:3306
+Source Database       : check_out
 
 Target Server Type    : MYSQL
-Target Server Version : 50718
+Target Server Version : 80012
 File Encoding         : 65001
 
-Date: 2018-08-24 17:44:08
+Date: 2018-09-04 18:06:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,5 +24,12 @@ CREATE TABLE `sys_role_permission` (
   `SYS_ROLE_ID` int(11) DEFAULT NULL COMMENT '关联系统角色表ID',
   `SYS_PERMISSION_ID` int(11) DEFAULT NULL COMMENT '关联系统权限表ID',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=255 DEFAULT CHARSET=utf8 COMMENT='系统角色与权限中间表';
+) ENGINE=InnoDB AUTO_INCREMENT=258 DEFAULT CHARSET=utf8 COMMENT='系统角色与权限中间表';
+
+-- ----------------------------
+-- Records of sys_role_permission
+-- ----------------------------
+INSERT INTO `sys_role_permission` VALUES ('255', '45', '1');
+INSERT INTO `sys_role_permission` VALUES ('256', '45', '3');
+INSERT INTO `sys_role_permission` VALUES ('257', '45', '12');
 SET FOREIGN_KEY_CHECKS=1;

@@ -31,6 +31,7 @@ import com.checkOut.common.service.sys.SysRoleService;
 import com.checkOut.common.shiro.ShiroUtil;
 import com.checkOut.utils.H;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
@@ -42,7 +43,7 @@ import io.swagger.annotations.ApiParam;
  */
 @Controller
 @RequestMapping(value = "/sys")
-//@Api(value = "SysRoleController", tags = "角色管理控制器")
+@Api(value = "SysRoleController", tags = "角色管理控制器")
 public class SysRoleController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
@@ -54,7 +55,7 @@ public class SysRoleController {
 	 * 跳转到角色列表页
 	 * @return String - 页面
 	 */
-//	@ApiOperation(value = "跳转到角色列表页", notes = "跳转到角色列表页", httpMethod = "GET", produces = MediaType.TEXT_HTML_VALUE)
+	@ApiOperation(value = "跳转到角色列表页", notes = "跳转到角色列表页", httpMethod = "GET", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/role/show", method = RequestMethod.GET)
 	@RequiresPermissions("role:index")
 	public String show() {
@@ -67,7 +68,7 @@ public class SysRoleController {
 	 * @param id - 菜单或权限ID
 	 * @return String - 页面
 	 */
-//	@ApiOperation(value = "跳转到添加或修改角色页面", notes = "跳转到添加或修改角色页面", httpMethod = "GET", produces = MediaType.TEXT_HTML_VALUE)
+	@ApiOperation(value = "跳转到添加或修改角色页面", notes = "跳转到添加或修改角色页面", httpMethod = "GET", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/role/fetch/{id}", method = RequestMethod.GET)
 	public ModelAndView fetch(@ApiParam(name = "id", value = "菜单或权限ID", required = false) @PathVariable(value = "id", required = false) Integer id) {
         logger.info("\n\n★进入跳转到添加或修改角色页面方法======================================================\n");

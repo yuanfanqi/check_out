@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.checkOut.common.mapper.sys.SysPermissionMapper;
+import com.checkOut.common.model.pageModel.PageData;
 import com.checkOut.common.model.sys.SysPermission;
 import com.checkOut.common.service.sys.SysPermissionService;
 import com.checkOut.common.shiro.ShiroUtil;
@@ -48,6 +50,8 @@ public class SysPermissionController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private SysPermissionService sysPermissionService;
+	@Autowired
+	private SysPermissionMapper sysPermissionMapper;
 
 	/**
 	 * 跳转到系统菜单及权限列表页
@@ -207,21 +211,19 @@ public class SysPermissionController {
 	@ApiOperation(value = "条件分页查询系统菜单权限列表", notes = "条件查询系统菜单权限列表", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
 	@RequestMapping(value = "/permission/search", method = RequestMethod.POST)
 	@ResponseBody
-	public List<SysPermission> search(@ModelAttribute(value = "sysPermission") SysPermission sysPermission,
+	public PageData<SysPermission> search(@ModelAttribute(value = "sysPermission") SysPermission sysPermission,
 			@ApiParam(name = "page", value = "当前页码", required = true, defaultValue = "1") @RequestParam(value = "page", required = true, defaultValue = "1") Integer page,
 			@ApiParam(name = "limit", value = "每页大小", required = true, defaultValue = "10") @RequestParam(value = "limit", required = true, defaultValue = "10") Integer limit,
 			@ApiParam(name = "sidx", value = "排序字段", required = false) @RequestParam(value = "sidx", required = false) String sidx,
 			@ApiParam(name = "order", value = "排序规则", required = false) @RequestParam(value = "order", required = false) String order) {
         logger.info("\n\n★进入条件分页查询系统菜单权限列表方法======================================================\n");
 
-		List<SysPermission> pageInfo = null;
-		
+		PageData<SysPermission> pageInfo = new PageData<>();
 		try {
 			pageInfo = sysPermissionService.findPage(sysPermission, page, limit);
 		} catch (Exception e) {
 			logger.error("根据条件分页查询权限信息集合出错", e);
 		}
-		
 		return pageInfo;
 	}
 	
@@ -229,7 +231,7 @@ public class SysPermissionController {
 	 * 根据类型查找父节点
 	 * @return List<SysPermission> - 系统菜单权限集合
 	 */
-//	@ApiOperation(value = "根据类型查找父节点", notes = "根据类型查找父节点", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "根据类型查找父节点", notes = "根据类型查找父节点", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
 	@RequestMapping(value="/permission/tree/{type}",method={RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	public List<SysPermission> tree(@ApiParam(name = "type", value = "类型", required = false) @PathVariable(value = "type", required = true) Short type){

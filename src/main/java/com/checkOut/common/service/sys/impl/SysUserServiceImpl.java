@@ -137,8 +137,9 @@ public class SysUserServiceImpl implements SysUserService {
 	@Override
 	public List<SysUser> findPage(SysUser record, Integer page, Integer limit) throws Exception {
 
-//		sysUserMapper.
-		return null;
+		//TODO 未做分页（user目前没有做分页，后期补全）
+		List<SysUser> select = sysUserMapper.select(record);
+		return select;
 	}
 	
 	@Override

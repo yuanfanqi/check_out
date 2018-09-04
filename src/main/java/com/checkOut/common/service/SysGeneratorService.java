@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.checkOut.common.mapper.GeneratorMapper;
 import com.checkOut.common.model.Table;
+import com.checkOut.common.model.pageModel.PageData;
 import com.checkOut.utils.GenUtils;
 import com.checkOut.utils.H;
 
@@ -33,24 +34,31 @@ public class SysGeneratorService {
 	 *            - 表实体条件
 	 * @return PageInfo<Map<String, Object>> - 分页信息
 	 */
-	public List<Map<String, Object>> queryList(Table record, Integer page, Integer limit) {
+	public PageData<Map<String, Object>> queryList(Table record, Integer page, Integer limit) {
 		List<Map<String, Object>> datas = null;
+		PageData<Map<String, Object>> pageData = new PageData<>();
+		
+		int total = 0;
 		if (H.isNotBlank(record)) {
 			datas = generatorMapper.queryListMysql(record);
+			total = datas.size();
 			if (H.isNotBlank(datas)) {
 				// 条件分页
 				Integer start = (page - 1) * limit;
 				Integer end = page * limit;
-				if (end >= datas.size()) {
-					datas = datas.subList(start, datas.size());
-				} else if (start >= datas.size()) {
+				if (end >= total) {
+					datas = datas.subList(start, total);
+				} else if (start >= total) {
 					datas = new ArrayList<Map<String, Object>>();
 				} else {
 					datas = datas.subList(start, end);
 				}
 			}
 		}
-		return datas;
+		
+		pageData.setList(datas);
+		pageData.setTotal(total);
+		return pageData;
 	}
 
 	/**

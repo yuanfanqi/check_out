@@ -19,8 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -264,32 +262,15 @@ public class SysUserController {
     public Map<String, Object> modify(
             @ApiParam(name = "userId", value = "用户ID", required = true) @RequestParam(value = "userId", required = true) @Valid Integer userId,
             @ApiParam(name = "userName", value = "用户名", required = true) @RequestParam(value = "userName", required = true) @Valid String userName,
-            @ApiParam(name = "password", value = "用户密码", required = true) @RequestParam(value = "password", required = true) @Valid String password,
-            @ApiParam(name = "nickName", value = "用户昵称", required = true) @RequestParam(value = "nickName", required = true) @Valid String nickName,
-            BindingResult bindingResult) {
+            @ApiParam(name = "password", value = "用户密码", required = true) @RequestParam(value = "password", required = true) @Valid String password
+            ) {
         logger.info("\n\n★进入修改单个用户信息方法======================================================\n");
 
         Map<String, Object> res = new HashMap<>(16);
-        if (bindingResult.hasErrors()) {
-            StringBuffer sb = new StringBuffer();
-            for (ObjectError objectError : bindingResult.getAllErrors()) {
-                if (((FieldError) objectError).getField().equals("phone")) {
-                    sb.append("手机号码：").append(objectError.getDefaultMessage()).append("</br>");
-                } else if (((FieldError) objectError).getField().equals("email")) {
-                    sb.append("邮箱：").append(objectError.getDefaultMessage()).append("</br>");
-                } else if (((FieldError) objectError).getField().equals("nickName")) {
-                    sb.append("昵称：").append(objectError.getDefaultMessage()).append("</br>");
-                }
-            }
-            res.put("status", false);
-            res.put("msg", sb.toString());
-            return res;
-        }
         try {
             SysUser record = new SysUser();
             record.setId(userId);
             record.setUserName(userName);
-            record.setNickName(nickName);
             SysUser sysUser = sysUserService.selectOne(record);
             if (H.isNotBlank(sysUser)) {
                 // 得到加密用的盐

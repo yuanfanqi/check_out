@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 10.1.1.12
-Source Server Version : 50718
-Source Host           : 10.1.1.12:3306
-Source Database       : jrtz_app
+Source Server         : loc
+Source Server Version : 80012
+Source Host           : localhost:3306
+Source Database       : check_out
 
 Target Server Type    : MYSQL
-Target Server Version : 50718
+Target Server Version : 80012
 File Encoding         : 65001
 
-Date: 2018-08-24 17:43:58
+Date: 2018-09-04 18:05:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,5 +28,10 @@ CREATE TABLE `sys_role` (
   `REMARK` varchar(500) DEFAULT '暂无备注' COMMENT '备注',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ROLE_NAME_UNIQUE` (`ROLE_NAME`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8 COMMENT='系统角色表';
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 COMMENT='系统角色表';
+
+-- ----------------------------
+-- Records of sys_role
+-- ----------------------------
+INSERT INTO `sys_role` VALUES ('45', '收银员', '', '2018-09-04 16:05:29', '2018-09-04 16:05:29', '具有查看权限');
 SET FOREIGN_KEY_CHECKS=1;

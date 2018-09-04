@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.checkOut.common.model.pageModel.PageData;
 import com.checkOut.common.model.sys.SysPermission;
 
 /**
@@ -51,19 +52,13 @@ public interface SysPermissionService {
 	 */
 	List<SysPermission> select(SysPermission record) throws Exception;
 	/**
-	 * 条件分页查询权限实体(单表)
-	 * @param record - 系统权限菜单实体条件
-	 * @return PageInfo<SysPermission> - 系统权限菜单实体与分页信息集合
-	 * @throws Exception
-	 */
-	List<SysPermission> selectPage(SysPermission record) throws Exception;
-	/**
 	 * 自定义条件分页查询权限实体(多表)
 	 * @param record - 系统权限菜单实体条件
 	 * @return PageInfo<SysPermission> - 系统权限菜单实体与分页信息集合
 	 * @throws Exception
 	 */
-	List<SysPermission> findPage(@Param("record")SysPermission record,@Param("page") Integer page,@Param("limit") Integer limit) throws Exception;
+//	List<SysPermission> findPage(@Param("record")SysPermission record,@Param("page") Integer page,@Param("limit") Integer limit) throws Exception;
+	PageData<SysPermission> findPage(@Param("record")SysPermission record,@Param("page") Integer page,@Param("limit") Integer limit) throws Exception;
 	/**
 	 * 根据条件查询权限信息集合
 	 * @param record - 系统权限菜单实体条件

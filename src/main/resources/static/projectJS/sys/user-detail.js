@@ -46,64 +46,6 @@ $(function() {
 		history.back();
 	});
 	//当点击保存按钮时
-	/*$("#saveBtn").on("click",function(){
-		var $userName = $("#userName");
-		var $password = $("#password");
-		var $roleIds = $("input[type=checkbox]:checked");
-		var roleIdsArr = [];
-		$.each($roleIds,function(index,node){
-			roleIdsArr.push(node.value);
-		});
-		
-		//用户名校验
-		if(!$userName||""){
-			parent.layer.alert("用户名不能为空");
-			$userName.focus();
-			return;
-		}
-		//密码校验
-		if(!$password||""){
-			parent.layer.alert("密码不能为空");
-			$password.focus();
-			return;
-		}
-		//ajax请求新增
-		var $userIdVal = $("#userId").val();
-		var ajaxType;
-		var index;
-		if(!$userIdVal||""){
-			ajaxType = "POST";
-		}else{
-			ajaxType = "PUT";
-		}
-		
-		$.ajax({
-			type:ajaxType,
-			url : "/sys/user",
-			data : $("#userForm").serialize(),
-			dataType : "json",
-			success:function(response){
-				if(response.status==false){
-					parent.layer.alert(response.msg);
-				}else{
-					parent.layer.alert("操作成功",function(index){
-						history.back();
-						parent.layer.closeAll();
-					});
-				}
-			},
-			error:function(){
-				parent.layer.alert("新增或修改用户异常");
-			},
-			beforeSend:function(){
-				index = parent.layer.load(1,{shade:0.5});
-			},
-			complete:function(){
-				parent.layer.close(index);
-			}
-		});
-	});*/
-	
 	//表单验证
     $('#userForm')
         .bootstrapValidator({

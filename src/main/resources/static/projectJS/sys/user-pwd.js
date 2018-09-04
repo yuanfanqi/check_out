@@ -5,7 +5,8 @@ $(function(){
 			});
 			//当点击确定时
 			$("#saveBtn").on("click",function(){
-				var $userIdVal = $.trim($("#userId").val());
+//				var $userIdVal = $.trim($("#userId").val());
+				var $userIdVal = parseInt($("#userId").val());
 				var $userNameVal = $.trim($("#userName").text());
 				var $passwordVal = $.trim($("#password").val());
 				var $rePasswordVal = $.trim($("#rePassword").val());

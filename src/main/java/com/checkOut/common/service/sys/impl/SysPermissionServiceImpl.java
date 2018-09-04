@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.checkOut.common.enums.PermissionType;
 import com.checkOut.common.mapper.sys.SysPermissionMapper;
+import com.checkOut.common.model.pageModel.PageData;
 import com.checkOut.common.model.sys.SysPermission;
 import com.checkOut.common.service.sys.SysPermissionService;
 import com.checkOut.common.shiro.ShiroRealm;
@@ -37,7 +38,6 @@ public class SysPermissionServiceImpl implements SysPermissionService {
 
 	@Override
 	public List<SysPermission> selectByUserIdAndType(Integer userId, Short[] types, Boolean valid) throws Exception {
-//		PageHelper.startPage(0, 0, false);
 		return sysPermissionMapper.selectByUserIdAndType(userId,valid,types);
 	}
 
@@ -48,20 +48,6 @@ public class SysPermissionServiceImpl implements SysPermissionService {
 		}
 		return sysPermissions;
 	}
-
-//	@Override
-//	public PageInfo<SysPermission> selectPage(SysPermission record) throws Exception {
-//		pageInfo = null;
-//		//TODO 因解决分布式事务问题,这里先注释掉了
-//		/*if (H.isNotBlank(record) && H.isNotBlank(record.getPage()) && H.isNotBlank(record.getRows())) {
-//			PageHelper.startPage(record.getPage(), record.getRows());
-//			sysPermissions = sysPermissionMapper.selectPage(record);
-//			if (H.isNotBlank(sysPermissions)) {
-//				pageInfo = new PageInfo<>(sysPermissions);
-//			}
-//		}*/
-//		return pageInfo;
-//	}
 
 	@Override
 	public Integer add(SysPermission record) throws Exception {
@@ -126,31 +112,21 @@ public class SysPermissionServiceImpl implements SysPermissionService {
 		return count;
 	}
 
-
 	@Override
-	public List<SysPermission> selectPage(SysPermission record) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/*@Override
-	public PageInfo<SysPermission> findPage(SysPermission record) throws Exception {
-		pageInfo = null;
-		if (H.isNotBlank(record) && H.isNotBlank(record.getPage()) && H.isNotBlank(record.getRows())) {
-			PageHelper.startPage(record.getPage(), record.getRows());
-			sysPermissions = sysPermissionMapper.findPage(record);
-			if (H.isNotBlank(sysPermissions)) {
-				pageInfo = new PageInfo<>(sysPermissions);
-			}
-		}
-		return pageInfo;
-	}*/
-	@Override
-	public List<SysPermission> findPage(SysPermission record, Integer page, Integer limit) throws Exception {
+	public PageData<SysPermission> findPage(SysPermission record, Integer page, Integer limit) throws Exception {
+		PageData<SysPermission> pageInfo = new PageData<>();
+		
 		Integer start = (page-1) * limit;
 		Integer end = page * limit;
-		List<SysPermission> findPage = sysPermissionMapper.findPage(sysPermission, start, end);
-		return findPage;
+		List<SysPermission> findPage = sysPermissionMapper.findPage(record, start, end);
+		int total = sysPermissionMapper.selectCount(record);
+		
+		pageInfo.setTotal(total);
+		pageInfo.setPageNum(page);
+		pageInfo.setPages(limit);
+		pageInfo.setList(findPage);
+		
+		return pageInfo;
 	}
 	
 	@Override
