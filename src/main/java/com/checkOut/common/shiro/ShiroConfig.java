@@ -61,10 +61,8 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/fonts/**", "anon");
         filterChainDefinitionMap.put("/images/**", "anon");
         filterChainDefinitionMap.put("/plugins/**", "anon");
-        filterChainDefinitionMap.put("/script/**", "anon");
+        filterChainDefinitionMap.put("/projectJS/**", "anon");
         filterChainDefinitionMap.put("/js/**", "anon");
-        filterChainDefinitionMap.put("/fund/instanceFundPool", "anon");//全量更新备选基金池入口
-        filterChainDefinitionMap.put("/fund/installFunctionAll", "anon");//全量更新精选基金池入口
         filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 

@@ -38,96 +38,7 @@
 					<option value="5"></option> -->
 				</select>
 			</div>
-			<!-- <label for="sellState" class="col-md-1 control-label">热销级别</label>
-			<div class="col-md-2">
-				<select id="sellState" name="sellState" class="form-control">
-					<option value="">请选择</option>
-					<option value="0">普通</option>
-					<option value="1">热销</option>
-				</select>
-			</div> -->
 		</div>
-		<!-- <div class="form-group">
-			<label for="startPublishDate" class="col-md-1 control-label">发布日期</label>
-			<div class="col-md-2">
-				<div class="input-group">
-					<input type="text" id="startPublishDate" name="startPublishDate" class="form-control" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd" onfocus="this.blur()" />
-					<div class="input-group-addon" onclick="javasciprt:$('#startPublishDate').val('');">
-						<i class="fa fa-close fa-fw"></i>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-1 text-center">
-                <label for="endPublishDate" class="control-label">到</label>
-			</div>
-			<div class="col-md-2">
-				<div class="input-group">
-					<input type="text" id="endPublishDate" name="endPublishDate" class="form-control" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd" onfocus="this.blur()" />
-					<div class="input-group-addon" onclick="javasciprt:$('#endPublishDate').val('');">
-						<i class="fa fa-close fa-fw"></i>
-					</div>
-				</div>
-			</div>
-			<label for="fundType" class="col-md-1 control-label">基金类型</label>
-			<input type="hidden" id="fundTypedb" name="fundTypedb" value=""/>
-			<div class="col-md-2">
-				<select id="fundType" name="fundType" class="selectpicker form-control" multiple="true"  data-live-search="false">
-					<option value="">请选择</option>
-					<option value="0">股票型</option>
-					<option value="1">混合型</option>
-					<option value="2">债券型</option>
-					<option value="3">货币市场型</option>
-					<option value="8">其他</option>
-					<option value="5">QDII型</option>
-					<option value="6">指数型</option>
-				</select>
-			</div>
-			<label for="productsState" class="col-md-1 control-label">产品状态</label>
-			<div class="col-md-2">
-				<select id="productsState" name="productsState" class="form-control">
-					<option value="">请选择</option>
-					<option value="1">上架</option>
-					<option value="0">下架</option>
-				</select>
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="putDate" class="col-md-1 control-label">上架日期</label>
-			<div class="col-md-2">
-				<div class="input-group">
-					<input type="text" id="putDate" name="putDate" class="form-control" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd" onfocus="this.blur()" />
-					<div class="input-group-addon" onclick="javasciprt:$('#putDate').val('');">
-						<i class="fa fa-close fa-fw"></i>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-1 text-center">
-                <label for="outDate" class="control-label">到</label>
-			</div>
-			<div class="col-md-2">
-				<div class="input-group">
-					<input type="text" id="outDate" name="outDate" class="form-control" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd" onfocus="this.blur()" />
-					<div class="input-group-addon" onclick="javasciprt:$('#outDate').val('');">
-						<i class="fa fa-close fa-fw"></i>
-					</div>
-				</div>
-			</div>
-            <label for="creatUser" class="col-md-1 control-label">录入人员</label>
-			<div class="col-md-2">
-				<select id="creatUser" name="creatUser" class="form-control">
-					<option value="">请选择</option>
-					<option th:each="creatUser,index:*{creatUsers}" th:value="${creatUser}" th:text="${creatUser}"></option>
-				</select>
-			</div>
-            <label for="approveUser" class="col-md-1 control-label">审核人员</label>
-			<div class="col-md-2">
-				<select id="approveUser" name="approveUser" class="form-control">
-					<option value="">请选择</option>
-					<option th:each="approveUser,index:*{approveUsers}" th:value="${approveUser}" th:text="${approveUser}"></option>
-				</select>
-			</div>
-		</div>
-		 -->
 	
 		<div class="form-group text-center">
 			<a href="javascript:void(0)" id="searchBtn" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;查询&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
@@ -146,12 +57,9 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<div class="col-sm-1">
+			<div class="col-sm-2">
 				<a id="deleteAllBtn" class="btn btn-default btn-block">全部删除</a>
 			</div>
-			<!-- <div class="col-sm-1">
-				<a id="approveAllBtn" class="btn btn-default btn-block">全部审核</a>
-			</div> -->
 		</div>
 
 	</form>

@@ -21,7 +21,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.checkOut.common.enums.PermissionType;
-import com.checkOut.common.mapper.sys.SysPermissionMapper;
 import com.checkOut.common.model.ActiveUser;
 import com.checkOut.common.model.sys.SysPermission;
 import com.checkOut.common.model.sys.SysUser;
@@ -29,9 +28,6 @@ import com.checkOut.common.service.sys.SysPermissionService;
 import com.checkOut.common.service.sys.SysUserService;
 import com.checkOut.utils.H;
 import com.checkOut.utils.M;
-
-import tk.mybatis.mapper.entity.Example;
-import tk.mybatis.mapper.entity.Example.Criteria;
 
 /**
  * Shiro自定义Realm
@@ -48,8 +44,8 @@ public class ShiroRealm extends AuthorizingRealm {
 	private SysUserService sysUserService;
 	@Autowired
 	private SysPermissionService sysPermissionService;
-	@Autowired
-	private SysPermissionMapper sysPermissionMapper;
+//	@Autowired
+//	private SysPermissionMapper sysPermissionMapper;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private SysUser record;
     private static final String ADMIN = "admin";

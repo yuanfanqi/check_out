@@ -2,11 +2,11 @@ package com.checkOut.common.mapper.sys;
 
 import java.util.List;
 
-import tk.mybatis.mapper.common.Mapper;
-
 import org.springframework.stereotype.Repository;
 
 import com.checkOut.common.model.sys.SysUser;
+
+import tk.mybatis.mapper.common.Mapper;
 
 @Repository
 public interface SysUserMapper extends Mapper<SysUser> {

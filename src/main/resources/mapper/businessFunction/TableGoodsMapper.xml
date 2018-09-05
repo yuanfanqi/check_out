@@ -20,7 +20,7 @@
   GOODS_ID,GOODS_NAME,GOODS_TYPE,GOODS_PRICE,GOODS_BID,GOODS_NUM,UPDATE_TIME,EXP
   </sql>
   
-  <select id="selectPage" parameterMap="BaseResultMap">
+  <select id="selectPage" resultMap="BaseResultMap">
   	select <include refid="base_column_list"></include> from table_goods
   	order by #{sidx} DESC
   	<where>
