@@ -1,5 +1,7 @@
 package com.checkOut.common.mapper.businessFunction;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -26,6 +28,6 @@ public interface TableGoodsMapper extends Mapper<TableGoods>{
 	 * @param order
 	 * @return
 	 */
-	public PageData<TableGoods> selectPage(@Param("tableGoods")TableGoods tableGoods, @Param("page")Integer page, @Param("limit")Integer limit, @Param("sidx")String sidx, @Param("order") String order);
+	public List<TableGoods> selectPage(@Param("tableGoods")TableGoods tableGoods, @Param("start")Integer start, @Param("end")Integer end, @Param("sidx")String sidx, @Param("order") String order);
 
 }
