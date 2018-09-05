@@ -3,6 +3,7 @@ package com.checkOut.common.service.sys.impl;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -116,15 +117,14 @@ public class SysPermissionServiceImpl implements SysPermissionService {
 	public PageData<SysPermission> findPage(SysPermission record, Integer page, Integer limit) throws Exception {
 		PageData<SysPermission> pageInfo = new PageData<>();
 		
-		Integer start = (page-1) * limit;
-		Integer end = page * limit;
-		List<SysPermission> findPage = sysPermissionMapper.findPage(record, start, end);
 		int total = sysPermissionMapper.selectCount(record);
-		
+		//分页参数处理
+		Map<String, Integer> pageOperation = H.pageOperation(page, limit, total);
+		List<SysPermission> findPage = sysPermissionMapper.findPage(record, pageOperation.get("start"), pageOperation.get("end"));
 		pageInfo.setTotal(total);
 		pageInfo.setPageNum(page);
-		pageInfo.setPages(limit);
 		pageInfo.setList(findPage);
+		pageInfo.setPages(pageOperation.get("pages"));
 		
 		return pageInfo;
 	}

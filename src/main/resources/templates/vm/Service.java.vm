@@ -1,7 +1,6 @@
-package ${package}.common.service.${database};
+package ${package}.common.service.businessFunction;
 
-import ${package}.model.${database}.${className};
-import ${package}.service.BaseService;
+import ${package}.common.model.businessFunction.${className};
 
 /**
  * ${comments}-业务层接口
@@ -10,6 +9,6 @@ import ${package}.service.BaseService;
  * @version 1.0
  * @since 
  */
-public interface ${className}Service extends BaseService<${className}>{
+public interface ${className}Service {
 	
 }

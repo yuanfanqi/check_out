@@ -56,7 +56,7 @@ $(function() {
                 validating: 'glyphicon glyphicon-refresh'
             },
             fields: {
-                userId: {
+            	userName: {
                     message: '用户名不正确',
                     validators: {
                         notEmpty: {

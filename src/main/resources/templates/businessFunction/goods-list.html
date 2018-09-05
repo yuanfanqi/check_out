@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+<title>goods-list</title>
+</head>
+<body>
+	<form id="goodsForm" class="form-horizontal" style="width: 100%">
+		<div class="form-group">
+			<label for="goodsId" class="col-md-1 control-label">商品条码（ID）</label>
+			<div class="col-md-2">
+				<div class="input-group">
+					<input type="text" id="goodsId" name="goodsId" class="form-control" />
+ 					<div class="input-group-addon" onclick="javasciprt:$('#goodsId').val('');">
+ 						<i class="fa fa-close fa-fw"></i>
+ 					</div>
+				</div>
+			</div>
+			<label for="goodsName" class="col-md-1 control-label">商品名称</label>
+			<div class="col-md-2">
+				<div class="input-group">
+					<input type="text" id="goodsName" name="goodsName" class="form-control" />
+					<div class="input-group-addon" onclick="javasciprt:$('#goodsName').val('');">
+						<i class="fa fa-close fa-fw"></i>
+					</div>
+				</div>
+			</div>
+			<label for="goodsType" class="col-md-1 control-label">商品分类</label>
+			<div class="col-md-2">
+				<select id="goodsType" name="goodsType" class="form-control">
+					<option value="">请选择</option>
+					<option value="1">洗浴用品</option>
+					<option value="2">护肤品</option>
+					<option value="3">服饰包包</option>
+					<!-- <option value="4"></option>
+					<option value="5"></option> -->
+				</select>
+			</div>
+			<!-- <label for="sellState" class="col-md-1 control-label">热销级别</label>
+			<div class="col-md-2">
+				<select id="sellState" name="sellState" class="form-control">
+					<option value="">请选择</option>
+					<option value="0">普通</option>
+					<option value="1">热销</option>
+				</select>
+			</div> -->
+		</div>
+		<!-- <div class="form-group">
+			<label for="startPublishDate" class="col-md-1 control-label">发布日期</label>
+			<div class="col-md-2">
+				<div class="input-group">
+					<input type="text" id="startPublishDate" name="startPublishDate" class="form-control" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd" onfocus="this.blur()" />
+					<div class="input-group-addon" onclick="javasciprt:$('#startPublishDate').val('');">
+						<i class="fa fa-close fa-fw"></i>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-1 text-center">
+                <label for="endPublishDate" class="control-label">到</label>
+			</div>
+			<div class="col-md-2">
+				<div class="input-group">
+					<input type="text" id="endPublishDate" name="endPublishDate" class="form-control" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd" onfocus="this.blur()" />
+					<div class="input-group-addon" onclick="javasciprt:$('#endPublishDate').val('');">
+						<i class="fa fa-close fa-fw"></i>
+					</div>
+				</div>
+			</div>
+			<label for="fundType" class="col-md-1 control-label">基金类型</label>
+			<input type="hidden" id="fundTypedb" name="fundTypedb" value=""/>
+			<div class="col-md-2">
+				<select id="fundType" name="fundType" class="selectpicker form-control" multiple="true"  data-live-search="false">
+					<option value="">请选择</option>
+					<option value="0">股票型</option>
+					<option value="1">混合型</option>
+					<option value="2">债券型</option>
+					<option value="3">货币市场型</option>
+					<option value="8">其他</option>
+					<option value="5">QDII型</option>
+					<option value="6">指数型</option>
+				</select>
+			</div>
+			<label for="productsState" class="col-md-1 control-label">产品状态</label>
+			<div class="col-md-2">
+				<select id="productsState" name="productsState" class="form-control">
+					<option value="">请选择</option>
+					<option value="1">上架</option>
+					<option value="0">下架</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="putDate" class="col-md-1 control-label">上架日期</label>
+			<div class="col-md-2">
+				<div class="input-group">
+					<input type="text" id="putDate" name="putDate" class="form-control" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd" onfocus="this.blur()" />
+					<div class="input-group-addon" onclick="javasciprt:$('#putDate').val('');">
+						<i class="fa fa-close fa-fw"></i>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-1 text-center">
+                <label for="outDate" class="control-label">到</label>
+			</div>
+			<div class="col-md-2">
+				<div class="input-group">
+					<input type="text" id="outDate" name="outDate" class="form-control" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd" onfocus="this.blur()" />
+					<div class="input-group-addon" onclick="javasciprt:$('#outDate').val('');">
+						<i class="fa fa-close fa-fw"></i>
+					</div>
+				</div>
+			</div>
+            <label for="creatUser" class="col-md-1 control-label">录入人员</label>
+			<div class="col-md-2">
+				<select id="creatUser" name="creatUser" class="form-control">
+					<option value="">请选择</option>
+					<option th:each="creatUser,index:*{creatUsers}" th:value="${creatUser}" th:text="${creatUser}"></option>
+				</select>
+			</div>
+            <label for="approveUser" class="col-md-1 control-label">审核人员</label>
+			<div class="col-md-2">
+				<select id="approveUser" name="approveUser" class="form-control">
+					<option value="">请选择</option>
+					<option th:each="approveUser,index:*{approveUsers}" th:value="${approveUser}" th:text="${approveUser}"></option>
+				</select>
+			</div>
+		</div>
+		 -->
+	
+		<div class="form-group text-center">
+			<a href="javascript:void(0)" id="searchBtn" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;查询&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-1">
+				<shiro:hasPermission name="goods:add">
+					<a class="btn btn-default btn-block" href="/goods/add">添加商品</a>
+				</shiro:hasPermission>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-12">
+				<table id="jqGrid" style="width: 100%"></table>
+				<div id="jqGridPager" style="width: 100%"></div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-1">
+				<a id="deleteAllBtn" class="btn btn-default btn-block">全部删除</a>
+			</div>
+			<!-- <div class="col-sm-1">
+				<a id="approveAllBtn" class="btn btn-default btn-block">全部审核</a>
+			</div> -->
+		</div>
+
+	</form>
+	<div th:include="common::header"></div>
+	<script th:src="@{'/projectJS/businessFunction/goods-list.js?time='+${new java.util.Date().getTime()}}"></script>
+</body>
+</html>

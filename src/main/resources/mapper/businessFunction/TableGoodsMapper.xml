@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.checkOut.common.mapper.businessFunction.TableGoodsMapper">
+  <resultMap id="BaseResultMap" type="com.checkOut.common.model.businessFunction.TableGoods" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+        <result column="GOODS_ID" property="goodsId" jdbcType="VARCHAR"/>
+        <result column="GOODS_NAME" property="goodsName" jdbcType="VARCHAR"/>
+        <result column="GOODS_TYPE" property="goodsType" jdbcType="VARCHAR"/>
+        <result column="GOODS_PRICE" property="goodsPrice" jdbcType="INTEGER"/>
+        <result column="GOODS_BID" property="goodsBid" jdbcType="DECIMAL"/>
+        <result column="GOODS_NUM" property="goodsNum" jdbcType="INTEGER"/>
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="EXP" property="exp" jdbcType="TIMESTAMP"/>
+  </resultMap>
+</mapper>

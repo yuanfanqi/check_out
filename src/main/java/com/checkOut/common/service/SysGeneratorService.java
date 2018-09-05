@@ -43,7 +43,7 @@ public class SysGeneratorService {
 			datas = generatorMapper.queryListMysql(record);
 			total = datas.size();
 			if (H.isNotBlank(datas)) {
-				// 条件分页
+				//分页参数处理
 				Integer start = (page - 1) * limit;
 				Integer end = page * limit;
 				if (end >= total) {
@@ -55,7 +55,12 @@ public class SysGeneratorService {
 				}
 			}
 		}
-		
+		if (0 == total % limit) {
+			pageData.setPages(total / limit);
+		} else {
+			pageData.setPages(total / limit == 0 ? 1 : total / limit + 1);
+		}
+		pageData.setPageNum(page);
 		pageData.setList(datas);
 		pageData.setTotal(total);
 		return pageData;

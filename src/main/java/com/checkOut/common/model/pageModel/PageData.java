@@ -9,9 +9,9 @@ import io.swagger.annotations.ApiModelProperty;
 public class PageData<T> {
 
 	/**
-	 * 页数据量
+	 * 总页数
 	 */
-	@ApiModelProperty(value = "页数据量")
+	@ApiModelProperty(value = "总页数")
 	private Integer pages;
 	/**
 	 * 当前页

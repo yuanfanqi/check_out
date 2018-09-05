@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.checkOut.common.mapper.businessFunction.SellHisMapper">
+  <resultMap id="BaseResultMap" type="com.checkOut.common.model.businessFunction.SellHis" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+        <result column="SELL_DATE" property="sellDate" jdbcType="TIMESTAMP"/>
+        <result column="GOODS_NAME" property="goodsName" jdbcType="VARCHAR"/>
+        <result column="GOODS_ID" property="goodsId" jdbcType="VARCHAR"/>
+        <result column="SELL_NUM" property="sellNum" jdbcType="INTEGER"/>
+        <result column="SELL_PRICE" property="sellPrice" jdbcType="DECIMAL"/>
+  </resultMap>
+</mapper>

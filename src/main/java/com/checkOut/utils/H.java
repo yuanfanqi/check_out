@@ -1,6 +1,7 @@
 package com.checkOut.utils;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -235,9 +236,24 @@ public class H {
         return guId;
     }
     
-    /*public static void main(String[] args) {
-        System.out.println(makeSalt());
-    	System.out.println(encSource("admin", "security", 1));
-        System.out.println(createGuId());
-    }*/
+    /**
+     * 帮助分页操作
+     * @param page
+     * @param limit
+     * @param total
+     * @return
+     */
+    public static Map<String, Integer> pageOperation(Integer page, Integer limit, Integer total){
+		Map<String, Integer> map = new HashMap<>();
+		map.put("start", (page-1) * limit);
+		map.put("end", page * limit);
+		Integer pages = null;
+		if(0 == total % limit){
+			pages = total/limit;
+		}else{
+			pages = total/limit == 0 ? 1 : total/limit+1;
+		}
+		map.put("pages", pages);
+		return map;
+	}
 }

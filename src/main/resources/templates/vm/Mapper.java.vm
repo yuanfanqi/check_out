@@ -1,7 +1,7 @@
-package ${package}.common.mapper.${database};
+package ${package}.common.mapper.businessFunction;
 
 import ${package}.mapper.Mapper;
-import ${package}.model.${database}.${className};
+import ${package}.common.model.businessFunction.${className};
 import org.springframework.stereotype.Repository;
 
 /**

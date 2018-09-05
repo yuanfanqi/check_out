@@ -1,4 +1,4 @@
-package ${package}.common.service.${database}.impl;
+package ${package}.common.service.businessFunction.impl;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -9,15 +9,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import ${package}.mapper.${database}.${className}Mapper;
-import ${package}.model.${database}.${className};
-import ${package}.service.${database}.${className}Service;
-import ${package}.utils.H;
-#if(${database}!='app')
-import ${package}.config.TargetDataSource;
-#end
+import ${package}.common.mapper.businessFunction.${className}Mapper;
+import ${package}.common.model.businessFunction.${className};
+import ${package}.common.service.businessFunction.${className}Service;
 
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.entity.Example.Criteria;
@@ -35,130 +29,4 @@ public class ${className}ServiceImpl implements ${className}Service {
 	private ${className}Mapper ${classname}Mapper;
 
 
-	@Override
-	public Integer add(${className} record) throws Exception {
-		Integer count = 0;
-		if(H.isNotBlank(record)){
-			count = ${classname}Mapper.insert(record);
-		}
-		return count;
-	}
-
-
-	@Override
-	public Integer remove(Object primaryKey) throws Exception {
-		Integer count = 0;
-		if(H.isNotBlank(primaryKey)){
-			count = ${classname}Mapper.deleteByPrimaryKey(primaryKey);
-		}
-		return count;
-	}
-
-/**
- * 根据指定条件删除
- *
- * @param example
- * @return
- * @throws Exception
- */
-    @Override
-    public Integer removeByExample(Example example) throws Exception {
-        Integer count = 0;
-        if (H.isNotBlank(example)) {
-            count = ${classname}Mapper.deleteByExample(example);
-        }
-        return count;
-    }
-
-
-	@Override
-	public Integer modify(${className} record) throws Exception {
-		Integer count = 0;
-		if(H.isNotBlank(record) #foreach ($pkColumn in $pk) && H.isNotBlank(record.get${pkColumn.attrName}()) #end){
-			count = ${classname}Mapper.updateByPrimaryKeySelective(record);
-		}
-		return count;
-	}
-
-
-	@Override
-	public ${className} selectByPrimaryKey(Object primaryKey) throws Exception {
-		${className} record = null;
-		if(H.isNotBlank(primaryKey)){
-			record = ${classname}Mapper.selectByPrimaryKey(primaryKey);
-		}
-		return record == null?new ${className}():record;
-	}
-
-
-	@Override
-	public ${className} selectOne(${className} record) throws Exception {
-		if(H.isNotBlank(record)){
-			record = ${classname}Mapper.selectOne(record);
-		}
-		return record==null?new ${className}():record;
-	}
-
-
-	@Override
-	public List<${className}> selectAll() throws Exception {
-		List<${className}> datas = ${classname}Mapper.selectAll();
-		return datas==null?new ArrayList<>():datas;
-	}
-
-
-	@Override
-	public List<${className}> selectByExample(${className} record) throws Exception {
-		Example example = this.convertExample(record);
-		List<${className}> datas = ${classname}Mapper.selectByExample(example);
-		return datas==null?new ArrayList<>():datas;
-	}
-
-
-	@Override
-	public PageInfo<${className}> selectPage(${className} record) throws Exception {
-		PageInfo<${className}> pageInfo = null;
-		List<${className}> datas = null;
-		Example example = this.convertExample(record);
-		if (H.isNotBlank(example) && H.isNotBlank(record.getPage()) && H.isNotBlank(record.getRows())) {
-			PageHelper.startPage(record.getPage(), record.getRows());
-			datas = ${classname}Mapper.selectByExample(example);
-			pageInfo = new PageInfo<>(datas);
-		}
-		return pageInfo == null ? new PageInfo<>() : pageInfo;
-	}
-
-
-	@Override
-	public Example convertExample(${className} record) throws Exception {
-		Example example = null;
-		if (H.isNotBlank(record)) {
-			example = new Example(record.getClass());
-			Criteria criteria = example.createCriteria();
-			Field[] fields = record.getClass().getDeclaredFields();
-			for (Field field : fields) {
-				if (field.getName().equals("serialVersionUID")) {
-					continue;
-				}
-				StringBuffer getMethodName = new StringBuffer("get")
-						.append(field.getName().substring(0, 1).toUpperCase()).append(field.getName().substring(1));
-				Method getMethod = record.getClass().getMethod(getMethodName.toString());
-				if (H.isNotBlank(getMethod.invoke(record))) {
-					criteria.andEqualTo(field.getName(), getMethod.invoke(record));
-				}
-			}
-			if (H.isNotBlank(record.getSortList())) {
-				Map<String, String> sortOrder = null;
-				StringBuffer condition = new StringBuffer("ORDER BY ");
-				for (int i = 0; i < record.getSortList().size(); i++) {
-					sortOrder = record.getSortList().get(i);
-					condition.append(H.camel2Underline(sortOrder.get("sortField")) + " ")
-							.append(sortOrder.get("sortDirection") + ",");
-				}
-				condition.deleteCharAt(condition.length() - 1);
-				criteria.andCondition(condition.toString());
-			}
-		}
-		return example;
-	}
 }
