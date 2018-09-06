@@ -1,5 +1,8 @@
 package com.checkOut.businessFunction;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,18 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.checkOut.common.model.businessFunction.TableGoods;
 import com.checkOut.common.model.pageModel.PageData;
 import com.checkOut.common.service.businessFunction.TableGoodsService;
+import com.checkOut.utils.H;
 
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
@@ -51,7 +54,7 @@ public class GoodsManagerController {
 	 * @param order
 	 * @return
 	 */
-	@ApiOperation(value = "条件分页清单列表查询", notes = "", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "条件分页清单列表查询", notes = "条件分页清单列表查询", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	@ResponseBody
 	public PageData<TableGoods> search(
@@ -63,7 +66,65 @@ public class GoodsManagerController {
 		logger.info("\n\n★进入条件分页清单列表查询方法======================================================\n");
 
 		PageData<TableGoods> pageInfo = new PageData<>();
-		pageInfo = tableGoodsService.selectPage(tableGoods, page, limit, sidx, order);
+		try {
+			pageInfo = tableGoodsService.selectPage(tableGoods, page, limit, sidx, order);
+		} catch (Exception e) {
+			logger.error("条件分页清单列表查询出错",e);
+		}
 		return pageInfo;
+	}
+	
+	/**
+	 * 跳转到商品信息添加或修改页面
+	 * @param goodsId
+	 * @param goodsName
+	 * @return
+	 */
+	@ApiOperation(value = "跳转到商品信息添加或修改页面", notes = "跳转到商品信息添加或修改页面", httpMethod = "GET", produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/fetch", method = RequestMethod.GET)
+	@RequiresPermissions("goods:fetch")
+	@ResponseBody
+	public ModelAndView goodsFetch(
+			@ApiParam(name = "goodsId", value = "商品条码", required = false)@RequestParam(value = "goodsId", required = false) String goodsId
+//			@ApiParam(name = "goodsName", value = "商品名称", required = false)@RequestParam(name = "goodsName", value = "商品名称", required = false) String goodsName
+			){
+		logger.info("\n\n★进入跳转到商品信息添加或修改页面方法======================================================\n");
+		
+		ModelAndView mv = new ModelAndView();
+		TableGoods tableGoods = new TableGoods();
+		mv.setViewName("/businessFunction/goods-detail");
+		if(H.isNotBlank(goodsId)){
+			try {
+				tableGoods = tableGoodsService.select(goodsId);
+			} catch (Exception e) {
+				logger.error("根据主键查询商品信息出错",e);
+			}
+		}
+		mv.addObject("tableGoods",H.isNotBlank(tableGoods) ? tableGoods : new TableGoods());
+		return mv;
+	}
+	
+	@ApiOperation(value = "单个商品信息添加", notes = "单个商品信息添加", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	@RequiresPermissions("goods:add")
+	@ResponseBody
+	public Map<String, Object> add(
+			@ModelAttribute(value = "tableGoods") TableGoods tableGoods
+			){
+		logger.info("\n\n★进入单个商品信息添加方法======================================================\n");
+		
+		Map<String, Object> res= new HashMap<>();
+		res.put("status", false);
+		res.put("msg", "添加失败");
+		
+		try {
+			tableGoodsService.add(tableGoods);
+			res.put("status", true);
+			res.put("msg", "添加成功");
+		} catch (Exception e) {
+			logger.error("单个商品信息添加出错",e);
+		}
+		
+		return res;
 	}
 }

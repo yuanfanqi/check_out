@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+<title>goods-detail</title>
+<script th:inline="javascript">  
+var tableGoods = /*[[${tableGoods}]]*/
+</script>
+</head>
+<body>
+	<form action="#" id="goodsForm" class="form-horizontal">
+		<div class="form-group col-lg-10">
+			<label for="goodsId" class="col-md-4 control-label" style="padding: 7px 5px 0 5px; text-align: right;">商品条码（ID）：</label>
+			<div class="col-md-8" style="padding: 0;">
+				<input type="text" id="goodsId" name="goodsId" class="form-control" placeholder="请输入商品条码" th:value="${tableGoods.goodsId}" onblur="goodsIdFX()" />
+			</div>
+		</div>
+		<div class="form-group col-lg-10">
+			<label for="goodsName" class="col-md-4 control-label" style="padding: 7px 5px 0 5px; text-align: right;">商品名称：</label>
+			<div class="col-md-8" style="padding: 0;">
+				<input type="text" id="goodsName" name="goodsName" class="form-control" placeholder="未匹配到该商品相关信息" maxlength="20" th:value="${tableGoods.goodsName}" disabled="disabled"/>
+			</div>
+		</div>
+		<div class="form-group col-lg-10">
+			<label for="goodsPrice" class="col-md-4 control-label" style="padding: 7px 5px 0 5px; text-align: right;">商品价格：</label>
+			<div class="col-md-8" style="padding: 0;">
+				<input type="text" id="goodsPrice" name="goodsPrice" class="form-control" placeholder="未匹配到该商品相关信息" maxlength="20" th:value="${tableGoods.goodsPrice}"/>
+			</div>
+		</div>
+		<div class="form-group col-lg-10" >
+			<label for="goodsType" class="col-md-4 control-label" style="padding: 7px 5px 0 5px; text-align: right;">商品类型：</label>
+			<div class="col-md-8" style="padding: 0;">
+				<select id="goodsType" name="goodsType" class="form-control">
+					<option value=''>请选择</option>
+					<option value='1' th:selected="${tableGoods.goodsType == 1}">洗浴用品</option>
+					<option value='2' th:selected="${tableGoods.goodsType == 2}">护肤品</option>
+					<option value='3' th:selected="${tableGoods.goodsType == 3}">服饰包包</option>
+					<!-- <option value='4' th:selected="${tableGoods.goodsType == 4}"></option> -->
+				</select>
+			</div>
+		</div>
+		<div class="form-group col-lg-10">
+			<label for="goodsNum" class="col-md-4 control-label" style="padding: 7px 5px 0 5px; text-align: right;">入库数量/库存：</label>
+			<div class="col-md-8" style="padding: 0;">
+				<input type="text" id="goodsNum" name="goodsNum" class="form-control" placeholder="未匹配到该商品相关信息" maxlength="20" th:value="${tableGoods.goodsNum}" disabled="disabled"/>
+			</div>
+		</div>
+		<!-- <div class="form-group col-lg-10">
+			<label for="limitReason" class="col-md-4 control-label" style="padding: 7px 5px 0 5px; text-align: right;">限制原因：</label>
+			<div class="col-md-8" style="padding: 0;">
+				<input type="text" id="limitReason" name="limitReason" class="form-control" th:value="${record.limitReason}" placeholder="请输入限制原因"/>
+				<p class="text-info" style="margin-top: 4px;">
+					<i class="fa fa-info-circle" aria-hidden="true" style="margin-right: 4px;"></i>
+					<span>选填,最长100个字符</span>
+				</p>
+			</div>
+		</div> -->
+		<div class="form-group text-center col-lg-10">
+			<button class="btn btn-primary" id="createBtn" style="width: 80px;" type="submit">保 存</button>
+			<!-- <button class="btn btn-primary" id="cancel" style="width: 80px;">返 回</button> -->
+			<!-- <a href="#" class="btn btn-success btn-sm" style="width: 80px;" v-on:click="submit">保 存</a> -->
+			<a href="#" class="btn btn-primary btn-sm" style="width: 80px;" id="cancel" onclick="javascript :history.back(-1);">返 回</a>
+		</div>
+	</form>
+	<div th:include="common::header"></div>
+	<script th:src="@{'/projectJS/businessFunction/goods-detail.js?time='+${new java.util.Date().getTime()}}"></script>
+</body>
+</html>

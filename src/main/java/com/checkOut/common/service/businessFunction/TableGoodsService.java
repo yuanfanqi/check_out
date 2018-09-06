@@ -21,5 +21,21 @@ public interface TableGoodsService {
 	 * @param order
 	 * @return
 	 */
-	public PageData<TableGoods> selectPage(TableGoods tableGoods, Integer page, Integer limit,String sidx, String order);
+	public PageData<TableGoods> selectPage(TableGoods tableGoods, Integer page, Integer limit,String sidx, String order) throws Exception;
+
+	/**
+	 * 单个商品信息添加
+	 * @param record
+	 * @return
+	 * @throws Exception
+	 */
+	public Integer add(TableGoods record) throws Exception; 
+	
+	/**
+	 * 按主键查询记录
+	 * @param goodsId
+	 * @return
+	 * @throws Exception
+	 */
+	public TableGoods select(String goodsId) throws Exception;
 }

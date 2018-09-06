@@ -26,7 +26,7 @@ public class TableGoodsServiceImpl implements TableGoodsService {
 
 	@Override
 	public PageData<TableGoods> selectPage(TableGoods record, Integer page, Integer limit, String sidx,
-			String order) {
+			String order) throws Exception {
 		PageData<TableGoods> pageInfo = new PageData<>();
 		int total = tableGoodsMapper.selectCount(record);
 		//分页参数处理
@@ -39,6 +39,19 @@ public class TableGoodsServiceImpl implements TableGoodsService {
 		pageInfo.setTotal(total);
 		
 		return pageInfo;
+	}
+
+	@Override
+	public Integer add(TableGoods record) throws Exception {
+		int insert = tableGoodsMapper.insertSelective(record);
+		System.out.println("*****************  "+insert);
+		return insert;
+	}
+
+	@Override
+	public TableGoods select(String goodsId) throws Exception {
+		TableGoods selectByPrimaryKey = tableGoodsMapper.selectByPrimaryKey(goodsId);
+		return selectByPrimaryKey;
 	}
 
 }

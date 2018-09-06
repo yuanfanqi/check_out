@@ -1,4 +1,8 @@
 $(function(){
+	//删除选中功能
+	$("#deleteAllBtn").on("click",function(){
+		
+	});
 	// 商品列表
 	$("#jqGrid").jqGrid({
 		url: "/goods/search",
@@ -31,12 +35,13 @@ $(function(){
 			},
 			{
 			label:"商品库存",
-			name:"goodsNum"
+			name:"goodsNum",
+			sortable:true
 			},
 			{
 			label:"修改时间",
 			name:"updateTime",
-			shortable:true
+			sortable:true
 			},
 			{
 			label:"保质期",
@@ -65,4 +70,20 @@ $(function(){
 					"overflow-x": "hidden"
 				});
 			}
+	});
+	//多条件搜索
+	$("#searchBtn").on("click", function () {
+		var grid = $("#jqGrid");
+		grid.setGridParam({
+			postData: {
+				type: "type",
+				page: "page",
+				limit: "limit",
+				sidx: "sidx",
+				order: "order",
+				tblBwList: serializeObject("#goodsForm")
+			}
+		}).trigger('reloadGrid');
+		
+	});
 });

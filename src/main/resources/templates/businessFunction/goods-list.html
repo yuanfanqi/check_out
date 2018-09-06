@@ -38,6 +38,15 @@
 					<option value="5"></option> -->
 				</select>
 			</div>
+			<label for="goodsNum" class="col-md-1 control-label">商品库存</label>
+			<div class="col-md-2">
+				<select id="goodsNum" name="goodsNum" class="form-control">
+					<option value="">请选择</option>
+					<option value="high">高</option>
+					<option value="middle">中</option>
+					<option value="low">低</option>
+				</select>
+			</div>
 		</div>
 	
 		<div class="form-group text-center">
@@ -46,7 +55,7 @@
 		<div class="form-group">
 			<div class="col-sm-1">
 				<shiro:hasPermission name="goods:add">
-					<a class="btn btn-default btn-block" href="/goods/add">添加商品</a>
+					<a class="btn btn-default btn-block" href="/goods/fetch">添加商品</a>
 				</shiro:hasPermission>
 			</div>
 		</div>
