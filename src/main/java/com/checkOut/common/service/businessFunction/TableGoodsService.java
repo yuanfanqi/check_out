@@ -38,4 +38,19 @@ public interface TableGoodsService {
 	 * @throws Exception
 	 */
 	public TableGoods select(String goodsId) throws Exception;
+	
+	/**
+	 * 根据主键修改商品信息
+	 * @param record
+	 * @throws Exception
+	 */
+	public void modify(TableGoods record) throws Exception;
+	
+	/**
+	 * 验证是否goodsId已经存在于数据库中
+	 * @param goodsId
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean isExist(String goodsId) throws Exception;
 }

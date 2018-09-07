@@ -19,11 +19,30 @@ $(function(){
 			},
 			{
 			label:"商品名称",
-			name:"goodsName"
+			name:"goodsName",
+			formatter:function(value, options, row){
+				return "<a href=/goods/fetch?goodsId="+row.goodsId+">"+ value +"</a>";
+			}
 			},
 			{
 			label:"商品分类",
-			name:"goodsType"
+			name:"goodsType",
+			formatter:function(value, options, row){
+				var result = "";
+				switch(value)
+				{
+				case 1:
+					result = "洗浴用品";
+				  break;
+				case 2:
+					result = "护肤品";
+				  break;
+				case 3:
+					result = "服饰包包";
+				  break;
+				}
+				return result;
+			}
 			},
 			{
 			label:"商品价格",
@@ -41,17 +60,32 @@ $(function(){
 			{
 			label:"修改时间",
 			name:"updateTime",
+			formatter:function(value, options, row){
+				var result = "";
+                if (!isEmpty(value)) {
+                    result = new Date(value).pattern("yyyy-MM-dd HH:mm");
+                }
+                return result;
+			},
 			sortable:true
 			},
 			{
 			label:"保质期",
-			name:"exp"
+			name:"exp",
+			formatter:function(value, options, row){
+				var result = "";
+                if (!isEmpty(value)) {
+                    result = new Date(value).pattern("yyyy-MM-dd");
+                }
+                return result;
+			}
 			}],
 			autowidth: true,
 			multiselect: true,
 			onSelectRow: function(rowId, status, e) {
 				var rowIds = $("#jqGrid").jqGrid('getGridParam', 'selarrrow');
 			},
+			viewrecords: true,
 			pager: "#jqGridPager",
 			jsonReader: {
 				root: "list",
@@ -74,6 +108,7 @@ $(function(){
 	//多条件搜索
 	$("#searchBtn").on("click", function () {
 		var grid = $("#jqGrid");
+		console.log(serializeObject("#goodsForm"))
 		grid.setGridParam({
 			postData: {
 				type: "type",
@@ -81,7 +116,7 @@ $(function(){
 				limit: "limit",
 				sidx: "sidx",
 				order: "order",
-				tblBwList: serializeObject("#goodsForm")
+				tableGoods: serializeObject("#goodsForm")
 			}
 		}).trigger('reloadGrid');
 		

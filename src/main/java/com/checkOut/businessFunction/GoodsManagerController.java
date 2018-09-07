@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.checkOut.common.controller.ExceptionController;
 import com.checkOut.common.model.businessFunction.TableGoods;
 import com.checkOut.common.model.pageModel.PageData;
 import com.checkOut.common.service.businessFunction.TableGoodsService;
@@ -31,7 +33,7 @@ import io.swagger.annotations.ApiParam;
 @Controller
 @RequestMapping(value = "/goods")
 @Api(value = "GoodsManagerController", tags = "商品管理控制器")
-public class GoodsManagerController {
+public class GoodsManagerController extends ExceptionController{
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
@@ -66,6 +68,7 @@ public class GoodsManagerController {
 		logger.info("\n\n★进入条件分页清单列表查询方法======================================================\n");
 
 		PageData<TableGoods> pageInfo = new PageData<>();
+		
 		try {
 			pageInfo = tableGoodsService.selectPage(tableGoods, page, limit, sidx, order);
 		} catch (Exception e) {
@@ -104,6 +107,11 @@ public class GoodsManagerController {
 		return mv;
 	}
 	
+	/**
+	 * 单个商品信息添加
+	 * @param tableGoods
+	 * @return
+	 */
 	@ApiOperation(value = "单个商品信息添加", notes = "单个商品信息添加", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@RequiresPermissions("goods:add")
@@ -125,6 +133,58 @@ public class GoodsManagerController {
 			logger.error("单个商品信息添加出错",e);
 		}
 		
+		return res;
+	}
+	
+	/**
+	 * 修改单个商品信息
+	 * @param tableGoods
+	 * @return
+	 */
+	@ApiOperation(value = "修改单个商品信息", notes = "修改单个商品信息", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	@RequiresPermissions("goods:modify")
+	@ResponseBody
+	public Map<String, Object> modify(@ModelAttribute(value = "tableGoods") TableGoods tableGoods){
+		logger.info("\n\n★进入单个商品信息修改方法======================================================\n");
+		
+		Map<String, Object> res = new HashMap<>();
+		res.put("status", false);
+		res.put("msg", "修改失败");
+		try {
+			tableGoodsService.modify(tableGoods);
+			res.put("status", true);
+			res.put("msg", "修改成功");
+		} catch (Exception e) {
+			logger.error("修改单个商品信息出错",e);
+		}
+		return res;
+	}
+	
+	/**
+	 * 验证是否是唯一存在的商品信息
+	 * @param goodsId
+	 * @return
+	 */
+	@ApiOperation(value = "验证是否是唯一存在的商品信息", notes = "验证是否是唯一存在的商品信息", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/isExist", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> isExist(
+			@ApiParam(name = "goodsId", value = "商品条码", required = true)@RequestParam(value = "goodsId", required = true) String goodsId
+			){
+		logger.info("\n\n★进入验证是否是唯一存在的商品信息方法======================================================\n");
+		
+		Map<String, Object> res = new HashMap<>();
+		res.put("status", false);
+		res.put("msg", "该商品条码已存在");
+		try {
+			if(!tableGoodsService.isExist(goodsId)){
+				res.put("status", true);
+				res.put("msg", "该商品条码未存在，可以添加");
+			}
+		} catch (Exception e) {
+			logger.error("信息唯一性验证出错");
+		}
 		return res;
 	}
 }

@@ -22,7 +22,7 @@
   
   <select id="selectPage" resultMap="BaseResultMap">
   	select <include refid="base_column_list"></include> from table_goods
-  	order by #{sidx} DESC
+  	order by #{sidx} #{order}
   	<where>
   		<if test="null != tableGoods">
   			<if test="null != tableGoods.goodsId">AND GOODS_ID = #{tableGoods.goodsId,jdbcType=VARCHAR}</if>

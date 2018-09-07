@@ -20,13 +20,13 @@ var tableGoods = /*[[${tableGoods}]]*/
 		<div class="form-group col-lg-10">
 			<label for="goodsName" class="col-md-4 control-label" style="padding: 7px 5px 0 5px; text-align: right;">商品名称：</label>
 			<div class="col-md-8" style="padding: 0;">
-				<input type="text" id="goodsName" name="goodsName" class="form-control" placeholder="未匹配到该商品相关信息" maxlength="20" th:value="${tableGoods.goodsName}" disabled="disabled"/>
+				<input type="text" id="goodsName" name="goodsName" class="form-control" placeholder="未匹配到该商品相关信息" maxlength="20" th:value="${tableGoods.goodsName}"/>
 			</div>
 		</div>
 		<div class="form-group col-lg-10">
 			<label for="goodsPrice" class="col-md-4 control-label" style="padding: 7px 5px 0 5px; text-align: right;">商品价格：</label>
 			<div class="col-md-8" style="padding: 0;">
-				<input type="text" id="goodsPrice" name="goodsPrice" class="form-control" placeholder="未匹配到该商品相关信息" maxlength="20" th:value="${tableGoods.goodsPrice}"/>
+				<input type="text" id="goodsPrice" name="goodsPrice" class="form-control" placeholder="未匹配到该商品相关信息" th:value="${tableGoods.goodsPrice}"/>
 			</div>
 		</div>
 		<div class="form-group col-lg-10" >
@@ -44,13 +44,13 @@ var tableGoods = /*[[${tableGoods}]]*/
 		<div class="form-group col-lg-10">
 			<label for="goodsNum" class="col-md-4 control-label" style="padding: 7px 5px 0 5px; text-align: right;">入库数量/库存：</label>
 			<div class="col-md-8" style="padding: 0;">
-				<input type="text" id="goodsNum" name="goodsNum" class="form-control" placeholder="未匹配到该商品相关信息" maxlength="20" th:value="${tableGoods.goodsNum}" disabled="disabled"/>
+				<input type="text" id="goodsNum" name="goodsNum" class="form-control" placeholder="未匹配到该商品相关信息" th:value="${tableGoods.goodsNum}"/>
 			</div>
 		</div>
 		<!-- <div class="form-group col-lg-10">
-			<label for="limitReason" class="col-md-4 control-label" style="padding: 7px 5px 0 5px; text-align: right;">限制原因：</label>
+			<label for="" class="col-md-4 control-label" style="padding: 7px 5px 0 5px; text-align: right;">限制原因：</label>
 			<div class="col-md-8" style="padding: 0;">
-				<input type="text" id="limitReason" name="limitReason" class="form-control" th:value="${record.limitReason}" placeholder="请输入限制原因"/>
+				<input type="text" id="" name="" class="form-control" th:value="${.}" placeholder="请输入限制原因"/>
 				<p class="text-info" style="margin-top: 4px;">
 					<i class="fa fa-info-circle" aria-hidden="true" style="margin-right: 4px;"></i>
 					<span>选填,最长100个字符</span>
@@ -59,8 +59,6 @@ var tableGoods = /*[[${tableGoods}]]*/
 		</div> -->
 		<div class="form-group text-center col-lg-10">
 			<button class="btn btn-primary" id="createBtn" style="width: 80px;" type="submit">保 存</button>
-			<!-- <button class="btn btn-primary" id="cancel" style="width: 80px;">返 回</button> -->
-			<!-- <a href="#" class="btn btn-success btn-sm" style="width: 80px;" v-on:click="submit">保 存</a> -->
 			<a href="#" class="btn btn-primary btn-sm" style="width: 80px;" id="cancel" onclick="javascript :history.back(-1);">返 回</a>
 		</div>
 	</form>

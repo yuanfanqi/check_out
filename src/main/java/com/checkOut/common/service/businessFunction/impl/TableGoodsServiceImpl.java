@@ -54,4 +54,21 @@ public class TableGoodsServiceImpl implements TableGoodsService {
 		return selectByPrimaryKey;
 	}
 
+	@Override
+	public void modify(TableGoods record) throws Exception {
+		tableGoodsMapper.updateByPrimaryKeySelective(record);
+	}
+
+	@Override
+	public boolean isExist(String goodsId) throws Exception {
+		TableGoods record = new TableGoods();
+		boolean res = false;
+		record.setGoodsId(goodsId);
+		int count = tableGoodsMapper.selectCount(record);
+		if(count > 0){
+			res = true;
+		}
+		return res;
+	}
+
 }
