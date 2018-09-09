@@ -22,7 +22,6 @@
   
   <select id="selectPage" resultMap="BaseResultMap">
   	select <include refid="base_column_list"></include> from table_goods
-  	order by #{sidx} #{order}
   	<where>
   		<if test="null != tableGoods">
   			<if test="null != tableGoods.goodsId">AND GOODS_ID = #{tableGoods.goodsId,jdbcType=VARCHAR}</if>
@@ -35,6 +34,9 @@
   			<if test="null != tableGoods.exp">AND EXP = #{tableGoods.exp,jdbcType=TIMESTAMP}</if>
   		</if>
   	</where>
+  	<if test="null != sidx">
+  	order by #{sidx} #{order}
+  	</if>
   	LIMIT #{start},#{end}
   </select>
   

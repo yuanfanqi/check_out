@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.checkOut.common.controller.ExceptionController;
@@ -61,6 +60,7 @@ public class GoodsManagerController extends ExceptionController{
 	@ResponseBody
 	public PageData<TableGoods> search(
 			@ModelAttribute(value = "tableGoods") TableGoods tableGoods,
+//			@ApiParam(name = "goodsNum", value = "库存", required = false)@RequestParam(value = "goodsNum",required = false) Integer goodsNum,
 			@ApiParam(name = "page", value = "当前页码", required = true, defaultValue = "1") @RequestParam(value = "page", required = true, defaultValue = "1") Integer page,
 			@ApiParam(name = "limit", value = "每页大小", required = true, defaultValue = "10") @RequestParam(value = "limit", required = true, defaultValue = "10") Integer limit,
 			@ApiParam(name = "sidx", value = "排序字段", required = false) @RequestParam(value = "sidx", required = false) String sidx,

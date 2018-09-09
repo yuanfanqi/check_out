@@ -55,10 +55,6 @@ $(function(){
 			{
 			label:"商品库存",
 			name:"goodsNum",
-			formatter:function(value, options, row){
-				//库存可以点，点击之后跳转库存管理页面，可以修改库存详细？？
-				return value;
-			},
 			sortable:true
 			},
 			{
@@ -80,7 +76,6 @@ $(function(){
 				var result = "";
                 if (!isEmpty(value)) {
                     result = new Date(value).pattern("yyyy-MM-dd");
-                    //保质期可以点，点击之后跳转保质期管理页面，可以查看保质期详情？？
                 }
                 return result;
 			}
@@ -109,22 +104,5 @@ $(function(){
 					"overflow-x": "hidden"
 				});
 			}
-	});
-	//多条件搜索
-	$("#searchBtn").on("click", function () {
-		var grid = $("#jqGrid");
-		console.log(serializeObject("#goodsForm"))
-		grid.setGridParam({
-			postData: {
-				type: "type",
-				page: "page",
-				limit: "limit",
-				sidx: "sidx",
-				order: "order",
-				goodsNum: $("#goodsNum").val(),
-				tableGoods: serializeObject("#goodsForm")
-			}
-		}).trigger('reloadGrid');
-		
 	});
 });
