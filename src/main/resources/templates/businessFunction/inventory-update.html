@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+<title>inventory-update</title>
+</head>
+<body>
+<div style="text-align:center;margin:20px 5px 15px 20px;">
+	<input type="hidden" th:value="${tblGoods.goodsId}" id="goodsId" name="goodsId" />
+	<label >库存数量:</label>
+	<input type="text" id="goodsNum" name="goodsNum" placeholder="库存应为非负整数">
+	<label >个/件</label>
+</div>
+	<div class="form-group text-center">
+		<button id="update" class='btn btn-default'>确定</button>
+	</div>
+	<div th:include="common::header"></div>
+	<script type="text/javascript">
+		$("#update").on("click",function(){
+			var goodsNum = $("#goodsNum").val();
+			console.log($("#goodsId").val())
+			//var regexp = /^[1-9]\d*|0$/;
+			if(goodsNum != null && goodsNum != ""){
+				var regexp = /^\d+$/;
+				if(!regexp.test(goodsNum)){
+					parent.layer.alert("输入个数/件数不符合要求",function(index){
+               	    	parent.layer.closeAll();
+               	 	});
+		       		return;
+		    	}
+			$.ajax({ 
+				url: "/goods/inventory/modify", 
+				type:"post",
+				contentType: "application/x-www-form-urlencoded",
+                dataType:"json",
+				data: {
+					"goodsId":$("#goodsId").val(),
+					"goodsNum":goodsNum
+				},
+				success: function(res){
+					parent.layer.alert(res.msg,function(index){
+	                      parent.layer.closeAll();
+	                  });
+		      	},
+		      	error: function() {
+					parent.layer.msg("error");
+				},
+		      
+			});
+			}else{
+				parent.layer.alert("输入个数/件数不能为空",function(index){
+           	    	parent.layer.closeAll();
+           	 	});
+			}
+		});
+	</script>
+</body>
+</html>

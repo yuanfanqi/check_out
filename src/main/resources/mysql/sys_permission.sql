@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80012
 File Encoding         : 65001
 
-Date: 2018-09-06 18:00:28
+Date: 2018-09-10 18:02:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,7 +31,7 @@ CREATE TABLE `sys_permission` (
   `UPDATE_TIME` datetime NOT NULL COMMENT '更新时间',
   `ICON` varchar(100) DEFAULT '' COMMENT 'font awsome所使用的图标代码',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8 COMMENT='系统权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8 COMMENT='系统权限表';
 
 -- ----------------------------
 -- Records of sys_permission
@@ -65,4 +65,7 @@ INSERT INTO `sys_permission` VALUES ('26', '列表', '2', 'role:index', '5', nul
 INSERT INTO `sys_permission` VALUES ('27', '商品列表', '2', 'goods:show', '6', '', '', '2018-09-05 15:42:57', '2018-09-05 15:42:57', '');
 INSERT INTO `sys_permission` VALUES ('28', '商品添加', '2', 'goods:add', '6', '', '', '2018-09-06 14:43:27', '2018-09-06 14:43:27', '');
 INSERT INTO `sys_permission` VALUES ('29', '商品查看', '2', 'goods:fetch', '6', '', '', '2018-09-06 15:40:52', '2018-09-06 15:40:52', '');
+INSERT INTO `sys_permission` VALUES ('105', '商品修改', '2', 'goods:modify', '0', '', '', '2018-09-07 16:15:23', '2018-09-07 16:15:23', '');
+INSERT INTO `sys_permission` VALUES ('106', '库存页面', '2', 'inventory:index', '6', '', '', '2018-09-10 14:45:28', '2018-09-10 14:45:28', '');
+INSERT INTO `sys_permission` VALUES ('107', '库存修改', '2', 'inventory:modify', '6', '', '', '2018-09-10 14:45:55', '2018-09-10 14:45:55', '');
 SET FOREIGN_KEY_CHECKS=1;

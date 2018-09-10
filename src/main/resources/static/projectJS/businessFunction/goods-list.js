@@ -1,7 +1,39 @@
 $(function(){
 	//删除选中功能
 	$("#deleteAllBtn").on("click",function(){
-		
+		var rowsId = getSelectedRows();
+		if(rowsId.length > 0){
+			var dataArr = [];
+			$.each(rowsId,function(index,value){
+				var goodsForm = $("#jqGrid").jqGrid('getRowData',value);
+				dataArr.push(goodsForm.goodsId);
+			});
+			if($.isEmpty(dataArr)){
+				parent.layer.alert("暂无可删除的数据");
+			}else{
+				$.ajax({
+					type:"POST",
+					url:"/goods/delete",
+					dataType:"JSON",
+					data:{"goodsIds":JSON.stringify(dataArr)},
+					success:function(result){
+						if(result.status==true){
+							parent.layer.alert(result.msg);
+							$("#jqGrid").jqGrid().trigger('reloadGrid');
+						}
+					},
+					error:function(){
+						parent.layer.alert("修改数据出现异常");
+					},
+					beforeSend:function(){
+						index = parent.layer.load(1,{shade:0.5});
+					},
+					complete:function(){
+						parent.layer.close(index);
+					}
+				});
+			}
+		}
 	});
 	// 商品列表
 	$("#jqGrid").jqGrid({
@@ -57,7 +89,7 @@ $(function(){
 			name:"goodsNum",
 			formatter:function(value, options, row){
 				//库存可以点，点击之后跳转库存管理页面，可以修改库存详细？？
-				return value;
+				return "<a href='javascript:void(0);' onclick='updateInventory(\""+ row.goodsId.toString() +"\")'>"+ value +"</a>";
 			},
 			sortable:true
 			},
@@ -113,7 +145,12 @@ $(function(){
 	//多条件搜索
 	$("#searchBtn").on("click", function () {
 		var grid = $("#jqGrid");
-		console.log(serializeObject("#goodsForm"))
+//		console.log(serializeObject("#goodsForm"))
+		//serializeObject("#goodsForm")虽然有值但是@ModelAttribute接收不到||@ModelAttribute解析不到，原因未找到(或许因为不是标准的表单提交
+		var goodsId = $("#goodsId").val();
+		var goodsName = $("#goodsName").val();
+		var goodsType = $("#goodsType").val();
+		var goodsNum = $("#goodsNum").val();
 		grid.setGridParam({
 			postData: {
 				type: "type",
@@ -121,10 +158,78 @@ $(function(){
 				limit: "limit",
 				sidx: "sidx",
 				order: "order",
-				goodsNum: $("#goodsNum").val(),
-				tableGoods: serializeObject("#goodsForm")
+				goodsId:goodsId,
+				goodsName:goodsName,
+				goodsType:goodsType,
+				goodsNum:goodsNum
 			}
 		}).trigger('reloadGrid');
 		
 	});
 });
+
+//弹窗页面，库存更改
+function updateInventory(goodsId){
+	console.log(goodsId)
+	parent.layer.open({
+		  type: 2,
+		  title: "更改商品库存数量",
+		  shadeClose: true,
+		  shade: 0.8,
+		  area: ['30%', '35%'],
+		  content: '/goods/inventory/index?goodsId=' + goodsId + '',
+		  end: function () {
+		        location.reload();
+		      }
+		});
+}
+
+/**
+		var rowIds = getSelectedRows();
+		if(rowIds.length>0){
+			var postArr = [];
+			$.each(rowIds,function(index,value){
+				var tblFundPortfolio = $("#jqGrid").jqGrid('getRowData',value);
+				if(tblFundPortfolio.isValid==0&&tblFundPortfolio.approveState==0){
+					var obj = {
+							"publishDate":tblFundPortfolio.publishDate,
+							"fundCode":tblFundPortfolio.fundCode
+					}
+					postArr.push(obj);
+				}else{
+			        parent.layer.alert("暂无可以被操作的数据");
+				}
+			});
+			if(postArr.length>0){
+				parent.layer.confirm("确认删除吗?", {
+					btn : [ '是', '否' ]
+				}, function() {
+		 			var index;
+					$.ajax({
+						type:"POST",
+						url:"/fundPortfolio/deleteBatch",
+						dataType:"JSON",
+						data:{"tblFundPortfolios":JSON.stringify(postArr)},
+						success:function(result){
+							if(result.status==true){
+								parent.layer.alert(result.msg);
+								$("#jqGrid").jqGrid().trigger('reloadGrid');
+							}
+						},
+						error:function(){
+							parent.layer.alert("删除数据出现异常");
+						},
+						beforeSend:function(){
+							index = parent.layer.load(1,{shade:0.5});
+						},
+						complete:function(){
+							parent.layer.close(index);
+						}
+					});
+		 		},function() {
+					parent.layer.closeAll();
+				});
+			}
+		}
+	});
+*/

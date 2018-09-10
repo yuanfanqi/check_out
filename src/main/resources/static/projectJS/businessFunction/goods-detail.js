@@ -63,9 +63,8 @@ $(function(){
             //区分新增和修改
             var url = '';
             var data = $form.serializeObject();
+//            console.log(data)
 			if(isEmpty(tableGoods.goodsId)){
-//					data["goodsName"] = resFX.fundName;
-//					data["goodsType"] = resFX.fundType;
 					url = '/goods/add';
 					var msg = '添加成功!';
 			}else{

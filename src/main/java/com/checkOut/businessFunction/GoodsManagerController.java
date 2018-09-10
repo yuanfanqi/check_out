@@ -1,7 +1,10 @@
 package com.checkOut.businessFunction;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
@@ -10,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +25,7 @@ import com.checkOut.common.model.businessFunction.TableGoods;
 import com.checkOut.common.model.pageModel.PageData;
 import com.checkOut.common.service.businessFunction.TableGoodsService;
 import com.checkOut.utils.H;
+import com.fasterxml.jackson.databind.deser.std.StringArrayDeserializer;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -60,7 +65,6 @@ public class GoodsManagerController extends ExceptionController{
 	@ResponseBody
 	public PageData<TableGoods> search(
 			@ModelAttribute(value = "tableGoods") TableGoods tableGoods,
-//			@ApiParam(name = "goodsNum", value = "库存", required = false)@RequestParam(value = "goodsNum",required = false) Integer goodsNum,
 			@ApiParam(name = "page", value = "当前页码", required = true, defaultValue = "1") @RequestParam(value = "page", required = true, defaultValue = "1") Integer page,
 			@ApiParam(name = "limit", value = "每页大小", required = true, defaultValue = "10") @RequestParam(value = "limit", required = true, defaultValue = "10") Integer limit,
 			@ApiParam(name = "sidx", value = "排序字段", required = false) @RequestParam(value = "sidx", required = false) String sidx,
@@ -186,5 +190,71 @@ public class GoodsManagerController extends ExceptionController{
 			logger.error("信息唯一性验证出错");
 		}
 		return res;
+	}
+	
+	/**
+	 * 跳转到 商品库存数量 方法
+	 * @param goodsId
+	 * @return
+	 */
+	@ApiOperation(notes = "跳转到 商品库存数量 方法", value = "跳转到 商品库存数量 方法", httpMethod = "GET", produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/inventory/index", method = RequestMethod.GET)
+	@RequiresPermissions("inventory:index")
+	public ModelAndView inventoryIndex(
+			@ApiParam(name = "goodsId", value = "商品条码（ID）", required = true)@RequestParam(value = "goodsId", required = true) String goodsId, HttpServletRequest request
+			){
+		logger.info("\n\n★进入跳转到 商品库存数量 方法======================================================\n");
+		
+		ModelAndView mView = new ModelAndView();
+		mView.setViewName("/businessFunction/inventory-update");
+		TableGoods tblGoods = new TableGoods();
+		tblGoods.setGoodsId(goodsId);
+		mView.addObject("tblGoods",tblGoods);
+		return mView;
+	}
+	
+	/**
+	 * 更改商品库存数量
+	 * @param goodsId
+	 * @return
+	 */
+	@ApiOperation(value = "更改商品库存数量", notes = "更改商品库存数量", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/inventory/modify", method = RequestMethod.POST)
+	@RequiresPermissions("inventory:modify")
+	@ResponseBody
+	public Map<String, Object> updataInventory(
+			@ApiParam(name = "goodsId", value = "商品条码", required = true)@RequestParam(value = "goodsId", required = true) String goodsId,
+			@ApiParam(name = "goodsNum", value = "商品库存", required = true)@RequestParam(value = "goodsNum", required = true) Integer goodsNum
+			){
+		logger.info("\n\n★进入更改商品库存数量方法======================================================\n");
+		
+		Map<String, Object> res = new HashMap<>();
+		res.put("status", false);
+		res.put("msg", "库存修改失败");
+		
+		TableGoods record = new TableGoods();
+		record.setGoodsId(goodsId);
+		record.setGoodsNum(goodsNum);
+		try {
+			tableGoodsService.modify(record);
+			res.put("status", true);
+			res.put("msg", "库存修改成功");
+		} catch (Exception e) {
+			logger.error("更改商品库存数量出错");
+		}
+		return res;
+	}
+	
+	//删除操作
+	@ApiOperation(value = "", notes = "", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@RequiresPermissions("goods:delete")
+	@ResponseBody
+	public Map<String, Object> delete(
+			@ApiParam()@RequestParam() List<String> goodsIds
+			){
+		logger.info("\n\n★进入删除商品信息方法======================================================\n");
+			
+		return null;
 	}
 }
