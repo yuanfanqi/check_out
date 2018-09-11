@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80012
 File Encoding         : 65001
 
-Date: 2018-09-10 18:02:21
+Date: 2018-09-11 18:04:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,7 +31,7 @@ CREATE TABLE `sys_permission` (
   `UPDATE_TIME` datetime NOT NULL COMMENT '更新时间',
   `ICON` varchar(100) DEFAULT '' COMMENT 'font awsome所使用的图标代码',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8 COMMENT='系统权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8 COMMENT='系统权限表';
 
 -- ----------------------------
 -- Records of sys_permission
@@ -42,7 +42,7 @@ INSERT INTO `sys_permission` VALUES ('3', '菜单管理', '1', '', '1', '/sys/pe
 INSERT INTO `sys_permission` VALUES ('4', '用户管理', '1', '', '1', '/sys/user/show', '', '2018-08-29 15:35:50', '2018-08-29 15:35:53', 'fa fa-user-circle-o');
 INSERT INTO `sys_permission` VALUES ('5', '角色管理', '1', '', '1', '/sys/role/show', '', '2018-08-29 15:35:50', '2018-08-29 15:35:53', 'fa fa-hand-paper-o');
 INSERT INTO `sys_permission` VALUES ('6', '商品管理', '1', '', '2', '/goods/show', '', '2018-08-27 10:22:28', '2018-08-27 10:22:31', 'fa fa-cubes');
-INSERT INTO `sys_permission` VALUES ('7', '库存管理', '1', '', '2', '/inventory/show', '', '2018-08-27 10:22:59', '2018-08-27 10:23:02', 'fa fa-server');
+INSERT INTO `sys_permission` VALUES ('7', '销售页面', '1', '', '2', '/sell/show', '', '2018-08-27 10:22:59', '2018-08-27 10:23:02', 'fa fa-server');
 INSERT INTO `sys_permission` VALUES ('8', '进货名单', '1', '', '2', '/prepurchase/show', '', '2018-08-27 10:23:22', '2018-08-27 10:23:27', 'fa fa-book');
 INSERT INTO `sys_permission` VALUES ('9', '昨日战绩', '1', '', '2', '/top/show', '', '2018-08-27 10:23:40', '2018-08-27 10:23:43', 'fa fa-graduation-cap');
 INSERT INTO `sys_permission` VALUES ('10', '代码生成', '1', '', '1', '/sys/generator/show', '', '2017-09-08 09:11:16', '2017-09-08 09:11:16', 'fa fa-file-code-o');
@@ -68,4 +68,7 @@ INSERT INTO `sys_permission` VALUES ('29', '商品查看', '2', 'goods:fetch', '
 INSERT INTO `sys_permission` VALUES ('105', '商品修改', '2', 'goods:modify', '0', '', '', '2018-09-07 16:15:23', '2018-09-07 16:15:23', '');
 INSERT INTO `sys_permission` VALUES ('106', '库存页面', '2', 'inventory:index', '6', '', '', '2018-09-10 14:45:28', '2018-09-10 14:45:28', '');
 INSERT INTO `sys_permission` VALUES ('107', '库存修改', '2', 'inventory:modify', '6', '', '', '2018-09-10 14:45:55', '2018-09-10 14:45:55', '');
+INSERT INTO `sys_permission` VALUES ('108', '商品删除', '2', 'goods:delete', '6', '', '', '2018-09-11 09:51:42', '2018-09-11 09:51:42', '');
+INSERT INTO `sys_permission` VALUES ('109', '销售操作', '2', 'sell:index', '7', '', '', '2018-09-11 11:27:28', '2018-09-11 11:27:28', '');
+INSERT INTO `sys_permission` VALUES ('110', '销售查询', '2', 'sell:search', '7', '', '', '2018-09-11 15:49:33', '2018-09-11 15:49:33', '');
 SET FOREIGN_KEY_CHECKS=1;
