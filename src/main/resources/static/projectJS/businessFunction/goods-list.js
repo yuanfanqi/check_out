@@ -90,7 +90,7 @@ $(function(){
 			name:"goodsNum",
 			formatter:function(value, options, row){
 				//库存可以点，点击之后跳转库存管理弹窗页面，可以修改库存详细？？
-				return "<a href='javascript:void(0);' onclick='updateInventory(\""+ row.goodsId.toString() +"\")'>"+ value +"</a>";
+				return "<a href='javascript:void(0);' onclick='updateInventory(\""+ row.goodsId +"\")'>"+ value +"</a>";
 			},
 			sortable:true
 			},

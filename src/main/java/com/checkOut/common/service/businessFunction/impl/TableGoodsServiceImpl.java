@@ -1,5 +1,6 @@
 package com.checkOut.common.service.businessFunction.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -74,6 +75,26 @@ public class TableGoodsServiceImpl implements TableGoodsService {
 	public Integer deleteByIds(List<String> goodsIds) throws Exception {
 		Integer count = tableGoodsMapper.deleteByIds(goodsIds);
 		return count;
+	}
+
+	@Override
+	public PageData<TableGoods> likeSelect(String paramName, String paramValue) throws Exception {
+		PageData<TableGoods> pagInfo = new PageData<>();
+		List<TableGoods> likeSelect = new ArrayList<>();
+
+		//对传参进行解析
+		paramValue = paramValue + '%';
+		if("goodsName".equals(paramName)){
+			likeSelect = tableGoodsMapper.likeSelect(null, paramValue);
+		}else if("goodsId".equals(paramName)){
+			likeSelect = tableGoodsMapper.likeSelect(paramValue, null);
+		}
+		pagInfo.setList(likeSelect);
+		pagInfo.setPageNum(1);
+		pagInfo.setPages(1);
+		pagInfo.setTotal(likeSelect.size());
+		
+		return pagInfo;
 	}
 
 }

@@ -36,4 +36,12 @@ public interface TableGoodsMapper extends Mapper<TableGoods>{
 	 * @return
 	 */
 	public Integer deleteByIds(@Param("goodsIds") List<String> goodsIds);
+	
+	/**
+	 * 按照给的字段进行模糊查询
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public List<TableGoods> likeSelect(@Param("goodsId")String goodsId,@Param("goodsName")String goodsName);
 }

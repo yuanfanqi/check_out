@@ -62,4 +62,12 @@ public interface TableGoodsService {
 	 * @throws Exception
 	 */
 	public Integer deleteByIds(List<String> goodsIds) throws Exception;
+	
+	/**
+	 * 按照给的字段进行模糊查询
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public PageData<TableGoods> likeSelect(String paramName,String paramValue) throws Exception;
 }

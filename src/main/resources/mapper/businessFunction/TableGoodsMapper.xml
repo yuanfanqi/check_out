@@ -61,4 +61,14 @@
 			</foreach>
 		</where>
 	</delete>
+	
+	<select id="likeSelect" resultMap="BaseResultMap">
+	select
+		<include refid="base_column_list"></include>
+		from table_goods
+		<where>
+		<if test="null != goodsId">GOODS_ID like #{goodsId}</if>
+		<if test="null != goodsName">GOODS_NAME like #{goodsName}</if>
+		</where>
+	</select>
 </mapper>
