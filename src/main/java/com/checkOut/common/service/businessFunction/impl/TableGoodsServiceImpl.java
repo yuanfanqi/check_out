@@ -44,7 +44,6 @@ public class TableGoodsServiceImpl implements TableGoodsService {
 	@Override
 	public Integer add(TableGoods record) throws Exception {
 		int insert = tableGoodsMapper.insertSelective(record);
-		System.out.println("*****************  "+insert);
 		return insert;
 	}
 
@@ -69,6 +68,12 @@ public class TableGoodsServiceImpl implements TableGoodsService {
 			res = true;
 		}
 		return res;
+	}
+
+	@Override
+	public Integer deleteByIds(List<String> goodsIds) throws Exception {
+		Integer count = tableGoodsMapper.deleteByIds(goodsIds);
+		return count;
 	}
 
 }

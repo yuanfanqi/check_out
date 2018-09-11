@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +24,6 @@ import com.checkOut.common.model.businessFunction.TableGoods;
 import com.checkOut.common.model.pageModel.PageData;
 import com.checkOut.common.service.businessFunction.TableGoodsService;
 import com.checkOut.utils.H;
-import com.fasterxml.jackson.databind.deser.std.StringArrayDeserializer;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -245,16 +243,31 @@ public class GoodsManagerController extends ExceptionController{
 		return res;
 	}
 	
-	//删除操作
-	@ApiOperation(value = "", notes = "", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+	/**
+	 * 商品信息删除操作
+	 * @param goodsIds
+	 * @return
+	 */
+	@ApiOperation(value = "删除商品信息", notes = "删除商品信息", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@RequiresPermissions("goods:delete")
 	@ResponseBody
 	public Map<String, Object> delete(
-			@ApiParam()@RequestParam() List<String> goodsIds
+			@ApiParam(name = "goodsIds", value = "商品条码数组", required = true)@RequestParam(value = "goodsIds", required = true) List<String> goodsIds
 			){
 		logger.info("\n\n★进入删除商品信息方法======================================================\n");
 			
-		return null;
+		Map<String, Object> res = new HashMap<>();
+		res.put("status", false);
+		res.put("msg", "删除失败");
+		
+		try {
+			Integer count = tableGoodsService.deleteByIds(goodsIds);
+			res.put("status", true);
+			res.put("msg", "成功删除"+ count+"条商品信息");
+		} catch (Exception e) {
+			logger.error("删除商品操作出错");
+		}
+		return res;
 	}
 }

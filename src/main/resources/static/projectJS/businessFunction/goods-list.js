@@ -15,12 +15,13 @@ $(function(){
 					type:"POST",
 					url:"/goods/delete",
 					dataType:"JSON",
-					data:{"goodsIds":JSON.stringify(dataArr)},
+					data:{"goodsIds":dataArr},
+					traditional:true,
 					success:function(result){
-						if(result.status==true){
+//						if(result.status==true){
 							parent.layer.alert(result.msg);
 							$("#jqGrid").jqGrid().trigger('reloadGrid');
-						}
+//						}
 					},
 					error:function(){
 						parent.layer.alert("修改数据出现异常");
@@ -88,7 +89,7 @@ $(function(){
 			label:"商品库存",
 			name:"goodsNum",
 			formatter:function(value, options, row){
-				//库存可以点，点击之后跳转库存管理页面，可以修改库存详细？？
+				//库存可以点，点击之后跳转库存管理弹窗页面，可以修改库存详细？？
 				return "<a href='javascript:void(0);' onclick='updateInventory(\""+ row.goodsId.toString() +"\")'>"+ value +"</a>";
 			},
 			sortable:true
@@ -183,53 +184,3 @@ function updateInventory(goodsId){
 		      }
 		});
 }
-
-/**
-		var rowIds = getSelectedRows();
-		if(rowIds.length>0){
-			var postArr = [];
-			$.each(rowIds,function(index,value){
-				var tblFundPortfolio = $("#jqGrid").jqGrid('getRowData',value);
-				if(tblFundPortfolio.isValid==0&&tblFundPortfolio.approveState==0){
-					var obj = {
-							"publishDate":tblFundPortfolio.publishDate,
-							"fundCode":tblFundPortfolio.fundCode
-					}
-					postArr.push(obj);
-				}else{
-			        parent.layer.alert("暂无可以被操作的数据");
-				}
-			});
-			if(postArr.length>0){
-				parent.layer.confirm("确认删除吗?", {
-					btn : [ '是', '否' ]
-				}, function() {
-		 			var index;
-					$.ajax({
-						type:"POST",
-						url:"/fundPortfolio/deleteBatch",
-						dataType:"JSON",
-						data:{"tblFundPortfolios":JSON.stringify(postArr)},
-						success:function(result){
-							if(result.status==true){
-								parent.layer.alert(result.msg);
-								$("#jqGrid").jqGrid().trigger('reloadGrid');
-							}
-						},
-						error:function(){
-							parent.layer.alert("删除数据出现异常");
-						},
-						beforeSend:function(){
-							index = parent.layer.load(1,{shade:0.5});
-						},
-						complete:function(){
-							parent.layer.close(index);
-						}
-					});
-		 		},function() {
-					parent.layer.closeAll();
-				});
-			}
-		}
-	});
-*/

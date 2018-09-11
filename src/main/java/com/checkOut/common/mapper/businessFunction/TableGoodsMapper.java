@@ -30,4 +30,10 @@ public interface TableGoodsMapper extends Mapper<TableGoods>{
 	 */
 	public List<TableGoods> selectPage(@Param("tableGoods")TableGoods tableGoods, @Param("start")Integer start, @Param("end")Integer end, @Param("sidx")String sidx, @Param("order") String order);
 
+	/**
+	 * 根据id数组进行商品信息删除操作
+	 * @param goodsIds
+	 * @return
+	 */
+	public Integer deleteByIds(@Param("goodsIds") List<String> goodsIds);
 }

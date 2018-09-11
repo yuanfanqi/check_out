@@ -1,5 +1,7 @@
 package com.checkOut.common.service.businessFunction;
 
+import java.util.List;
+
 import com.checkOut.common.model.businessFunction.TableGoods;
 import com.checkOut.common.model.pageModel.PageData;
 
@@ -53,4 +55,11 @@ public interface TableGoodsService {
 	 * @throws Exception
 	 */
 	public boolean isExist(String goodsId) throws Exception;
+	
+	/**
+	 * 商品信息删除操作
+	 * @param goodsIds
+	 * @throws Exception
+	 */
+	public Integer deleteByIds(List<String> goodsIds) throws Exception;
 }

@@ -2,44 +2,63 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.checkOut.common.mapper.businessFunction.TableGoodsMapper">
-  <resultMap id="BaseResultMap" type="com.checkOut.common.model.businessFunction.TableGoods" >
-    <!--
-      WARNING - @mbg.generated
-    -->
-        <result column="GOODS_ID" property="goodsId" jdbcType="VARCHAR"/>
-        <result column="GOODS_NAME" property="goodsName" jdbcType="VARCHAR"/>
-        <result column="GOODS_TYPE" property="goodsType" jdbcType="INTEGER"/>
-        <result column="GOODS_PRICE" property="goodsPrice" jdbcType="INTEGER"/>
-        <result column="GOODS_BID" property="goodsBid" jdbcType="DECIMAL"/>
-        <result column="GOODS_NUM" property="goodsNum" jdbcType="INTEGER"/>
-        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
-        <result column="EXP" property="exp" jdbcType="TIMESTAMP"/>
-  </resultMap>
-  
-  <sql id="base_column_list">
-  GOODS_ID,GOODS_NAME,GOODS_TYPE,GOODS_PRICE,GOODS_BID,GOODS_NUM,UPDATE_TIME,EXP
-  </sql>
-  
-  <select id="selectPage" resultMap="BaseResultMap">
-  	select <include refid="base_column_list"></include> from table_goods
-  	<where>
-  		<if test="null != tableGoods">
-  			<if test="null != tableGoods.goodsId and '' != tableGoods.goodsId">AND GOODS_ID = #{tableGoods.goodsId,jdbcType=VARCHAR}</if>
-  			<if test="null != tableGoods.goodsName and '' != tableGoods.goodsName">AND GOODS_NAME = #{tableGoods.goodsName,jdbcType=VARCHAR}</if>
-  			<if test="null != tableGoods.goodsType and '' != tableGoods.goodsType">AND GOODS_TYPE = #{tableGoods.goodsType,jdbcType=INTEGER}</if>
-  			<if test="null != tableGoods.goodsPrice and '' != tableGoods.goodsPrice">AND GOODS_PRICE = #{tableGoods.goodsId,jdbcType=INTEGER}</if>
-  			<if test="null != tableGoods.goodsBid and '' != tableGoods.goodsBid">AND GOODS_BID = #{tableGoods.goodsBid,jdbcType=DECIMAL}</if>
-  			<if test="null != tableGoods.goodsNum and 20 == tableGoods.goodsNum">AND GOODS_NUM &gt;= #{tableGoods.goodsNum,jdbcType=INTEGER}</if>
-  			<if test="null != tableGoods.goodsNum and 10 == tableGoods.goodsNum">AND GOODS_NUM between 5 and 20</if>
-  			<if test="null != tableGoods.goodsNum and 5 == tableGoods.goodsNum">AND GOODS_NUM &lt;= #{tableGoods.goodsNum,jdbcType=INTEGER}</if>
-  			<if test="null != tableGoods.updateTime and '' != tableGoods.updateTime">AND UPDATE_TIME = #{tableGoods.updateTime,jdbcType=TIMESTAMP}</if>
-  			<if test="null != tableGoods.exp and '' != tableGoods.exp">AND EXP = #{tableGoods.exp,jdbcType=TIMESTAMP}</if>
-  		</if>
-  	</where>
-  	<if test="null != sidx and '' != sidx">
-  	order by #{sidx} #{order}
-  	</if>
-  	LIMIT #{start},#{end}
-  </select>
-  
+	<resultMap id="BaseResultMap"
+		type="com.checkOut.common.model.businessFunction.TableGoods">
+		<!-- WARNING - @mbg.generated -->
+		<result column="GOODS_ID" property="goodsId" jdbcType="VARCHAR" />
+		<result column="GOODS_NAME" property="goodsName" jdbcType="VARCHAR" />
+		<result column="GOODS_TYPE" property="goodsType" jdbcType="INTEGER" />
+		<result column="GOODS_PRICE" property="goodsPrice" jdbcType="INTEGER" />
+		<result column="GOODS_BID" property="goodsBid" jdbcType="DECIMAL" />
+		<result column="GOODS_NUM" property="goodsNum" jdbcType="INTEGER" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="EXP" property="exp" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<sql id="base_column_list">
+		GOODS_ID,GOODS_NAME,GOODS_TYPE,GOODS_PRICE,GOODS_BID,GOODS_NUM,UPDATE_TIME,EXP
+	</sql>
+
+	<select id="selectPage" resultMap="BaseResultMap">
+		select
+		<include refid="base_column_list"></include>
+		from table_goods
+		<where>
+			<if test="null != tableGoods">
+				<if test="null != tableGoods.goodsId and '' != tableGoods.goodsId">AND GOODS_ID = #{tableGoods.goodsId,jdbcType=VARCHAR}
+				</if>
+				<if test="null != tableGoods.goodsName and '' != tableGoods.goodsName">AND GOODS_NAME =
+					#{tableGoods.goodsName,jdbcType=VARCHAR}</if>
+				<if test="null != tableGoods.goodsType and '' != tableGoods.goodsType">AND GOODS_TYPE =
+					#{tableGoods.goodsType,jdbcType=INTEGER}</if>
+				<if test="null != tableGoods.goodsPrice and '' != tableGoods.goodsPrice">AND GOODS_PRICE = #{tableGoods.goodsId,jdbcType=INTEGER}
+				</if>
+				<if test="null != tableGoods.goodsBid and '' != tableGoods.goodsBid">AND GOODS_BID = #{tableGoods.goodsBid,jdbcType=DECIMAL}
+				</if>
+				<if test="null != tableGoods.goodsNum and 20 == tableGoods.goodsNum">AND GOODS_NUM &gt;=
+					#{tableGoods.goodsNum,jdbcType=INTEGER}</if>
+				<if test="null != tableGoods.goodsNum and 10 == tableGoods.goodsNum">AND GOODS_NUM between 5 and 20</if>
+				<if test="null != tableGoods.goodsNum and 5 == tableGoods.goodsNum">AND GOODS_NUM &lt;=
+					#{tableGoods.goodsNum,jdbcType=INTEGER}</if>
+				<if test="null != tableGoods.updateTime and '' != tableGoods.updateTime">AND UPDATE_TIME =
+					#{tableGoods.updateTime,jdbcType=TIMESTAMP}</if>
+				<if test="null != tableGoods.exp and '' != tableGoods.exp">AND EXP = #{tableGoods.exp,jdbcType=TIMESTAMP}</if>
+			</if>
+		</where>
+		<if test="null != sidx and '' != sidx">
+			order by #{sidx} #{order}
+		</if>
+		LIMIT #{start},#{end}
+	</select>
+
+	<delete id="deleteByIds">
+		delete from table_goods
+		<where>
+			GOODS_ID in
+			<foreach collection="goodsIds" item="item" open="("
+				separator="," close=")">
+				#{item}
+			</foreach>
+		</where>
+	</delete>
 </mapper>
