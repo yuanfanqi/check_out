@@ -1,3 +1,7 @@
+var global = {
+		total:0
+}
+
 $(function(){
 	
 	//按键抬起触发事件
@@ -113,9 +117,26 @@ function add(arr){
 	//添加行
 	/*<li>商品条码（ID）</li><li>商品名称</li><li>商品单价</li><li>购买个数</li><li>合计</li>*/
     //var liHtml = '<li><i class="fa fa-minus-circle fa-2x text-muted" aria-hidden="true"></i></li>'
-    var liHtml = '<li>'+ arr["0"].goodsId +'</li><li>'+ arr["0"].goodsName +'</li><li>'+ arr["0"].goodsPrice +'</li><li>'+ arr["0"].num +'</li><li>'+ totalCash +'</li>'
+    var liHtml = '<li>'+ arr["0"].goodsName +'</li><li>'+ arr["0"].goodsPrice +'</li><li>'+ arr["0"].num +'</li><li>'+ totalCash +'</li><li><a href="javascript:void(0)" onclick="remove(this)"><i class="fa fa-minus-circle" aria-hidden="true"></i></a></li>';
 
     $('.list-show').append(liHtml);
 
+    //累加操作
+    $("#total").text(Number(global.total)+Number(totalCash));
 	
+}
+
+function remove(target){
+	    parent.layer.confirm("确认删除该项商品吗?", {
+	        btn: ['是', '否']
+	    }, function () {
+	        //1.直接删除dom元素
+	        $(target).parent().parent().remove();
+	        //2.调用保存风险等级数据
+//	        saveRiskAvoidBtnFx();
+
+	        parent.layer.closeAll();
+	    }, function () {
+	        parent.layer.closeAll();
+	    });
 }
