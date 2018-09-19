@@ -1,5 +1,6 @@
 var global = {
-		total:0
+		total:0,
+		data:[],
 }
 
 $(function(){
@@ -62,7 +63,6 @@ $(function(){
 							goodsId: row.goodsId,
 							goodsName: row.goodsName,
 							goodsPrice: row.goodsPrice,
-	                        num: 1
 	                    }
 	                    var objArr = [];
 	                    objArr.push(obj);
@@ -91,6 +91,8 @@ $(function(){
 				});
 			}
 	});
+	
+	$("#save").on("click",doDBOperator);
 });
 
 function search(param){
@@ -112,31 +114,76 @@ function search(param){
 }
 
 function add(arr){
+	//prompt层
+	parent.layer.prompt({title: '输入商品数量，并确认', formType: 0}, function(text, index){
+		parent.layer.close(index);
+		doAdd(arr,text);
+	});
+}
 
-	var totalCash = arr["0"].goodsPrice * arr["0"].num;
+function doAdd(arr,text){
+	//遍历数组global.data，如果存在相同的id则，不添加行
+	var mark = false;
+	for(var i = 0 ; i < global.data.length ; i++){
+		if(global.data[i].goodsId == arr["0"].goodsId){
+			mark = true;
+		}
+	}
+	if(mark){
+		parent.layer.alert('该商品已进入清单!');
+		return;
+	}
+	var num = text;
+	var totalCash = arr["0"].goodsPrice * num;
 	//添加行
-	/*<li>商品条码（ID）</li><li>商品名称</li><li>商品单价</li><li>购买个数</li><li>合计</li>*/
-    //var liHtml = '<li><i class="fa fa-minus-circle fa-2x text-muted" aria-hidden="true"></i></li>'
-    var liHtml = '<li>'+ arr["0"].goodsName +'</li><li>'+ arr["0"].goodsPrice +'</li><li>'+ arr["0"].num +'</li><li>'+ totalCash +'</li><li><a href="javascript:void(0)" onclick="remove(this)"><i class="fa fa-minus-circle" aria-hidden="true"></i></a></li>';
+    var liHtml = '<pre id='+ arr["0"].goodsId +'><li>'+ arr["0"].goodsName +'</li><li>'+ arr["0"].goodsPrice +'</li><li>'+ num +'</li><li>'+ totalCash +'</li><li><a href="javascript:void(0)" onclick="remove(this)"><i class="fa fa-minus-circle" aria-hidden="true"></i></a></li></pre>';
 
     $('.list-show').append(liHtml);
 
+    //将该数据存入data属性中
+    var obj = {
+    		goodsId:arr["0"].goodsId,
+    		goodsPrice:arr["0"].goodsPrice,
+    		num:num
+    }
+    global.data.push(obj);
     //累加操作
-    $("#total").text(Number(global.total)+Number(totalCash));
-	
+    global.total = Number(global.total)+Number(totalCash);
+    $("#total").text(global.total);
 }
 
 function remove(target){
 	    parent.layer.confirm("确认删除该项商品吗?", {
 	        btn: ['是', '否']
 	    }, function () {
-	        //1.直接删除dom元素
+	    	var id = $(target).parent().parent().attr("id");
+	    	var totalCash = 0;
+	    	//删除dom元素之前得先进行总金额的调整
+	    	for(var i = 0 ; i < global.data.length ; i++){
+	    		if( id == global.data[i].goodsId ){
+	    			totalCash = global.data[i].num * global.data[i].goodsPrice;
+	    	        //删除global.data的相关数据
+	    			global.data.splice(i,1);
+	    		}
+	    	}
+	    	global.total = Number(global.total) - Number(totalCash);
+	        $("#total").text(global.total);
+	        //直接删除dom元素
 	        $(target).parent().parent().remove();
-	        //2.调用保存风险等级数据
-//	        saveRiskAvoidBtnFx();
 
 	        parent.layer.closeAll();
 	    }, function () {
 	        parent.layer.closeAll();
 	    });
 }
+
+//点击销售按键后需要进行数据库的记录更新 相关的库有销售历史表、和商品库存表
+function doDBOperator(){
+	var count = $('.list-show').find('pre').size();
+	if(count > 0){
+		
+	}else{
+		parent.layer.alert('当前没有选中的商品!');
+	}
+}
+
