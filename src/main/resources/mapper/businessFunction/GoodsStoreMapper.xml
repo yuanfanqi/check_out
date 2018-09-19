@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.checkOut.common.mapper.businessFunction.GoodsStoreMapper">
+	<resultMap id="BaseResultMap"
+		type="com.checkOut.common.model.businessFunction.GoodsStore">
+		<!-- WARNING - @mbg.generated -->
+		<result column="GOODS_ID" property="goodsId" jdbcType="VARCHAR" />
+		<result column="GOODS_NAME" property="goodsName" jdbcType="VARCHAR" />
+		<result column="GOODS_NUM" property="goodsNum" jdbcType="INTEGER" />
+		<result column="INSERT_DATE" property="insertDate" jdbcType="TIMESTAMP" />
+		<result column="EXP" property="exp" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<sql id="base_column_list">
+		GOODS_ID,GOODS_NAME,GOODS_NUM,INSERT_DATE,EXP
+	</sql>
+
+	<update id="updateById">
+		update goods_store
+		<set>
+			<if test="null != record.goodsName">GOODS_NAME = #{record.goodsName,jdbcType=VARCHAR}</if>
+			<if test="null != record.goodsNum">GOODS_NUM = #{record.goodsNum,jdbcType=INTEGER}</if>
+			<if test="null != record.exp">EXP = #{record.exp,jdbcType=TIMESTAMP}</if>
+		</set>
+		<where>
+			GOODS_ID = #{record.goodsId,jdbcType=VARCHAR} 
+			and INSERT_DATE = (select max(INSERT_DATE) from goods_store)
+		</where>
+	</update>
+</mapper>

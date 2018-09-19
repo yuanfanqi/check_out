@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.checkOut.common.model.businessFunction.TableGoods;
-import com.checkOut.common.model.pageModel.PageData;
+
 import tk.mybatis.mapper.common.Mapper;
 
 /**

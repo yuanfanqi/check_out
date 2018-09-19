@@ -20,8 +20,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.checkOut.common.controller.ExceptionController;
+import com.checkOut.common.model.businessFunction.GoodsStore;
 import com.checkOut.common.model.businessFunction.TableGoods;
-import com.checkOut.common.model.pageModel.PageData;
+import com.checkOut.common.model.commonModel.GoodsModel;
+import com.checkOut.common.model.commonModel.PageData;
+import com.checkOut.common.service.businessFunction.GoodsStoreService;
 import com.checkOut.common.service.businessFunction.TableGoodsService;
 import com.checkOut.utils.H;
 
@@ -40,6 +43,8 @@ public class GoodsManagerController extends ExceptionController{
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private TableGoodsService tableGoodsService;
+	@Autowired
+	private GoodsStoreService goodsStoreService;
 
 	@ApiOperation(value = "跳转到商品清单列表页", notes = "跳转到商品清单列表页", httpMethod = "GET", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
@@ -61,7 +66,7 @@ public class GoodsManagerController extends ExceptionController{
 	@ApiOperation(value = "条件分页清单列表查询", notes = "条件分页清单列表查询", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	@ResponseBody
-	public PageData<TableGoods> search(
+	public PageData<GoodsModel> search(
 			@ModelAttribute(value = "tableGoods") TableGoods tableGoods,
 			@ApiParam(name = "page", value = "当前页码", required = true, defaultValue = "1") @RequestParam(value = "page", required = true, defaultValue = "1") Integer page,
 			@ApiParam(name = "limit", value = "每页大小", required = true, defaultValue = "10") @RequestParam(value = "limit", required = true, defaultValue = "10") Integer limit,
@@ -69,7 +74,7 @@ public class GoodsManagerController extends ExceptionController{
 			@ApiParam(name = "order", value = "排序规则", required = false) @RequestParam(value = "order", required = false) String order) {
 		logger.info("\n\n★进入条件分页清单列表查询方法======================================================\n");
 
-		PageData<TableGoods> pageInfo = new PageData<>();
+		PageData<GoodsModel> pageInfo = new PageData<>();
 		
 		try {
 			pageInfo = tableGoodsService.selectPage(tableGoods, page, limit, sidx, order);
@@ -90,8 +95,8 @@ public class GoodsManagerController extends ExceptionController{
 	@RequiresPermissions("goods:fetch")
 	@ResponseBody
 	public ModelAndView goodsFetch(
-			@ApiParam(name = "goodsId", value = "商品条码", required = false)@RequestParam(value = "goodsId", required = false) String goodsId
-//			@ApiParam(name = "goodsName", value = "商品名称", required = false)@RequestParam(name = "goodsName", value = "商品名称", required = false) String goodsName
+			@ApiParam(name = "goodsId", value = "商品条码", required = false)@RequestParam(value = "goodsId", required = false) String goodsId,
+			@ApiParam(name = "goodsNum", value = "库存", required = false)@RequestParam(value = "goodsNum", required = false) Integer goodsNum
 			){
 		logger.info("\n\n★进入跳转到商品信息添加或修改页面方法======================================================\n");
 		
@@ -106,6 +111,7 @@ public class GoodsManagerController extends ExceptionController{
 			}
 		}
 		mv.addObject("tableGoods",H.isNotBlank(tableGoods) ? tableGoods : new TableGoods());
+		mv.addObject("goodsNum", goodsNum);
 		return mv;
 	}
 	
@@ -119,7 +125,8 @@ public class GoodsManagerController extends ExceptionController{
 	@RequiresPermissions("goods:add")
 	@ResponseBody
 	public Map<String, Object> add(
-			@ModelAttribute(value = "tableGoods") TableGoods tableGoods
+			@ModelAttribute(value = "tableGoods") TableGoods tableGoods,
+			@ModelAttribute(value = "goodsStore")GoodsStore goodsStore
 			){
 		logger.info("\n\n★进入单个商品信息添加方法======================================================\n");
 		
@@ -128,7 +135,7 @@ public class GoodsManagerController extends ExceptionController{
 		res.put("msg", "添加失败");
 		
 		try {
-			tableGoodsService.add(tableGoods);
+			tableGoodsService.add(tableGoods,goodsStore);
 			res.put("status", true);
 			res.put("msg", "添加成功");
 		} catch (Exception e) {
@@ -230,11 +237,11 @@ public class GoodsManagerController extends ExceptionController{
 		res.put("status", false);
 		res.put("msg", "库存修改失败");
 		
-		TableGoods record = new TableGoods();
+		GoodsStore record = new GoodsStore();
 		record.setGoodsId(goodsId);
 		record.setGoodsNum(goodsNum);
 		try {
-			tableGoodsService.modify(record);
+			goodsStoreService.modify(record);
 			res.put("status", true);
 			res.put("msg", "库存修改成功");
 		} catch (Exception e) {

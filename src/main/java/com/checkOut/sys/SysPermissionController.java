@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.checkOut.common.mapper.sys.SysPermissionMapper;
-import com.checkOut.common.model.pageModel.PageData;
+import com.checkOut.common.model.commonModel.PageData;
 import com.checkOut.common.model.sys.SysPermission;
 import com.checkOut.common.service.sys.SysPermissionService;
 import com.checkOut.common.shiro.ShiroUtil;

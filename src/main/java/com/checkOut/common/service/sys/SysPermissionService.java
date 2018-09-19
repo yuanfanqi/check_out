@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.checkOut.common.model.pageModel.PageData;
+import com.checkOut.common.model.commonModel.PageData;
 import com.checkOut.common.model.sys.SysPermission;
 
 /**

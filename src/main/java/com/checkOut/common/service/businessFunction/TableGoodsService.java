@@ -2,8 +2,10 @@ package com.checkOut.common.service.businessFunction;
 
 import java.util.List;
 
+import com.checkOut.common.model.businessFunction.GoodsStore;
 import com.checkOut.common.model.businessFunction.TableGoods;
-import com.checkOut.common.model.pageModel.PageData;
+import com.checkOut.common.model.commonModel.GoodsModel;
+import com.checkOut.common.model.commonModel.PageData;
 
 /**
  * 商品表-业务层接口
@@ -23,7 +25,7 @@ public interface TableGoodsService {
 	 * @param order
 	 * @return
 	 */
-	public PageData<TableGoods> selectPage(TableGoods tableGoods, Integer page, Integer limit,String sidx, String order) throws Exception;
+	public PageData<GoodsModel> selectPage(TableGoods tableGoods, Integer page, Integer limit,String sidx, String order) throws Exception;
 
 	/**
 	 * 单个商品信息添加
@@ -31,7 +33,7 @@ public interface TableGoodsService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Integer add(TableGoods record) throws Exception; 
+	public Integer add(TableGoods record, GoodsStore goodsStore) throws Exception; 
 	
 	/**
 	 * 按主键查询记录

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.checkOut.common.mapper.GeneratorMapper;
 import com.checkOut.common.model.Table;
-import com.checkOut.common.model.pageModel.PageData;
+import com.checkOut.common.model.commonModel.PageData;
 import com.checkOut.utils.GenUtils;
 import com.checkOut.utils.H;
 

@@ -179,8 +179,8 @@ function remove(target){
 
 //点击销售按键后需要进行数据库的记录更新 相关的库有销售历史表、和商品库存表
 function doDBOperator(){
-	var count = $('.list-show').find('pre').size();
-	if(count > 0){
+	if(global.data.length > 0){
+		//将数据传入后台
 		
 	}else{
 		parent.layer.alert('当前没有选中的商品!');

@@ -54,7 +54,7 @@ $(function(){
 			label:"商品名称",
 			name:"goodsName",
 			formatter:function(value, options, row){
-				return "<a href=/goods/fetch?goodsId="+row.goodsId+">"+ value +"</a>";
+				return "<a href=/goods/fetch?goodsId="+ row.goodsId +"&goodsNum="+ row.goodsNum +">"+ value +"</a>";
 			}
 			},
 			{

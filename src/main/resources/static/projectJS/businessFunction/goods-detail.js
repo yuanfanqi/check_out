@@ -37,6 +37,14 @@ $(function(){
                         }
                     }
                 },
+                goodsNum: {
+                    message: '商品库存不能为空',
+                    validators: {
+                        notEmpty: {
+                            message: '商品库存必填,非空'
+                        }
+                    }
+                },
                 goodsType: {
                     message: '商品类型不能为空',
                     validators: {

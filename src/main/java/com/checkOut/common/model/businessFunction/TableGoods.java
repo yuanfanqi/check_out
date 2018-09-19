@@ -44,20 +44,10 @@ public class TableGoods implements Serializable {
     @Column(name = "goods_bid")
 	private BigDecimal goodsBid;
 	/**
-     * 商品数量（库存）
-     */
-    @Column(name = "goods_num")
-	private Integer goodsNum;
-	/**
      * 修改时间
      */
     @Column(name = "update_time")
 	private Date updateTime;
-	/**
-     * 保质期
-     */
-    @Column(name = "exp")
-	private Date exp;
 
 	/**
 	 * 设置：商品ID（商品条码）
@@ -125,19 +115,6 @@ public class TableGoods implements Serializable {
 		return goodsBid;
 	}
 	/**
-	 * 设置：商品数量（库存）
-	 */
-	public void setGoodsNum(Integer goodsNum) {
-		this.goodsNum = goodsNum;
-	}
-	/**
-	 * 获取：商品数量（库存）
-	 * @return goods_num - 商品数量（库存）
-	 */
-	public Integer getGoodsNum() {
-		return goodsNum;
-	}
-	/**
 	 * 设置：修改时间
 	 */
 	public void setUpdateTime(Date updateTime) {
@@ -149,18 +126,5 @@ public class TableGoods implements Serializable {
 	 */
 	public Date getUpdateTime() {
 		return updateTime;
-	}
-	/**
-	 * 设置：保质期
-	 */
-	public void setExp(Date exp) {
-		this.exp = exp;
-	}
-	/**
-	 * 获取：保质期
-	 * @return exp - 保质期
-	 */
-	public Date getExp() {
-		return exp;
 	}
 }

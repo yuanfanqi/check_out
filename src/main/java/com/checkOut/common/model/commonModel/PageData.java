@@ -1,4 +1,4 @@
-package com.checkOut.common.model.pageModel;
+package com.checkOut.common.model.commonModel;
 
 import java.util.List;
 

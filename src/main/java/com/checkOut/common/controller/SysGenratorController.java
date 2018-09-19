@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.checkOut.common.model.Table;
-import com.checkOut.common.model.pageModel.PageData;
+import com.checkOut.common.model.commonModel.PageData;
 import com.checkOut.common.service.SysGeneratorService;
 
 /**
