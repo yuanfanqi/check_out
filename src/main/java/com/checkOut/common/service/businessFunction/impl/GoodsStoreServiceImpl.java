@@ -1,5 +1,7 @@
 package com.checkOut.common.service.businessFunction.impl;
 
+import java.sql.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,10 @@ public class GoodsStoreServiceImpl implements GoodsStoreService {
 
 	@Override
 	public void modify(GoodsStore record) throws Exception {
+		//库存更改只对最新日期进行操作
+		Date maxInsertDate = goodsStoreMapper.selectMaxInsert(record.getGoodsId());
+		System.out.println(maxInsertDate);
+		record.setInsertDate(maxInsertDate);
 		goodsStoreMapper.updateById(record);
 	}
 

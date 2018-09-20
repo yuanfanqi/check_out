@@ -1,5 +1,6 @@
 package com.checkOut.businessFunction;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -96,7 +97,8 @@ public class GoodsManagerController extends ExceptionController{
 	@ResponseBody
 	public ModelAndView goodsFetch(
 			@ApiParam(name = "goodsId", value = "商品条码", required = false)@RequestParam(value = "goodsId", required = false) String goodsId,
-			@ApiParam(name = "goodsNum", value = "库存", required = false)@RequestParam(value = "goodsNum", required = false) Integer goodsNum
+			@ApiParam(name = "goodsNum", value = "库存", required = false)@RequestParam(value = "goodsNum", required = false) Integer goodsNum,
+			@ApiParam(name = "exp", value = "保质期", required = false)@RequestParam(value = "exp", required = false) String exp
 			){
 		logger.info("\n\n★进入跳转到商品信息添加或修改页面方法======================================================\n");
 		
@@ -110,8 +112,12 @@ public class GoodsManagerController extends ExceptionController{
 				logger.error("根据主键查询商品信息出错",e);
 			}
 		}
+		Map<String, Object> goodsStore = new HashMap<>();
+		goodsStore.put("goodsNum", goodsNum);
+		goodsStore.put("exp", exp);
+		
 		mv.addObject("tableGoods",H.isNotBlank(tableGoods) ? tableGoods : new TableGoods());
-		mv.addObject("goodsNum", goodsNum);
+		mv.addObject("goodsStore", goodsStore);
 		return mv;
 	}
 	
@@ -245,7 +251,7 @@ public class GoodsManagerController extends ExceptionController{
 			res.put("status", true);
 			res.put("msg", "库存修改成功");
 		} catch (Exception e) {
-			logger.error("更改商品库存数量出错");
+			logger.error("更改商品库存数量出错" + e);
 		}
 		return res;
 	}

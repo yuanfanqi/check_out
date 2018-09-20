@@ -20,13 +20,13 @@ var tableGoods = /*[[${tableGoods}]]*/
 		<div class="form-group col-lg-10">
 			<label for="goodsName" class="col-md-4 control-label" style="padding: 7px 5px 0 5px; text-align: right;">商品名称：</label>
 			<div class="col-md-8" style="padding: 0;">
-				<input type="text" id="goodsName" name="goodsName" class="form-control" placeholder="未匹配到该商品相关信息" maxlength="20" th:value="${tableGoods.goodsName}"/>
+				<input type="text" id="goodsName" name="goodsName" class="form-control" placeholder="请输入商品相关信息" maxlength="20" th:value="${tableGoods.goodsName}"/>
 			</div>
 		</div>
 		<div class="form-group col-lg-10">
 			<label for="goodsPrice" class="col-md-4 control-label" style="padding: 7px 5px 0 5px; text-align: right;">商品价格：</label>
 			<div class="col-md-8" style="padding: 0;">
-				<input type="text" id="goodsPrice" name="goodsPrice" class="form-control" placeholder="未匹配到该商品相关信息" th:value="${tableGoods.goodsPrice}"/>
+				<input type="text" id="goodsPrice" name="goodsPrice" class="form-control" placeholder="请输入商品相关信息" th:value="${tableGoods.goodsPrice}"/>
 			</div>
 		</div>
 		<div class="form-group col-lg-10" >
@@ -41,10 +41,28 @@ var tableGoods = /*[[${tableGoods}]]*/
 				</select>
 			</div>
 		</div>
+		<div class="form-group col-lg-10" >
+			<label for="supplier" class="col-md-4 control-label" style="padding: 7px 5px 0 5px; text-align: right;">供货商：</label>
+			<div class="col-md-8" style="padding: 0;">
+				<select id="supplier" name="supplier" class="form-control">
+					<option value=''>请选择</option>
+					<option value='1' th:selected="${tableGoods.supplier == 1}">供货商一号</option>
+					<option value='2' th:selected="${tableGoods.supplier == 2}">供货商二号</option>
+					<option value='3' th:selected="${tableGoods.supplier == 3}">供货商三号</option>
+					<!-- <option value='4' th:selected="${tableGoods.goodsType == 4}"></option> -->
+				</select>
+			</div>
+		</div>
 		<div class="form-group col-lg-10">
 			<label for="goodsNum" class="col-md-4 control-label" style="padding: 7px 5px 0 5px; text-align: right;">入库数量/库存：</label>
 			<div class="col-md-8" style="padding: 0;">
-				<input type="text" id="goodsNum" name="goodsNum" class="form-control" placeholder="未匹配到该商品相关信息" th:value="${goodsNum}"/>
+				<input type="text" id="goodsNum" name="goodsNum" class="form-control" placeholder="请输入商品相关信息" th:value="${goodsStore.goodsNum}"/>
+			</div>
+		</div>
+		<div class="form-group col-lg-10">
+			<label for="exp" class="col-md-4 control-label" style="padding: 7px 5px 0 5px; text-align: right;">该批次保质期：</label>
+			<div class="col-md-8" style="padding: 0;">
+				<input type="text" id="exp" name="exp" class="form-control" placeholder="请输入商品相关信息" th:value="${goodsStore.exp}"/>
 			</div>
 		</div>
 		<!-- <div class="form-group col-lg-10">

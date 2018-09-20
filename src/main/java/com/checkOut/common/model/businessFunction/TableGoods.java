@@ -48,7 +48,12 @@ public class TableGoods implements Serializable {
      */
     @Column(name = "update_time")
 	private Date updateTime;
-
+    /**
+     * 供货商
+     */
+    @Column(name = "supplier")
+	private Integer supplier;
+    
 	/**
 	 * 设置：商品ID（商品条码）
 	 */
@@ -126,5 +131,18 @@ public class TableGoods implements Serializable {
 	 */
 	public Date getUpdateTime() {
 		return updateTime;
+	}
+	/**
+	 * 设置：供货商
+	 */
+	public void setSupplier(Integer supplier) {
+		this.supplier = supplier;
+	}
+	/**
+	 * 获取：供货商
+	 * @return supplier - 供货商
+	 */
+	public Integer getSupplier() {
+		return supplier;
 	}
 }

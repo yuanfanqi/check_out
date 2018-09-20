@@ -1,5 +1,6 @@
 package com.checkOut.common.service.businessFunction.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -78,7 +79,9 @@ public class TableGoodsServiceImpl implements TableGoodsService {
 	@Transactional(rollbackFor = Exception.class)
 	public Integer add(TableGoods record, GoodsStore goodsStore) throws Exception {
 		int insert = tableGoodsMapper.insertSelective(record);
-		//库存保质期等数据入库
+		//库存保质期等数据入库  插入日期处理
+		Date parse = new SimpleDateFormat("yyyy-MM-dd").parse(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+		goodsStore.setInsertDate(parse);
 		int insertSelective = goodsStoreMapper.insertSelective(goodsStore);
 		return insert + insertSelective;
 	}

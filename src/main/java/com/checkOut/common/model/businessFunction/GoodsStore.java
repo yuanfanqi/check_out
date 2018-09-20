@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * 商品库存表-实体
  * @author 77 E-mail:77@163.com
@@ -39,11 +41,13 @@ public class GoodsStore implements Serializable {
      */
     @Id
     @Column(name = "insert_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date insertDate;
 	/**
      * 保质期
      */
     @Column(name = "exp")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date exp;
 
 	/**

@@ -11,10 +11,11 @@
 		<result column="GOODS_PRICE" property="goodsPrice" jdbcType="INTEGER" />
 		<result column="GOODS_BID" property="goodsBid" jdbcType="DECIMAL" />
 		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="SUPPLIER" property="supplier" jdbcType="INTEGER"/>
 	</resultMap>
 
 	<sql id="base_column_list">
-		GOODS_ID,GOODS_NAME,GOODS_TYPE,GOODS_PRICE,GOODS_BID,UPDATE_TIME
+		GOODS_ID,GOODS_NAME,GOODS_TYPE,GOODS_PRICE,GOODS_BID,UPDATE_TIME,SUPPLIER
 	</sql>
 
 	<select id="selectPage" resultMap="BaseResultMap">

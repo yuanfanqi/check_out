@@ -1,5 +1,7 @@
 package com.checkOut.common.mapper.businessFunction;
 
+import java.sql.Date;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -23,4 +25,6 @@ public interface GoodsStoreMapper extends Mapper<GoodsStore> {
 	 * @return
 	 */
 	public Integer updateById(@Param("record") GoodsStore record);
+	
+	public Date selectMaxInsert(@Param("goodsId")String goodsId);
 }

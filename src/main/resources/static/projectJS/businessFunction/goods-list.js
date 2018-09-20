@@ -18,10 +18,8 @@ $(function(){
 					data:{"goodsIds":dataArr},
 					traditional:true,
 					success:function(result){
-//						if(result.status==true){
 							parent.layer.alert(result.msg);
 							$("#jqGrid").jqGrid().trigger('reloadGrid');
-//						}
 					},
 					error:function(){
 						parent.layer.alert("修改数据出现异常");
@@ -54,7 +52,7 @@ $(function(){
 			label:"商品名称",
 			name:"goodsName",
 			formatter:function(value, options, row){
-				return "<a href=/goods/fetch?goodsId="+ row.goodsId +"&goodsNum="+ row.goodsNum +">"+ value +"</a>";
+				return "<a href=/goods/fetch?goodsId="+ row.goodsId +"&goodsNum="+ row.goodsNum +"&exp="+ new Date(row.exp).pattern("yyyy-MM-dd") +">"+ value +"</a>";
 			}
 			},
 			{
@@ -146,12 +144,11 @@ $(function(){
 	//多条件搜索
 	$("#searchBtn").on("click", function () {
 		var grid = $("#jqGrid");
-//		console.log(serializeObject("#goodsForm"))
 		//serializeObject("#goodsForm")虽然有值但是@ModelAttribute接收不到||@ModelAttribute解析不到，原因未找到(或许因为不是标准的表单提交
 		var goodsId = $("#goodsId").val();
 		var goodsName = $("#goodsName").val();
 		var goodsType = $("#goodsType").val();
-		var goodsNum = $("#goodsNum").val();
+		var supplier = $("#supplier").val();
 		grid.setGridParam({
 			postData: {
 				type: "type",
@@ -162,7 +159,7 @@ $(function(){
 				goodsId:goodsId,
 				goodsName:goodsName,
 				goodsType:goodsType,
-				goodsNum:goodsNum
+				supplier:supplier
 			}
 		}).trigger('reloadGrid');
 		

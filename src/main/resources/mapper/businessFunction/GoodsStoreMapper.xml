@@ -25,7 +25,11 @@
 		</set>
 		<where>
 			GOODS_ID = #{record.goodsId,jdbcType=VARCHAR} 
-			and INSERT_DATE = (select max(INSERT_DATE) from goods_store)
+			and INSERT_DATE = #{record.insertDate,jdbcType=TIMESTAMP}
 		</where>
 	</update>
+	
+	<select id="selectMaxInsert" resultType="java.sql.Date">
+	select max(INSERT_DATE) from goods_store where GOODS_ID = #{goodsId} 
+	</select>
 </mapper>
