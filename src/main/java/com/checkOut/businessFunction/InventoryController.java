@@ -40,6 +40,9 @@ public class InventoryController {
 	 */
 	
 	//清单分页
+	@ApiOperation(value = "条件分页查询库存清单列表", notes = "条件分页查询库存 清单列表", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	@RequiresPermissions("inventory:search")
 	public PageData<TableGoods> search(
 			@ModelAttribute(value = "tableGoods") TableGoods tableGoods,
 			@ApiParam(name = "page", value = "当前页码", required = true, defaultValue = "1") @RequestParam(value = "page", required = true, defaultValue = "1") Integer page,

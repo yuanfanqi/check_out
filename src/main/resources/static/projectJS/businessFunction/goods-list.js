@@ -110,11 +110,21 @@ $(function(){
 			formatter:function(value, options, row){
 				var result = "";
                 if (!isEmpty(value)) {
-                    result = new Date(value).pattern("yyyy-MM-dd");
+//                    result = new Date(value).pattern("yyyy-MM-dd");
                     //保质期可以点，点击之后跳转保质期管理页面，可以查看保质期详情？？
+                    result = "<a href='javascript:void(0);' onclick=''>"+ new Date(value).pattern("yyyy-MM-dd") +"</a>";
                 }
                 return result;
 			}
+			},
+			{
+				label:"操作",
+				name:"",
+				formatter:function(value, options, row){
+					var result = "";
+	                //补货btn + 其他功能按钮
+	                return result;
+				}
 			}],
 			autowidth: true,
 			multiselect: true,
