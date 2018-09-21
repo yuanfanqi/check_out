@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +22,6 @@ import com.checkOut.common.model.businessFunction.GoodsStore;
 import com.checkOut.common.model.businessFunction.TableGoods;
 import com.checkOut.common.model.commonModel.GoodsModel;
 import com.checkOut.common.model.commonModel.PageData;
-import com.checkOut.common.service.businessFunction.GoodsStoreService;
 import com.checkOut.common.service.businessFunction.TableGoodsService;
 import com.checkOut.utils.H;
 
@@ -43,8 +40,6 @@ public class GoodsManagerController extends ExceptionController{
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private TableGoodsService tableGoodsService;
-	@Autowired
-	private GoodsStoreService goodsStoreService;
 
 	@ApiOperation(value = "跳转到商品清单列表页", notes = "跳转到商品清单列表页", httpMethod = "GET", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
@@ -198,59 +193,6 @@ public class GoodsManagerController extends ExceptionController{
 			}
 		} catch (Exception e) {
 			logger.error("信息唯一性验证出错");
-		}
-		return res;
-	}
-	
-	/**
-	 * 跳转到 商品库存数量 方法
-	 * @param goodsId
-	 * @return
-	 */
-	@ApiOperation(notes = "跳转到 商品库存数量 方法", value = "跳转到 商品库存数量 方法", httpMethod = "GET", produces = MediaType.APPLICATION_JSON_VALUE)
-	@RequestMapping(value = "/inventory/index", method = RequestMethod.GET)
-	@RequiresPermissions("inventory:index")
-	public ModelAndView inventoryIndex(
-			@ApiParam(name = "goodsId", value = "商品条码（ID）", required = true)@RequestParam(value = "goodsId", required = true) String goodsId, HttpServletRequest request
-			){
-		logger.info("\n\n★进入跳转到 商品库存数量 方法======================================================\n");
-		
-		ModelAndView mView = new ModelAndView();
-		mView.setViewName("/businessFunction/inventory-update");
-		TableGoods tblGoods = new TableGoods();
-		tblGoods.setGoodsId(goodsId);
-		mView.addObject("tblGoods",tblGoods);
-		return mView;
-	}
-	
-	/**
-	 * 更改商品库存数量
-	 * @param goodsId
-	 * @return
-	 */
-	@ApiOperation(value = "更改商品库存数量", notes = "更改商品库存数量", httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
-	@RequestMapping(value = "/inventory/modify", method = RequestMethod.POST)
-	@RequiresPermissions("inventory:modify")
-	@ResponseBody
-	public Map<String, Object> updataInventory(
-			@ApiParam(name = "goodsId", value = "商品条码", required = true)@RequestParam(value = "goodsId", required = true) String goodsId,
-			@ApiParam(name = "goodsNum", value = "商品库存", required = true)@RequestParam(value = "goodsNum", required = true) Integer goodsNum
-			){
-		logger.info("\n\n★进入更改商品库存数量方法======================================================\n");
-		
-		Map<String, Object> res = new HashMap<>();
-		res.put("status", false);
-		res.put("msg", "库存修改失败");
-		
-		GoodsStore record = new GoodsStore();
-		record.setGoodsId(goodsId);
-		record.setGoodsNum(goodsNum);
-		try {
-			goodsStoreService.modify(record);
-			res.put("status", true);
-			res.put("msg", "库存修改成功");
-		} catch (Exception e) {
-			logger.error("更改商品库存数量出错" + e);
 		}
 		return res;
 	}

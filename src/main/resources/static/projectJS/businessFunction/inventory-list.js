@@ -1,11 +1,7 @@
 $(function(){
-	//删除选中功能
-	$("#deleteAllBtn").on("click",function(){
-		
-	});
-	// 商品列表
+	// 商品库存列表
 	$("#jqGrid").jqGrid({
-		url: "/goods/search",
+		url: "/inventory/search",
 		mtype: "POST",
 		datatype: "json",
 		height: 'auto',
@@ -25,41 +21,13 @@ $(function(){
 			}
 			},
 			{
-			label:"商品分类",
-			name:"goodsType",
-			formatter:function(value, options, row){
-				var result = "";
-				switch(value)
-				{
-				case 1:
-					result = "洗浴用品";
-				  break;
-				case 2:
-					result = "护肤品";
-				  break;
-				case 3:
-					result = "服饰包包";
-				  break;
-				}
-				return result;
-			}
-			},
-			{
-			label:"商品价格",
-			name:"goodsPrice"
-			},
-			{
-			label:"商品进价",
-			name:"goodsBid"
-			},
-			{
 			label:"商品库存",
 			name:"goodsNum",
 			sortable:true
 			},
 			{
 			label:"修改时间",
-			name:"updateTime",
+			name:"insertDate",
 			formatter:function(value, options, row){
 				var result = "";
                 if (!isEmpty(value)) {

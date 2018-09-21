@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+<title>inventory-list</title>
+</head>
+<body>
+	<form id="goodsForm" class="form-horizontal" style="width: 100%">
+	
+		<div class="form-group text-center">
+		<p>商品库存详情</p>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-1">
+				<!-- <shiro:hasPermission name="">
+					<a class="btn btn-default btn-block" href="">库存修改</a>
+				</shiro:hasPermission> -->
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-12">
+				<table id="jqGrid" style="width: 100%"></table>
+				<div id="jqGridPager" style="width: 100%"></div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2">
+				<a id="deleteAllBtn" class="btn btn-default btn-block">全部删除</a>
+			</div>
+		</div>
+
+	</form>
+	<div th:include="common::header"></div>
+	<script th:src="@{'/projectJS/businessFunction/inventory-list.js?time='+${new java.util.Date().getTime()}}"></script>
+</body>
+</html>

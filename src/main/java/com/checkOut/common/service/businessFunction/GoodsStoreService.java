@@ -1,6 +1,7 @@
 package com.checkOut.common.service.businessFunction;
 
 import com.checkOut.common.model.businessFunction.GoodsStore;
+import com.checkOut.common.model.commonModel.PageData;
 
 /**
  * 商品库存表-业务层接口
@@ -16,4 +17,6 @@ public interface GoodsStoreService {
 	 * @throws Exception
 	 */
 	public void modify(GoodsStore record) throws Exception;
+	
+	public PageData<GoodsStore> selectPage(GoodsStore record, Integer page, Integer limit,String sidx, String order) throws Exception;
 }

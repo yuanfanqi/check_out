@@ -1,6 +1,7 @@
 package com.checkOut.common.mapper.businessFunction;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -26,5 +27,21 @@ public interface GoodsStoreMapper extends Mapper<GoodsStore> {
 	 */
 	public Integer updateById(@Param("record") GoodsStore record);
 	
+	/**
+	 * 查询记录最大插入日期 
+	 * @param goodsId
+	 * @return
+	 */
 	public Date selectMaxInsert(@Param("goodsId")String goodsId);
+	
+	/**
+	 * 条件分页清单列表查询
+	 * @param goodsStore
+	 * @param start
+	 * @param end
+	 * @param sidx
+	 * @param order
+	 * @return
+	 */
+	public List<GoodsStore> selectPage(@Param("goodsStore")GoodsStore goodsStore, @Param("start")Integer start, @Param("end")Integer end, @Param("sidx")String sidx, @Param("order") String order);
 }

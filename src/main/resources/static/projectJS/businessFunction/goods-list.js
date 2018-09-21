@@ -110,9 +110,8 @@ $(function(){
 			formatter:function(value, options, row){
 				var result = "";
                 if (!isEmpty(value)) {
-//                    result = new Date(value).pattern("yyyy-MM-dd");
                     //保质期可以点，点击之后跳转保质期管理页面，可以查看保质期详情？？
-                    result = "<a href='javascript:void(0);' onclick=''>"+ new Date(value).pattern("yyyy-MM-dd") +"</a>";
+                    result = "<a href=/inventory/show?goodsId="+ row.goodsId +">"+ new Date(value).pattern("yyyy-MM-dd") +"</a>";
                 }
                 return result;
 			}
@@ -185,7 +184,7 @@ function updateInventory(goodsId){
 		  shadeClose: true,
 		  shade: 0.8,
 		  area: ['30%', '35%'],
-		  content: '/goods/inventory/index?goodsId=' + goodsId + '',
+		  content: '/inventory/index?goodsId=' + goodsId + '',
 		  end: function () {
 		        location.reload();
 		      }

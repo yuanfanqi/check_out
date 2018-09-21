@@ -24,12 +24,39 @@
 			<if test="null != record.exp">EXP = #{record.exp,jdbcType=TIMESTAMP}</if>
 		</set>
 		<where>
-			GOODS_ID = #{record.goodsId,jdbcType=VARCHAR} 
-			and INSERT_DATE = #{record.insertDate,jdbcType=TIMESTAMP}
+			GOODS_ID = #{record.goodsId,jdbcType=VARCHAR}
+			and INSERT_DATE =
+			#{record.insertDate,jdbcType=TIMESTAMP}
 		</where>
 	</update>
-	
+
 	<select id="selectMaxInsert" resultType="java.sql.Date">
-	select max(INSERT_DATE) from goods_store where GOODS_ID = #{goodsId} 
+		select max(INSERT_DATE)
+		from goods_store where GOODS_ID = #{goodsId}
+	</select>
+
+	<select id="selectPage">
+		select
+		<include refid="base_column_list"></include>
+		from goods_store
+		<where>
+			<if test="null != goodsStore">
+				<if test="null != goodsStore.goodsId">AND GOODS_ID = #{goodsStore.goodsId,jdbcType=VARCHAR}
+				</if>
+				<if test="null != goodsStore.goodsName">AND GOODS_NAME =
+					#{goodsStore.goodsName,jdbcType=VARCHAR}
+				</if>
+				<if test="null != goodsStore.goodsNum">AND GOODS_NUM = #{goodsStore.goodsNum,jdbcType=INTEGER}
+				</if>
+				<if test="null != goodsStore.insertDate">AND INSERT_DATE =
+					#{goodsStore.insertDate,jdbcType=TIMESTAMP}
+				</if>
+				<if test="null != goodsStore.exp">AND EXP = #{goodsStore.exp,jdbcType=TIMESTAMP}</if>
+			</if>
+		</where>
+		<if test="null != sidx and '' != sidx">
+			order by #{sidx} #{order}
+		</if>
+		LIMIT #{start},#{end}
 	</select>
 </mapper>
