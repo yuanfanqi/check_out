@@ -8,6 +8,7 @@ $(function(){
 		rowNum: 10,
 		rowList: [10, 20, 30],
 		scrollOffset: 0,
+		postData:{goodsId:$("#goodsId").val()},
 		colModel:[{
 			label:"商品条码（编号）",
 			name:"goodsId",

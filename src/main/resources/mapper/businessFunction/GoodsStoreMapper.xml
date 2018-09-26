@@ -35,23 +35,23 @@
 		from goods_store where GOODS_ID = #{goodsId}
 	</select>
 
-	<select id="selectPage">
+	<select id="selectPage" resultMap="BaseResultMap">
 		select
 		<include refid="base_column_list"></include>
 		from goods_store
 		<where>
 			<if test="null != goodsStore">
-				<if test="null != goodsStore.goodsId">AND GOODS_ID = #{goodsStore.goodsId,jdbcType=VARCHAR}
+				<if test="null != goodsStore.goodsId and '' != goodsStore.goodsId">AND GOODS_ID = #{goodsStore.goodsId,jdbcType=VARCHAR}
 				</if>
-				<if test="null != goodsStore.goodsName">AND GOODS_NAME =
+				<if test="null != goodsStore.goodsName and '' != goodsStore.goodsName">AND GOODS_NAME =
 					#{goodsStore.goodsName,jdbcType=VARCHAR}
 				</if>
-				<if test="null != goodsStore.goodsNum">AND GOODS_NUM = #{goodsStore.goodsNum,jdbcType=INTEGER}
+				<if test="null != goodsStore.goodsNum and '' != goodsStore.goodsNum">AND GOODS_NUM = #{goodsStore.goodsNum,jdbcType=INTEGER}
 				</if>
-				<if test="null != goodsStore.insertDate">AND INSERT_DATE =
+				<if test="null != goodsStore.insertDate and '' != goodsStore.insertDate">AND INSERT_DATE =
 					#{goodsStore.insertDate,jdbcType=TIMESTAMP}
 				</if>
-				<if test="null != goodsStore.exp">AND EXP = #{goodsStore.exp,jdbcType=TIMESTAMP}</if>
+				<if test="null != goodsStore.exp and '' != goodsStore.exp">AND EXP = #{goodsStore.exp,jdbcType=TIMESTAMP}</if>
 			</if>
 		</where>
 		<if test="null != sidx and '' != sidx">
