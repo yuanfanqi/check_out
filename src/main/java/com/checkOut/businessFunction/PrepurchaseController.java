@@ -23,7 +23,7 @@ public class PrepurchaseController {
 
 	@ApiOperation(value = "跳转到预进货列表页", notes = "跳转到预进货列表页", httpMethod = "GET", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
-	@RequiresPermissions("")
+	@RequiresPermissions("prepurchase:show")
 	public String show() {
 		logger.info("\n\n★进入跳转到 预进货 列表页方法======================================================\n");
 		return "";

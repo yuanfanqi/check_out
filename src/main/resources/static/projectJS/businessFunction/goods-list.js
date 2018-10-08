@@ -115,15 +115,6 @@ $(function(){
                 }
                 return result;
 			}
-			},
-			{
-				label:"操作",
-				name:"",
-				formatter:function(value, options, row){
-					var result = "";
-	                //补货btn + 其他功能按钮
-	                return result;
-				}
 			}],
 			autowidth: true,
 			multiselect: true,

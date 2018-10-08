@@ -1,14 +1,13 @@
 $(function(){
-	// 商品库存列表
+	// 商品进货名单
 	$("#jqGrid").jqGrid({
-		url: "/inventory/search",
+		url: "/prepurchase/search",
 		mtype: "POST",
 		datatype: "json",
 		height: 'auto',
 		rowNum: 10,
 		rowList: [10, 20, 30],
 		scrollOffset: 0,
-		postData:{goodsId:$("#goodsId").val()},
 		colModel:[{
 			label:"商品条码（编号）",
 			name:"goodsId",
@@ -55,7 +54,7 @@ $(function(){
 				formatter:function(value, options, row){
 					var result = "";
 	                //补货btn + 其他功能按钮
-					result += "<a href='javascript:void(0);' onclick=''>加入进货名单</a>"
+					result += "<a href='javascript:void(0);' onclick=''>从名单中移除</a>"
 	                return result;
 				}
 			}],

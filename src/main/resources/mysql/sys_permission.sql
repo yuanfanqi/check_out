@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80012
 File Encoding         : 65001
 
-Date: 2018-09-21 13:22:44
+Date: 2018-10-08 17:56:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,7 +31,7 @@ CREATE TABLE `sys_permission` (
   `UPDATE_TIME` datetime NOT NULL COMMENT '更新时间',
   `ICON` varchar(100) DEFAULT '' COMMENT 'font awsome所使用的图标代码',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=utf8 COMMENT='系统权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8 COMMENT='系统权限表';
 
 -- ----------------------------
 -- Records of sys_permission
@@ -66,10 +66,11 @@ INSERT INTO `sys_permission` VALUES ('27', '商品列表', '2', 'goods:show', '6
 INSERT INTO `sys_permission` VALUES ('28', '商品添加', '2', 'goods:add', '6', '', '', '2018-09-06 14:43:27', '2018-09-06 14:43:27', '');
 INSERT INTO `sys_permission` VALUES ('29', '商品查看', '2', 'goods:fetch', '6', '', '', '2018-09-06 15:40:52', '2018-09-06 15:40:52', '');
 INSERT INTO `sys_permission` VALUES ('105', '商品修改', '2', 'goods:modify', '0', '', '', '2018-09-07 16:15:23', '2018-09-07 16:15:23', '');
-INSERT INTO `sys_permission` VALUES ('106', '库存页面', '2', 'inventory:index', '6', '', '', '2018-09-10 14:45:28', '2018-09-10 14:45:28', '');
-INSERT INTO `sys_permission` VALUES ('107', '库存修改', '2', 'inventory:modify', '6', '', '', '2018-09-10 14:45:55', '2018-09-10 14:45:55', '');
+INSERT INTO `sys_permission` VALUES ('106', '库存页面', '2', 'inventory:index', '111', '', '', '2018-09-10 14:45:28', '2018-09-10 14:45:28', '');
+INSERT INTO `sys_permission` VALUES ('107', '库存修改', '2', 'inventory:modify', '111', '', '', '2018-09-10 14:45:55', '2018-09-10 14:45:55', '');
 INSERT INTO `sys_permission` VALUES ('108', '商品删除', '2', 'goods:delete', '6', '', '', '2018-09-11 09:51:42', '2018-09-11 09:51:42', '');
 INSERT INTO `sys_permission` VALUES ('109', '销售操作', '2', 'sell:index', '7', '', '', '2018-09-11 11:27:28', '2018-09-11 11:27:28', '');
 INSERT INTO `sys_permission` VALUES ('110', '销售查询', '2', 'sell:search', '7', '', '', '2018-09-11 15:49:33', '2018-09-11 15:49:33', '');
 INSERT INTO `sys_permission` VALUES ('111', '库存管理', '1', '', '2', '/inventory/show', '', '2018-09-21 10:53:52', '2018-09-21 10:53:52', 'fa fa-cubes');
+INSERT INTO `sys_permission` VALUES ('112', '库存查看', '2', 'inventory:search', '111', '', '', '2018-09-26 14:23:54', '2018-09-26 14:23:54', '');
 SET FOREIGN_KEY_CHECKS=1;
