@@ -10,4 +10,12 @@ package com.checkOut.common.service.businessFunction;
  */
 public interface PrepurchaseListService{
 	
+	/**
+	 * 进货名单添加操作
+	 * @param goodsId
+	 * @param prepurchaseNum
+	 * @return
+	 */
+	public Integer add(String goodsId, Integer prepurchaseNum);
+	
 }

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+<title>prepurchase-update</title>
+</head>
+<body>
+<div style="text-align:center;margin:20px 5px 15px 20px;">
+	<input type="hidden" th:value="${goodsId}" id="goodsId" name="goodsId" />
+	<label >预计添加数量:</label>
+	<input type="text" id="prepurchaseNum" name="prepurchaseNum" placeholder="数据应为非负整数">
+	<label >个/件</label>
+</div>
+	<div class="form-group text-center">
+		<button id="doAdd" class='btn btn-default'>确定</button>
+	</div>
+	<div th:include="common::header"></div>
+	<script type="text/javascript">
+		$("#doAdd").on("click",function(){
+			var prepurchaseNum = $("#prepurchaseNum").val();
+			console.log($("#goodsId").val())
+			//var regexp = /^[1-9]\d*|0$/;
+			if(prepurchaseNum != null && prepurchaseNum != ""){
+				var regexp = /^\d+$/;
+				if(!regexp.test(prepurchaseNum)){
+					parent.layer.alert("输入个数/件数不符合要求",function(index){
+               	    	parent.layer.closeAll();
+               	 	});
+		       		return;
+		    	}
+			$.ajax({ 
+				url: "/prepurchase/add", 
+				type:"post",
+				contentType: "application/x-www-form-urlencoded",
+                dataType:"json",
+				data: {
+					"goodsId":$("#goodsId").val(),
+					"prepurchaseNum":prepurchaseNum
+				},
+				success: function(res){
+					parent.layer.alert(res.msg,function(index){
+	                      parent.layer.closeAll();
+	                  });
+		      	},
+		      	error: function() {
+					parent.layer.msg("error");
+				},
+		      
+			});
+			}else{
+				parent.layer.alert("输入个数/件数不能为空",function(index){
+           	    	parent.layer.closeAll();
+           	 	});
+			}
+		});
+	</script>
+</body>
+</html>

@@ -38,20 +38,6 @@ public class InventoryController {
 	@Autowired
 	private GoodsStoreService goodsStoreService;
 
-	/*@ApiOperation(value = "跳转到商品库存清单列表页", notes = "跳转到商品库存清单列表页", httpMethod = "GET", produces = MediaType.TEXT_HTML_VALUE)
-	@RequestMapping(value = "/show", method = RequestMethod.GET)
-	@RequiresPermissions("inventory:index")
-	public String show(
-			@ApiParam(name = "goodsId", value = "商品ID", required = false)@RequestParam(value = "goodsId", required = false)String goodsId
-			) {
-		logger.info("\n\n★进入跳转到 商品清单库存 列表页方法======================================================\n");
-		if (null == goodsId) {
-			return "/businessFunction/inventory-list";
-		}else{
-			return "/businessFunction/inventory-list?goodsId=" + goodsId;
-		}
-	}*/
-	
 	@ApiOperation(value = "跳转到商品库存清单列表页", notes = "跳转到商品库存清单列表页", httpMethod = "GET", produces = MediaType.TEXT_HTML_VALUE)
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	@RequiresPermissions("inventory:index")

@@ -55,7 +55,7 @@ $(function(){
 				formatter:function(value, options, row){
 					var result = "";
 	                //补货btn + 其他功能按钮
-					result += "<a href='javascript:void(0);' onclick=''>加入进货名单</a>"
+					result += "<a href='javascript:void(0);' onclick='doAddOpr(\""+ row.goodsId +"\")'>加入进货名单</a>"
 	                return result;
 				}
 			}],
@@ -85,3 +85,16 @@ $(function(){
 			}
 	});
 });
+
+//进货名单 添加操作
+function doAddOpr(goodsId){
+	console.log(goodsId)
+	parent.layer.open({
+		  type: 2,
+		  title: "商品进货名单补充",
+		  shadeClose: true,
+		  shade: 0.8,
+		  area: ['30%', '35%'],
+		  content: '/prepurchase/index?goodsId=' + goodsId + '',
+		});
+}

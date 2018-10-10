@@ -166,7 +166,7 @@ $(function(){
 	});
 });
 
-//弹窗页面，库存更改
+//弹窗页面，库存更改页面
 function updateInventory(goodsId){
 	console.log(goodsId)
 	parent.layer.open({
