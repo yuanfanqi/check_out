@@ -1,14 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.checkOut.common.mapper.businessFunction.PrepurchaseListMapper">
-  <resultMap id="BaseResultMap" type="com.checkOut.common.model.businessFunction.PrepurchaseList" >
-    <!--
-      WARNING - @mbg.generated
-    -->
-        <result column="GOODS_NAME" property="goodsName" jdbcType="VARCHAR"/>
-        <result column="GOODS_ID" property="goodsId" jdbcType="VARCHAR"/>
-        <result column="PREPURCHASE_NUM" property="prepurchaseNum" jdbcType="INTEGER"/>
-        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
-  </resultMap>
+<mapper
+	namespace="com.checkOut.common.mapper.businessFunction.PrepurchaseListMapper">
+	<resultMap id="BaseResultMap"
+		type="com.checkOut.common.model.businessFunction.PrepurchaseList">
+		<!-- WARNING - @mbg.generated -->
+		<result column="GOODS_NAME" property="goodsName" jdbcType="VARCHAR" />
+		<result column="GOODS_ID" property="goodsId" jdbcType="VARCHAR" />
+		<result column="PREPURCHASE_NUM" property="prepurchaseNum"
+			jdbcType="INTEGER" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<sql id="base_column_list">
+		GOODS_ID,GOODS_NAME,PREPURCHASE_NUM,UPDATE_TIME
+	</sql>
+
+	<select id="selectPage" resultMap="BaseResultMap">
+		select
+		<include refid="base_column_list"></include>
+		from Prepurchase_list
+		<where>
+			<if test="null != prepurchaseList">
+				<if test="null != prepurchaseList.goodsId and '' != prepurchaseList.goodsId">AND GOODS_ID = #{prepurchaseList.goodsId,jdbcType=VARCHAR}
+				</if>
+				<if test="null != prepurchaseList.goodsName and '' != prepurchaseList.goodsName">AND GOODS_NAME = #{prepurchaseList.goodsName,jdbcType=VARCHAR}
+				</if>
+				<if test="null != prepurchaseList.prepurchaseNum and '' != prepurchaseList.prepurchaseNum">AND PREPURCHASE_NUM = #{prepurchaseList.prepurchaseNum,jdbcType=INTEGER}
+				</if>
+				<if test="null != prepurchaseList.updateTime and '' != prepurchaseList.updateTime">AND UPDATE_TIME = #{prepurchaseList.updateTime,jdbcType=TIMESTAMP}
+				</if>
+			</if>
+		</where>
+		<if test="null != sidx and '' != sidx">
+			order by #{sidx} #{order}
+		</if>
+		LIMIT #{start},#{end}
+	</select>
 </mapper>

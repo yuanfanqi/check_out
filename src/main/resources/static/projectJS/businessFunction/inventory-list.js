@@ -95,6 +95,6 @@ function doAddOpr(goodsId){
 		  shadeClose: true,
 		  shade: 0.8,
 		  area: ['30%', '35%'],
-		  content: '/prepurchase/index?goodsId=' + goodsId + '',
+		  content: '/prepurchase/index?goodsId=' + goodsId + '&doNext=add',
 		});
 }

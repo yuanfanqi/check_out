@@ -9,6 +9,7 @@
 <body>
 <div style="text-align:center;margin:20px 5px 15px 20px;">
 	<input type="hidden" th:value="${goodsId}" id="goodsId" name="goodsId" />
+	<input type="hidden" th:value="${doNext}" id="doNext" name="doNext" />
 	<label >预计添加数量:</label>
 	<input type="text" id="prepurchaseNum" name="prepurchaseNum" placeholder="数据应为非负整数">
 	<label >个/件</label>
@@ -21,6 +22,7 @@
 		$("#doAdd").on("click",function(){
 			var prepurchaseNum = $("#prepurchaseNum").val();
 			console.log($("#goodsId").val())
+			var doNext = $("#doNext").val();
 			//var regexp = /^[1-9]\d*|0$/;
 			if(prepurchaseNum != null && prepurchaseNum != ""){
 				var regexp = /^\d+$/;
@@ -30,8 +32,14 @@
                	 	});
 		       		return;
 		    	}
+			var url;
+			if("add" == doNext){
+				url = "/prepurchase/add";
+			}else{
+				url = "/prepurchase/modify";
+			}
 			$.ajax({ 
-				url: "/prepurchase/add", 
+				url: url, 
 				type:"post",
 				contentType: "application/x-www-form-urlencoded",
                 dataType:"json",

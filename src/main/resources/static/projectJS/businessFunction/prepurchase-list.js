@@ -21,13 +21,13 @@ $(function(){
 			}
 			},
 			{
-			label:"商品库存",
-			name:"goodsNum",
+			label:"预进货数量",
+			name:"prepurchaseNum",
 			sortable:true
 			},
 			{
 			label:"修改时间",
-			name:"insertDate",
+			name:"updateTime",
 			formatter:function(value, options, row){
 				var result = "";
                 if (!isEmpty(value)) {
@@ -38,24 +38,13 @@ $(function(){
 			sortable:true
 			},
 			{
-			label:"保质期",
-			name:"exp",
-			formatter:function(value, options, row){
-				var result = "";
-                if (!isEmpty(value)) {
-                    result = new Date(value).pattern("yyyy-MM-dd");
-                }
-                return result;
-			}
-			},
-			{
 				label:"操作",
-				name:"",
+				name:"operation",
 				formatter:function(value, options, row){
-					var result = "";
-	                //补货btn + 其他功能按钮
-					result += "<a href='javascript:void(0);' onclick=''>从名单中移除</a>"
-	                return result;
+	                //从名单中移除 + 修改进货数量
+					var delBtn = "<a href='javascript:void(0);' onclick='delBtn(\""+ row.goodsId +"\")'>从名单中移除</a>"
+	                var updateBtn = "<a href='javascript:void(0);' onclick='updateBtn(\""+ row.goodsId +"\")'>修改进货件数</a>"
+					return  delBtn+ '&emsp;&emsp;' +updateBtn;
 				}
 			}],
 			autowidth: true,
@@ -84,3 +73,59 @@ $(function(){
 			}
 	});
 });
+
+//从名单中移除
+function delBtn(goodsId){
+	$.ajax({
+		type:"POST",
+		url:"/prepurchase/delete",
+		dataType:"JSON",
+		data:{"goodsId":goodsId},
+		success:function(result){
+				parent.layer.alert(result.msg);
+				$("#jqGrid").jqGrid().trigger('reloadGrid');
+		},
+		error:function(){
+			parent.layer.alert("删除数据出现异常");
+		},
+		beforeSend:function(){
+			index = parent.layer.load(1,{shade:0.5});
+		},
+		complete:function(){
+			parent.layer.close(index);
+		}
+	});
+}
+//修改进货数量
+function updateBtn(goodsId){
+	parent.layer.open({
+		  type: 2,
+		  title: "商品进货名单补充",
+		  shadeClose: true,
+		  shade: 0.8,
+		  area: ['30%', '35%'],
+		  content: '/prepurchase/index?goodsId=' + goodsId + '&doNext=modify',
+		  end: function () {
+		        location.reload();
+		      }
+		});
+//	$.ajax({
+//		type:"POST",
+//		url:"/prepurchase/modify",
+//		dataType:"JSON",
+//		data:{"goodsIds":dataArr},
+//		success:function(result){
+//				parent.layer.alert(result.msg);
+//				$("#jqGrid").jqGrid().trigger('reloadGrid');
+//		},
+//		error:function(){
+//			parent.layer.alert("修改数据出现异常");
+//		},
+//		beforeSend:function(){
+//			index = parent.layer.load(1,{shade:0.5});
+//		},
+//		complete:function(){
+//			parent.layer.close(index);
+//		}
+//	});
+}

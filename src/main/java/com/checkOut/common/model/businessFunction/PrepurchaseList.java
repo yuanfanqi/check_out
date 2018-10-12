@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -25,6 +26,7 @@ public class PrepurchaseList implements Serializable {
 	/**
      * 商品ID（商品条码）
      */
+    @Id
     @Column(name = "goods_id")
 	private String goodsId;
 	/**
