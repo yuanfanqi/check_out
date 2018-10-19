@@ -30,4 +30,16 @@ public interface PrepurchaseListMapper extends Mapper<PrepurchaseList>{
 	 */
 	public List<PrepurchaseList> selectPage(@Param("prepurchaseList")PrepurchaseList prepurchaseList, @Param("start")Integer start, @Param("end")Integer end, @Param("sidx")String sidx, @Param("order") String order);
 
+	/**
+	 * 通过名单期数代码进行导出
+	 * @param themeCode
+	 * @return
+	 */
+	public List<PrepurchaseList> selectForExport(@Param("themeCode")String themeCode);
+	
+	/**
+	 * 查询往期名单
+	 * @return
+	 */
+	public List<String> selectOldPrepurchaseList();
 }

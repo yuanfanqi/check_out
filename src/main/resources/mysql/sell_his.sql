@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80012
 File Encoding         : 65001
 
-Date: 2018-09-05 17:21:55
+Date: 2018-10-11 10:54:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,4 +27,8 @@ CREATE TABLE `sell_his` (
   `sell_price` decimal(10,2) DEFAULT NULL COMMENT '实际销售价格',
   PRIMARY KEY (`sell_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='销售历史表';
+
+-- ----------------------------
+-- Records of sell_his
+-- ----------------------------
 SET FOREIGN_KEY_CHECKS=1;

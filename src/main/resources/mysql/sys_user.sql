@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 10.1.1.12
-Source Server Version : 50718
-Source Host           : 10.1.1.12:3306
-Source Database       : jrtz_app
+Source Server         : loc
+Source Server Version : 80012
+Source Host           : localhost:3306
+Source Database       : check_out
 
 Target Server Type    : MYSQL
-Target Server Version : 50718
+Target Server Version : 80012
 File Encoding         : 65001
 
-Date: 2018-08-24 17:26:08
+Date: 2018-10-11 10:54:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,11 +37,10 @@ CREATE TABLE `sys_user` (
   `EMAIL` varchar(100) DEFAULT '' COMMENT '邮箱',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `USER_NAME_UNIQUE` (`USER_NAME`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COMMENT='系统用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COMMENT='系统用户表';
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', 'b9d11b3be25f5a1a7dc8ca04cd310b28', '123456', 'admin', '2018-08-29 14:57:57', '2018-08-29 14:58:18', '\0', '', '2018-08-31 16:41:56', '', '', '暂无备注', '', '');
-
+INSERT INTO `sys_user` VALUES ('1', 'admin', 'b9d11b3be25f5a1a7dc8ca04cd310b28', '123456', 'admin', '2018-08-29 14:57:57', '2018-08-29 14:58:18', '\0', '', '2018-10-11 10:51:30', '', '', '暂无备注', '', '');
 SET FOREIGN_KEY_CHECKS=1;

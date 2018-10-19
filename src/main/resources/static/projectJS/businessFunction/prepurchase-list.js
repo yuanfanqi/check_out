@@ -1,4 +1,10 @@
 $(function(){
+	//删除功能
+//	$("deleteAllBtn").on("click",doDel());
+	
+	//导出功能
+	$("export").on("click",doExport());
+	
 	// 商品进货名单
 	$("#jqGrid").jqGrid({
 		url: "/prepurchase/search",
@@ -54,6 +60,49 @@ $(function(){
 			},
 			viewrecords: true,
 			pager: "#jqGridPager",
+			jsonReader: {
+				root: "list",
+				page: "pageNum",
+				total: "pages",
+				records: "total"
+			},
+			prmNames: {
+				page: "page",
+				rows: "limit",
+				order: "order"
+			},
+			gridComplete: function() {
+				// 隐藏grid底部滚动条
+				$("#jqGrid").closest(".ui-jqgrid-bdiv").css({
+					"overflow-x": "hidden"
+				});
+			}
+	});
+	
+	//往期名单列表
+	$("#jqGridForOld").jqGrid({
+		caption:"往期名单列表",
+		url: "/prepurchase/searchForOld",
+		mtype: "POST",
+		datatype: "json",
+		height: 'auto',
+		rowNum: 10,
+		rowList: [10, 20, 30],
+		scrollOffset: 0,
+		colModel:[{
+			label:"商品条码（编号）",
+			name:"goodsId",
+			sortable:true
+			},{
+				
+			}],
+			autowidth: true,
+			multiselect: true,
+			onSelectRow: function(rowId, status, e) {
+				var rowIds = $("#jqGridForOld").jqGrid('getGridParam', 'selarrrow');
+			},
+			viewrecords: true,
+			pager: "#jqGridPagerForOld",
 			jsonReader: {
 				root: "list",
 				page: "pageNum",
@@ -128,4 +177,86 @@ function updateBtn(goodsId){
 //			parent.layer.close(index);
 //		}
 //	});
+}
+
+
+//导出功能
+function doExport(){
+	 var option={};
+	 var data;
+	$.ajax({
+		type:"POST",
+		url:"/prepurchase/doExport",
+		dataType:"JSON",
+		success:function(res){
+			if(res == null || res == ""){
+        		parent.layer.alert("历史净值为空，不能导出",function(index){
+                    parent.layer.closeAll();
+                });
+        	}else{
+        		data = res;
+        	}
+		},
+		error:function(){
+			parent.layer.alert("修改数据出现异常");
+		},
+		beforeSend:function(){
+			index = parent.layer.load(1,{shade:0.5});
+		},
+		complete:function(){
+			parent.layer.close(index);
+		}
+	});
+	
+	if(data != null){
+	option.fileName = '导出表excel'
+		option.datas = [{
+		    sheetData: data,
+		    sheetName: '导出表sheet',
+		    sheetFilter: ['goods_name', 'goods_id','prepurchase_num'],
+		    sheetHeader: ["商品名称", "商品ID（商品条码）","预计补货数量","是否进货完成"],
+		 
+		}];
+		var toExcel = new ExportJsonExcel(option);
+		toExcel.saveExcel();
+	}
+/*//导出功能
+function doExport(themeCode){
+	var option={};
+	 var data;
+	$.ajax({
+		type:"POST",
+		url:"/prepurchase/doExport",
+		dataType:"JSON",
+		data:{"themeCode":themeCode},
+		success:function(res){
+			if(res == null || res == ""){
+        		parent.layer.alert("历史净值为空，不能导出",function(index){
+                    parent.layer.closeAll();
+                });
+        	}else{
+        		data = res;
+        	}
+		},
+		error:function(){
+			parent.layer.alert("修改数据出现异常");
+		},
+		beforeSend:function(){
+			index = parent.layer.load(1,{shade:0.5});
+		},
+		complete:function(){
+			parent.layer.close(index);
+		}
+	});
+	if(data != null){
+	option.fileName = '导出表excel'
+		option.datas = [{
+		    sheetData: data,
+		    sheetName: '导出表sheet',
+		    sheetFilter: ['goods_name', 'goods_id','prepurchase_num',''],
+		    sheetHeader: ["商品名称", "商品ID（商品条码）","预计补货数量","是否进货完成"],
+		 
+		}];
+		var toExcel = new ExportJsonExcel(option);
+		toExcel.saveExcel();}*/
 }

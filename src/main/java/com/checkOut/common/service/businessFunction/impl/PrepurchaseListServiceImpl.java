@@ -73,4 +73,14 @@ public class PrepurchaseListServiceImpl implements PrepurchaseListService {
 		return prepurchaseListMapper.updateByPrimaryKeySelective(prepurchaseList);
 	}
 
+	@Override
+	public List<PrepurchaseList> doExport(String themeCode) throws Exception {
+		return prepurchaseListMapper.selectForExport(themeCode);
+	}
+
+	@Override
+	public List<String> selectOldPrepurchaseList() throws Exception {
+		return null;
+	}
+
 }

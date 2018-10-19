@@ -1,5 +1,7 @@
 package com.checkOut.common.service.businessFunction;
 
+import java.util.List;
+
 import com.checkOut.common.model.businessFunction.PrepurchaseList;
 import com.checkOut.common.model.commonModel.PageData;
 
@@ -47,4 +49,14 @@ public interface PrepurchaseListService{
 	 * @throws Exception
 	 */
 	public Integer modify(PrepurchaseList prepurchaseList) throws Exception;
+	
+	/**
+	 * 进货名单导出功能
+	 * @param goodsId
+	 * @return
+	 * @throws Exception
+	 */
+	public List<PrepurchaseList> doExport(String goodsId) throws Exception;
+	
+	public List<String> selectOldPrepurchaseList() throws Exception;
 }

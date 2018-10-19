@@ -11,16 +11,17 @@
 		<result column="PREPURCHASE_NUM" property="prepurchaseNum"
 			jdbcType="INTEGER" />
 		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="THEME_CODE" property="themeCode" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<sql id="base_column_list">
-		GOODS_ID,GOODS_NAME,PREPURCHASE_NUM,UPDATE_TIME
+		GOODS_ID,GOODS_NAME,PREPURCHASE_NUM,UPDATE_TIME,THEME_CODE
 	</sql>
 
 	<select id="selectPage" resultMap="BaseResultMap">
 		select
 		<include refid="base_column_list"></include>
-		from Prepurchase_list
+		from Prepurchase_list 
 		<where>
 			<if test="null != prepurchaseList">
 				<if test="null != prepurchaseList.goodsId and '' != prepurchaseList.goodsId">AND GOODS_ID = #{prepurchaseList.goodsId,jdbcType=VARCHAR}
@@ -31,11 +32,26 @@
 				</if>
 				<if test="null != prepurchaseList.updateTime and '' != prepurchaseList.updateTime">AND UPDATE_TIME = #{prepurchaseList.updateTime,jdbcType=TIMESTAMP}
 				</if>
+				<if test="null != prepurchaseList.themeCode and '' != prepurchaseList.themeCode">and THEME_CODE = #{prepurchaseList.themeCode,jdbcType=VARCHAR}</if>
 			</if>
 		</where>
 		<if test="null != sidx and '' != sidx">
 			order by #{sidx} #{order}
 		</if>
 		LIMIT #{start},#{end}
+	</select>
+	
+	<select id="selectForExport" resultMap="BaseResultMap"> 
+		select
+		<include refid="base_column_list"></include>
+		from Prepurchase_list 
+		<where>
+			<if test="null != themeCode and '' != themeCode">and THEME_CODE = #{themeCode,jdbcType=VARCHAR}</if>
+			<if test="null == themeCode or '' == themeCode">and THEME_CODE = '待补货'</if>
+		</where>
+	</select>
+	
+	<select id="selectOldPrepurchaseList">
+	select THEME_CODE from Prepurchase_list where THEME_CODE != '待补货'
 	</select>
 </mapper>

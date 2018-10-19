@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80012
 File Encoding         : 65001
 
-Date: 2018-09-20 15:34:28
+Date: 2018-10-11 10:55:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,4 +29,11 @@ CREATE TABLE `table_goods` (
   `supplier` tinyint(4) DEFAULT NULL COMMENT '供货商',
   PRIMARY KEY (`goods_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品表';
+
+-- ----------------------------
+-- Records of table_goods
+-- ----------------------------
+INSERT INTO `table_goods` VALUES ('002', '测试商品', '2', '10.00', null, '2018-09-20 16:01:18', '1');
+INSERT INTO `table_goods` VALUES ('004', '测试商品', '1', '10.00', null, '2018-09-11 09:40:12', null);
+INSERT INTO `table_goods` VALUES ('111', '测试商品111', '2', '23.00', null, '2018-09-20 10:37:12', null);
 SET FOREIGN_KEY_CHECKS=1;
